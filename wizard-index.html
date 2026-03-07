@@ -168,11 +168,12 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
       <div class="step-body">
         <div class="opt-grid cols4" id="makeGrid">
           <button class="opt-btn" onclick="selectMake('vw','Volkswagen')"><div class="veh-icon">🚐</div><div class="ol">Volkswagen</div><div class="os">T2, T3 Vanagon, LT II</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('mercedes','Mercedes-Benz')"><div class="veh-icon">🚌</div><div class="ol">Mercedes-Benz</div><div class="os">Vario, Sprinter, T1, T2</div><div class="check">✓</div></button>
+          <button class="opt-btn" onclick="selectMake('mercedes','Mercedes-Benz')"><div class="veh-icon">🚌</div><div class="ol">Mercedes-Benz</div><div class="os">Vario, Sprinter, T1, T2, G460</div><div class="check">✓</div></button>
           <button class="opt-btn" onclick="selectMake('ford','Ford')"><div class="veh-icon">🚛</div><div class="ol">Ford</div><div class="os">Transit 3H (2009+)</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('landrover','Land Rover')"><div class="veh-icon">🚙</div><div class="ol">Land Rover</div><div class="os">Discovery 1 &amp; 2</div><div class="check">✓</div></button>
+          <button class="opt-btn" onclick="selectMake('landrover','Land Rover')"><div class="veh-icon">🚙</div><div class="ol">Land Rover</div><div class="os">Discovery 1 &amp; 2, Defender</div><div class="check">✓</div></button>
           <button class="opt-btn" onclick="selectMake('volvo','Volvo / TGB')"><div class="veh-icon">🚐</div><div class="ol">Volvo / TGB</div><div class="os">C303, C304, C306</div><div class="check">✓</div></button>
           <button class="opt-btn" onclick="selectMake('iveco','Iveco')"><div class="veh-icon">🚚</div><div class="ol">Iveco</div><div class="os">Daily 40-10</div><div class="check">✓</div></button>
+          <button class="opt-btn" onclick="selectMake('uaz','UAZ')"><div class="veh-icon">🚐</div><div class="ol">UAZ</div><div class="os">UAZ-452 (Buhanka)</div><div class="check">✓</div></button>
           <button class="opt-btn" onclick="selectMake('other','Other / Custom')"><div class="veh-icon">🔧</div><div class="ol">Other / Custom</div><div class="os">Enter dimensions manually</div><div class="check">✓</div></button>
         </div>
       </div>
@@ -203,7 +204,7 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
         </div>
         <div id="manualHeightWrap" style="display:none;margin-top:16px">
           <label style="font-size:13px;color:var(--mid);display:block;margin-bottom:6px">Required bracket height (mm) — distance from roof rail to crossbar centre:</label>
-          <input type="number" id="manualHeight" value="169" min="100" max="500" style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:120px" oninput="S.manualHeight=parseInt(this.value)||169">
+          <input type="number" id="manualHeight" value="169" min="100" max="600" style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:120px" oninput="S.manualHeight=parseInt(this.value)||169">
           <span style="font-size:12px;color:var(--muted);margin-left:8px">mm</span>
         </div>
       </div>
@@ -301,7 +302,7 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
       <h2>About TS-PARTS Roof Rack Brackets</h2>
       <p>TS-PARTS roof rack brackets are precision-made steel clamps designed to mount roof rack crossbars directly onto the factory roof gutters (drip rails) of commercial vans, campers and 4x4 vehicles. They require no drilling and leave no permanent marks on the vehicle bodywork.</p>
       <p>Each bracket is manufactured from high-grade steel, hot-dip galvanised and powder-coated black for long-term corrosion resistance. HD (Heavy Duty) variants use a thicker profile for increased load capacity — recommended for heavy loads or frequent off-road use.</p>
-      <p>Brackets are available in four height variants — 169 mm, 240 mm, 260 mm, and 357 mm — to match the roof profile and gutter depth of different vehicles. The correct height places the crossbar at a consistent level above the roofline.</p>
+      <p>Brackets are available in multiple height variants — 123 mm, 169 mm, 220 mm, 240 mm, 260 mm, 357 mm, and 510 mm — to match the roof profile and gutter depth of different vehicles. The correct height places the crossbar at a consistent level above the roofline.</p>
       <p>Brackets are sold individually. A complete rack installation requires a minimum of 2 pairs (4 brackets). For longer vehicles or heavier loads, additional intermediate pairs are recommended. Use the Wizard to calculate the correct quantity for your specific roof length.</p>
       <p>Optional accessory handles (v1 low / v2 high) can be added to each bracket to provide a grab handle for loading cargo onto the roof rack. Recommended for high-roof vehicles where reaching the rack requires extra assistance.</p>
     </div>
@@ -327,35 +328,53 @@ let S={make:null,makeLabel:null,model:null,modelLabel:null,height:null,heightLab
        roofLen:160,manualHeight:169,useMode:null,customLoad:null};
 
 const PRODUCTS=[
+  // VW
   {id:526,name:'Roof bracket 169HD — VW T2/T3 Vanagon',make:'vw',model:'t2t3',height:169,hd:true,priceGross:43.73,priceNet:35.55,url:'https://ts-parts.eu/en_US/p/Roof-bracket-169HD-VW-T2-T3-Vanagon/526',roofType:['low']},
+  {id:493,name:'Roof bracket 169mm — VW T3',make:'vw',model:'t3',height:169,hd:false,priceGross:43.24,priceNet:35.16,url:'https://ts-parts.eu/en_US/p/Roof-bracket-169mm-VW-T3/493',roofType:['low']},
+  {id:451,name:'Roof bracket 123mmHD — VW LT 35 (1996–2006)',make:'vw',model:'lt2',height:123,hd:true,priceGross:43.24,priceNet:35.16,url:'https://ts-parts.eu/en_US/p/Roof-bracket-123mmHD-Volkswagen-LT-35-96-06/451',roofType:['low']},
+  {id:479,name:'Roof bracket 357mm — VW LT II',make:'vw',model:'lt2',height:357,hd:false,priceGross:46.05,priceNet:37.44,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-VW-LT-II/479',roofType:['high']},
   {id:474,name:'Roof bracket 357HD — VW LT II (1996–2006)',make:'vw',model:'lt2',height:357,hd:true,priceGross:50.11,priceNet:40.74,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Volkswagen-LT-II-1996-2006-/474',roofType:['high']},
+  // Mercedes
   {id:501,name:'Roof bracket 169mm — MB Vario',make:'mercedes',model:'vario',height:169,hd:false,priceGross:46.09,priceNet:37.48,url:'https://ts-parts.eu/en_US/p/Roof-bracket-169mm-MB-Vario/501',roofType:['low']},
   {id:502,name:'Roof bracket 169HD — MB Vario',make:'mercedes',model:'vario',height:169,hd:true,priceGross:46.09,priceNet:37.48,url:'https://ts-parts.eu/en_US/p/Roof-bracket-169mmHD-MB-Vario/502',roofType:['low']},
   {id:480,name:'Roof bracket 357mm — MB Vario',make:'mercedes',model:'vario',height:357,hd:false,priceGross:46.57,priceNet:37.86,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-MB-Vario/480',roofType:['high']},
   {id:473,name:'Roof bracket 357HD — MB Vario',make:'mercedes',model:'vario',height:357,hd:true,priceGross:50.11,priceNet:40.74,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-MB-Vario/473',roofType:['high']},
+  {id:452,name:'Roof bracket 123mmHD — MB Sprinter W901-905',make:'mercedes',model:'sprinter',height:123,hd:true,priceGross:43.24,priceNet:35.16,url:'https://ts-parts.eu/en_US/p/Roof-bracket-123mmHD-Mercedes-Sprinter-W901-W902-W903-W904-W905-/452',roofType:['low']},
   {id:481,name:'Roof bracket 357mm — MB Sprinter W901-905',make:'mercedes',model:'sprinter',height:357,hd:false,priceGross:46.57,priceNet:37.86,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-MB-W901-w905-Sprinter/481',roofType:['high']},
   {id:476,name:'Roof bracket 357HD — MB Sprinter W901-905',make:'mercedes',model:'sprinter',height:357,hd:true,priceGross:50.11,priceNet:40.74,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-MB-W901-905-Sprinter/476',roofType:['high']},
+  {id:450,name:'Roof bracket 123mmHD — MB T1',make:'mercedes',model:'t1',height:123,hd:true,priceGross:43.24,priceNet:35.16,url:'https://ts-parts.eu/en_US/p/Roof-bracket-123mmHD-Mercedes-MB-T1/450',roofType:['low']},
   {id:478,name:'Roof bracket 357mm — MB T1',make:'mercedes',model:'t1',height:357,hd:false,priceGross:46.57,priceNet:37.86,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-Mercedes-MB-T1/478',roofType:['high']},
   {id:475,name:'Roof bracket 357HD — MB T1',make:'mercedes',model:'t1',height:357,hd:true,priceGross:50.11,priceNet:40.74,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Mercedes-MB-T1/475',roofType:['high']},
-  {id:485,name:'Roof bracket 357mm — MB T2 711D',make:'mercedes',model:'t2711',height:357,hd:false,priceGross:46.57,priceNet:37.86,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-Mercedes-T2-711D/485',roofType:['high']},
+  {id:485,name:'Roof bracket 357mm — MB T2 711D',make:'mercedes',model:'t2711',height:357,hd:false,priceGross:46.05,priceNet:37.44,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-Mercedes-T2-711D/485',roofType:['high']},
   {id:484,name:'Roof bracket 357HD — MB T2 711D',make:'mercedes',model:'t2711',height:357,hd:true,priceGross:50.11,priceNet:40.74,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Mercedes-T2-711D/484',roofType:['high']},
   {id:523,name:'Roof bracket 260mm — MB T2 Dudo',make:'mercedes',model:'dudo',height:260,hd:false,priceGross:44.91,priceNet:36.51,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-260mm-MB-T2-DUDO/523',roofType:['low','high']},
+  {id:532,name:'Roof bracket 169mm — MB G460',make:'mercedes',model:'g460',height:169,hd:false,priceGross:43.24,priceNet:35.16,url:'https://ts-parts.eu/en_US/p/Roof-bracket-169mm-MB-G460/532',roofType:['low']},
+  // Ford
   {id:482,name:'Roof bracket 357mm — Ford Transit 3H 2009',make:'ford',model:'transit',height:357,hd:false,priceGross:46.57,priceNet:37.86,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-Ford-Transit-3H-2009/482',roofType:['high']},
   {id:477,name:'Roof bracket 357HD — Ford Transit 3H 2009',make:'ford',model:'transit',height:357,hd:true,priceGross:50.11,priceNet:40.74,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Ford-Transit-3H-2009/477',roofType:['high']},
-  {id:492,name:'Roof bracket 260mm — Land Rover Discovery 1',make:'landrover',model:'disco1',height:260,hd:false,priceGross:44.91,priceNet:37.86,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-260mm-Land-Rover-Discovery-1/492',roofType:['low','high']},
+  // Land Rover
+  {id:492,name:'Roof bracket 260mm — Land Rover Discovery 1',make:'landrover',model:'disco1',height:260,hd:false,priceGross:44.91,priceNet:36.51,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-260mm-Land-Rover-Discovery-1/492',roofType:['low','high']},
   {id:525,name:'Roof bracket 260mm — Land Rover Discovery 2',make:'landrover',model:'disco2',height:260,hd:false,priceGross:44.91,priceNet:36.51,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-260-Land-Rover-Discovery-2/525',roofType:['low','high']},
+  {id:472,name:'Roof bracket 220mm — Land Rover Defender 90/110',make:'landrover',model:'def1',height:220,hd:false,priceGross:43.24,priceNet:35.16,url:'https://ts-parts.eu/en_US/p/Roof-bracket-220mm-Land-Rover-Defender-90110/472',roofType:['low','high']},
+  // Volvo
   {id:483,name:'Roof bracket 240HD — Volvo TGB C303/C304/C306',make:'volvo',model:'tgb',height:240,hd:true,priceGross:46.09,priceNet:37.48,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-240HD-Volvo-TGB-C303-C304-C306/483',roofType:['low','high']},
+  // Iveco
   {id:530,name:'Roof bracket 357mm — Iveco Daily 40-10',make:'iveco',model:'daily',height:357,hd:false,priceGross:46.57,priceNet:37.86,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-IVECO-DAILY-4010/530',roofType:['high']},
   {id:531,name:'Roof bracket 357HD — Iveco Daily 40-10',make:'iveco',model:'daily',height:357,hd:true,priceGross:50.11,priceNet:40.74,url:'https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-IVECO-DAILY-4010/531',roofType:['high']},
+  // UAZ
+  {id:456,name:'Roof bracket 169mm — UAZ-452 (Buhanka)',make:'uaz',model:'uaz452',height:169,hd:false,priceGross:43.24,priceNet:35.16,url:'https://ts-parts.eu/en_US/p/Roof-bracket-169mm-UAZ-452-Buhanka/456',roofType:['low','high']},
+  {id:457,name:'Roof bracket 169mmHD — UAZ-452 (Buhanka)',make:'uaz',model:'uaz452',height:169,hd:true,priceGross:43.24,priceNet:35.16,url:'https://ts-parts.eu/en_US/p/Roof-bracket-169mmHD-UAZ-452-Buhanka/457',roofType:['low','high']},
+  {id:458,name:'Roof bracket 510mm — UAZ-452 (Buhanka)',make:'uaz',model:'uaz452',height:510,hd:false,priceGross:49.09,priceNet:39.91,url:'https://ts-parts.eu/en_US/p/Roof-bracket-510mm-UAZ-452-Buhanka/458',roofType:['high']},
 ];
 
 const MODELS={
-  vw:        [{id:'t2t3',label:'VW T2 / T3 Vanagon',sub:'1967–1992'},{id:'lt2',label:'VW LT II',sub:'1996–2006'}],
-  mercedes:  [{id:'vario',label:'MB Vario',sub:'1996–2013'},{id:'sprinter',label:'MB Sprinter W901-905',sub:'1995–2006'},{id:'t1',label:'MB T1',sub:'1977–1995'},{id:'t2711',label:'MB T2 711D',sub:'heavy truck'},{id:'dudo',label:'MB T2 Dudo',sub:'1967–1996'}],
+  vw:        [{id:'t2t3',label:'VW T2 / T3 Vanagon',sub:'1967–1992'},{id:'t3',label:'VW T3',sub:'1979–1992'},{id:'lt2',label:'VW LT II / LT 35',sub:'1996–2006'}],
+  mercedes:  [{id:'vario',label:'MB Vario',sub:'1996–2013'},{id:'sprinter',label:'MB Sprinter W901-905',sub:'1995–2006'},{id:'t1',label:'MB T1',sub:'1977–1995'},{id:'t2711',label:'MB T2 711D',sub:'heavy truck'},{id:'dudo',label:'MB T2 Dudo',sub:'1967–1996'},{id:'g460',label:'MB G-Wagen G460',sub:'1979–2018'}],
   ford:      [{id:'transit',label:'Ford Transit 3H',sub:'2009+'}],
-  landrover: [{id:'disco1',label:'Discovery 1',sub:'1989–1998'},{id:'disco2',label:'Discovery 2',sub:'1998–2004'}],
+  landrover: [{id:'disco1',label:'Discovery 1',sub:'1989–1998'},{id:'disco2',label:'Discovery 2',sub:'1998–2004'},{id:'def1',label:'Defender 90/110',sub:'1983–2016'}],
   volvo:     [{id:'tgb',label:'Volvo TGB C303/C304/C306',sub:'military series'}],
   iveco:     [{id:'daily',label:'Iveco Daily 40-10',sub:'4010 series'}],
+  uaz:       [{id:'uaz452',label:'UAZ-452 (Buhanka)',sub:'classic van'}],
   other:     [{id:'custom',label:'Custom / Manual',sub:'Enter dimensions manually'}],
 };
 
@@ -503,13 +522,18 @@ function showResult(){
   if(hdOpt) rec.push(recRow('Recommended',hdOpt.name+' (HD upgrade)',
     'Thicker HD profile — recommended for sustained heavy loads, travelling with cargo, or off-road use.',
     tot,'pcs',hdOpt.priceNet,hdOpt.priceGross,hdOpt.url,false));
-  rec.push(recRow('Recommended','Trunk support beam / longitudinal rail',
-    'Steel longitudinal beam connecting all crossbars front-to-rear. Creates a rigid ladder-frame. Essential for roof decks and for distributing static loads evenly.',
-    2,'pcs (left + right)',null,null,'https://ts-parts.eu/en_US/c/Roof-racks/105',false));
+  rec.push(recRow('Recommended','Trunk support beam 147cm / 6cm',
+    'Steel longitudinal beam (147 cm) connecting all crossbars front-to-rear. Creates a rigid ladder-frame platform. Essential for roof decks and distributing static loads evenly. Typically 2 pcs per installation (left + right).',
+    2,'pcs (left + right)',66.51,81.81,'https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522',false));
   if(S.make==='landrover'&&S.model==='disco1'){
     rec.push(recRow('Platform','Expedition trunk / Roof Rack Platform — Land Rover Discovery 1',
       'Complete integrated roof platform — replaces the full bracket + beam + deck combination with a single factory-fit unit.',
-      1,'unit',595.77,732.79,'https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488',false));
+      1,'unit',589.11,724.60,'https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488',false));
+  }
+  if(S.make==='vw'&&(S.model==='t2t3'||S.model==='t3')){
+    rec.push(recRow('Platform','VW T2 / T3 / SYNCRO expedition trunk / Roof Rack Platform',
+      'Complete integrated expedition roof platform for VW T2, T3 and Syncro. Replaces the full bracket + beam kit with a single factory-fit unit.',
+      1,'unit',589.11,724.60,'https://ts-parts.eu/en_US/p/VW-T2-T3-SYNCRO-expedition-trunk-Roof-Rack-Platform/490',false));
   }
 
   const opt=[];
@@ -528,8 +552,8 @@ function showResult(){
     'Stainless steel bottle opener, mounts onto any bracket upright or crossbar tube. Powder-coated black.',
     1,'pc',10.57,13.00,'https://ts-parts.eu/en_US/p/Rack-Mounted-Bottle-Opener-Roof-bracket/497',false));
 
-  const knownNet=(primary?primary.priceNet*tot:0)+15.76*tot+10.57;
-  const knownGross=(primary?primary.priceGross*tot:0)+19.38*tot+13.00;
+  const knownNet=(primary?primary.priceNet*tot:0)+15.76*tot+10.57+66.51*2;
+  const knownGross=(primary?primary.priceGross*tot:0)+19.38*tot+13.00+81.81*2;
 
   document.getElementById('resultContent').innerHTML=`
     <div class="result-summary">
@@ -555,10 +579,10 @@ function showResult(){
       <div>
         <div class="bt-label">Estimated cost (priced items)</div>
         <div class="bt-val">€${knownNet.toFixed(2)} <span style="font-size:14px;font-weight:400;color:#aaa">net</span></div>
-        <div class="bt-sub">€${knownGross.toFixed(2)} gross incl. VAT · Brackets + handles + bottle opener</div>
+        <div class="bt-sub">€${knownGross.toFixed(2)} gross incl. VAT · Brackets + beams + handles + bottle opener</div>
       </div>
       <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-        <div class="bt-note" style="margin-left:0">Tubes &amp; beams require pricing — contact TS-PARTS separately.</div>
+        <div class="bt-note" style="margin-left:0">Crossbar tubes require separate pricing — contact TS-PARTS.</div>
       </div>
     </div>
     <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
