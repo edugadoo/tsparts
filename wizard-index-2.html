@@ -528,7 +528,7 @@ function calcBrackets(isHD){
   const spacingCm=s.sp;
 
   // Pairs from spacing rule (min 2 pairs = 4 brackets)
-  const pFS=Math.max(2,Math.ceil(len/spacingCm)+1);
+  const pFS=Math.max(2,Math.ceil(len/spacingCm));
   // Pairs from load (if entered)
   let pFL=null;
   if(S.customLoad){
@@ -632,76 +632,68 @@ function showResult(){
     :(pStd?calcStd:calcHD);
   const primaryProd=modeId==='offroad'?(pHD||pStd):(pStd||pHD);
 
-  // ── Bracket choice block ──────────────────────────────────────────────────
-  function bracketOption(prod,calc,isRecommended){
-    if(!prod) return '';
-    const badge=isRecommended
-      ?`<span style="background:var(--accent);color:#fff;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;font-family:'Oswald',sans-serif;margin-left:8px">★ Recommended</span>`
-      :`<span style="background:var(--mid);color:#fff;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;font-family:'Oswald',sans-serif;margin-left:8px">Alternative</span>`;
-    const accentColor=isRecommended?'var(--accent)':'#888';
-    const border=isRecommended?'2px solid var(--accent)':'1px solid var(--border)';
+  // ── bracket panel renderer (called on initial render + toggle) ───────────
+  // Store refs needed by the toggle in closure-accessible vars
+  let _bracketState={pStd,pHD,calcStd,calcHD,bothExist,modeId,len,bName,R,P};
+
+  function renderBracketPanel(showHD){
+    const {pStd,pHD,calcStd,calcHD,bothExist,modeId,len,bName,R,P}=_bracketState;
+    const prod=showHD?pHD:pStd;
+    const calc=showHD?calcHD:calcStd;
+    if(!prod) return `<div style="padding:14px 18px;color:var(--muted);font-size:14px">${fmt(R.noMatch,{contactUrl:LOCALE.contactUrl})}</div>`;
     const {pairs,tot,actualSpacing,totalCapacity,kgPerBracket,maxSpacingCm}=calc;
-    return `<div style="border:${border};background:var(--white);margin-bottom:12px;overflow:hidden">
-      <div style="background:${isRecommended?'var(--accent)':'var(--mid)'};color:#fff;padding:8px 16px;display:flex;align-items:center;gap:8px">
-        <span style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:.5px">${prod.hd?'HD Heavy Duty':'Standard'}</span>
-        ${isRecommended?'<span style="font-size:11px;opacity:.85">— recommended for this use</span>':'<span style="font-size:11px;opacity:.75">— also available</span>'}
-      </div>
-      <div style="padding:14px 16px">
-        <div style="font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;margin-bottom:4px">${bName(prod)}</div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Height: ${prod.height} mm · ${prod.hd?'Heavy Duty profile':'Standard profile'} · ${kgPerBracket} kg/bracket · max spacing ${maxSpacingCm} cm</div>
+    const isRec=(modeId==='offroad')?showHD:!showHD; // recommended = HD for offroad, std otherwise
+    const recBadge=isRec
+      ?`<span style="background:var(--accent);color:#fff;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;font-family:'Oswald',sans-serif">★ Recommended</span>`
+      :'';
+    return `
+      <div style="background:var(--white);border:1px solid var(--border);padding:16px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+          <div style="font-family:'Oswald',sans-serif;font-size:15px;font-weight:500">${bName(prod)}</div>
+          ${recBadge}
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:14px">
+          Height: ${prod.height} mm · ${prod.hd?'Heavy Duty profile':'Standard profile'} · ${kgPerBracket} kg/bracket · max spacing ${maxSpacingCm} cm
+        </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
           <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
             <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Pairs needed</div>
-            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:${accentColor}">${pairs}</div>
+            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--accent)">${pairs}</div>
             <div style="font-size:11px;color:var(--muted)">${tot} brackets total</div>
           </div>
           <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
             <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Spacing</div>
-            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:${accentColor}">${actualSpacing} cm</div>
+            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--accent)">${actualSpacing} cm</div>
             <div style="font-size:11px;color:var(--muted)">max ${maxSpacingCm} cm</div>
           </div>
           <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
             <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Capacity</div>
-            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:${accentColor}">${totalCapacity} kg</div>
+            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--accent)">${totalCapacity} kg</div>
             <div style="font-size:11px;color:var(--muted)">${kgPerBracket} kg × ${tot}</div>
           </div>
         </div>
-        <div class="spacing-diagram" style="margin:0 0 12px 0">
+        <div class="spacing-diagram" style="margin:0 0 14px 0">
           <div class="diagram-title">Top view — ${len} cm roof · ${pairs} pairs</div>
-          ${makeDiagram(calc,len,isRecommended?'var(--accent)':'#888')}
+          ${makeDiagram(calc,len,'var(--accent)')}
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
           <div style="font-size:13px;color:var(--mid)">Qty: <strong>${tot} pcs</strong></div>
-          <a href="${bracketUrl(prod)}" onclick="openPopup(event,this.href)" class="btn-rec" style="${isRecommended?'':'background:var(--mid)'}">View product →</a>
+          <a href="${bracketUrl(prod)}" onclick="openPopup(event,this.href)" class="btn-rec">View product →</a>
         </div>
-      </div>
-    </div>`;
+      </div>`;
   }
 
-  // Build bracket section
-  let bracketHtml='';
-  if(!pStd&&!pHD){
-    bracketHtml=`<div style="padding:14px 18px;color:var(--muted);font-size:14px">${fmt(R.noMatch,{contactUrl:LOCALE.contactUrl})}</div>`;
-  } else if(bothExist){
-    // Both types available — show as alternatives, recommended first
-    if(modeId==='offroad'){
-      bracketHtml=bracketOption(pHD,calcHD,true)+bracketOption(pStd,calcStd,false);
-    } else {
-      bracketHtml=bracketOption(pStd,calcStd,true)+bracketOption(pHD,calcHD,false);
-    }
-  } else {
-    // Only one type available — show it without "recommended/alternative" framing
-    const onlyProd=pStd||pHD;
-    const onlyCalc=pStd?calcStd:calcHD;
-    bracketHtml=bracketOption(onlyProd,onlyCalc,true);
-  }
+  // Default selection: HD for offroad, std otherwise (fallback if only one exists)
+  const defaultHD=(modeId==='offroad')?!!pHD:!pStd;
 
-  // crossbar tube qty = max of the two pair counts (worst case)
-  const tubeQty=Math.max(calcStd.pairs,calcHD.pairs);
+  // Expose render function for the toggle
+  window._bracketState={..._bracketState, renderFn:renderBracketPanel};
 
-  // 2 — Recommended (non-bracket additions)
+  // crossbar tube qty follows selected bracket type
+  const tubeQty=defaultHD?calcHD.pairs:calcStd.pairs;
+
+  // 2 — non-bracket required items
   const rec=[];
-  const tubeCalc=primaryCalc;
   rec.push(recRow('Required',P.supportBeam.name,P.supportBeam.detail,
     tubeQty,P.supportBeam.qtyLabel,accUrl(522),false));
   if(S.make==='landrover'&&S.model==='disco1')
@@ -711,21 +703,38 @@ function showResult(){
     rec.push(recRow('Platform',P.platformT2T3.name,P.platformT2T3.detail,
       1,P.platformT2T3.qtyLabel,accUrl(490),false));
 
-  // 3 — Optional
+  // 2 — Optional accessories
   const opt=[];
-  const handleTot=primaryCalc.tot;
+  const handleTot=(defaultHD?calcHD:calcStd).tot;
   if(S.height==='high'||S.height==='unknown')
     opt.push(recRow('Optional',P.handleHigh.name,P.handleHigh.detail,handleTot,P.handleHigh.qtyLabel,accUrl(521),false));
   else
     opt.push(recRow('Optional',P.handleLow.name,P.handleLow.detail,handleTot,P.handleLow.qtyLabel,accUrl(520),false));
 
-  // 4 — Extras
+  // 3 — Extras
   const acc=[];
   acc.push(recRow('Accessory',P.bottleOpener.name,P.bottleOpener.detail,1,P.bottleOpener.qtyLabel,accUrl(497),false));
 
-  // Height summary card
+  // Height summary
   const heightMm=primaryProd?primaryProd.height:S.manualHeight;
   const heightSub=primaryProd?(primaryProd.hd?R.hd:R.std):R.closest;
+
+  // Toggle HTML — only shown when both types exist
+  const toggleHtml=bothExist?`
+    <div style="display:flex;align-items:center;gap:0;margin-bottom:16px">
+      <span style="font-size:12px;color:var(--muted);margin-right:12px;text-transform:uppercase;letter-spacing:.8px;font-family:'Oswald',sans-serif">Bracket type:</span>
+      <div style="display:flex;border:1px solid var(--border);overflow:hidden">
+        <button id="tog-std" onclick="bracketToggle(false)"
+          style="padding:8px 20px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.6px;text-transform:uppercase;border:none;cursor:pointer;transition:all .15s;background:${!defaultHD?'var(--dark)':'var(--white)'};color:${!defaultHD?'#fff':'var(--mid)'}">
+          Standard${!defaultHD&&(modeId!=='offroad')?'&nbsp;★':''}
+        </button>
+        <button id="tog-hd" onclick="bracketToggle(true)"
+          style="padding:8px 20px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.6px;text-transform:uppercase;border:none;border-left:1px solid var(--border);cursor:pointer;transition:all .15s;background:${defaultHD?'var(--dark)':'var(--white)'};color:${defaultHD?'#fff':'var(--mid)'}">
+          HD${defaultHD&&modeId==='offroad'?'&nbsp;★':''}
+        </button>
+      </div>
+      <span style="font-size:11px;color:var(--muted);margin-left:12px">★ recommended for ${(S.useMode||{label:'this use'}).label.toLowerCase()}</span>
+    </div>`:'' ;
 
   document.getElementById('resultContent').innerHTML=`
     <div class="result-summary" style="margin-bottom:24px">
@@ -737,21 +746,22 @@ function showResult(){
       <div class="res-card">
         <div class="rc-label">Use mode</div>
         <div class="rc-val" style="font-size:16px;padding-top:4px">${(S.useMode||{label:'Stationary'}).label}</div>
-        <div class="rc-sub">${primaryCalc.kgPerBracket} kg/bracket · ${S.roofLen} cm roof</div>
+        <div class="rc-sub">${S.roofLen} cm roof${S.customLoad?' · '+S.customLoad+' kg load':''}</div>
       </div>
     </div>
 
     <div style="margin-bottom:24px">
-      <div class="bom-section-title" style="margin-bottom:12px">
+      <div class="bom-section-title" style="margin-bottom:14px">
         <h3 style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase">${T.bom.s1}</h3>
         <div class="section-rule"></div>
       </div>
-      ${bracketHtml}
-      ${rec.length?`<div style="margin-top:4px">${rec.join('')}</div>`:''}
+      ${toggleHtml}
+      <div id="bracketPanel">${renderBracketPanel(defaultHD)}</div>
+      ${rec.length?`<div style="margin-top:10px">${rec.join('')}</div>`:''}
     </div>
 
-    ${bomSection(T.bom.s3,opt)}
-    ${bomSection(T.bom.s4,acc)}
+    ${bomSection(T.bom.s2,opt)}
+    ${bomSection(T.bom.s3,acc)}
     <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
       <button class="btn-wizard secondary" onclick="resetWizard()">${R.startOver}</button>
       <a href="${LOCALE.shopUrl}" class="btn-wizard">${R.shopBtn}</a>
@@ -762,6 +772,22 @@ function showResult(){
 }
 
 // ── utilities ─────────────────────────────────────────────────────────────
+function bracketToggle(showHD){
+  const panel=document.getElementById('bracketPanel');
+  if(!panel||!window._bracketState) return;
+  // Re-use the closure state stored on window by showResult
+  panel.innerHTML=window._bracketState.renderFn(showHD);
+  // Update toggle button styles
+  const stdBtn=document.getElementById('tog-std');
+  const hdBtn =document.getElementById('tog-hd');
+  if(stdBtn&&hdBtn){
+    stdBtn.style.background=!showHD?'var(--dark)':'var(--white)';
+    stdBtn.style.color=!showHD?'#fff':'var(--mid)';
+    hdBtn.style.background=showHD?'var(--dark)':'var(--white)';
+    hdBtn.style.color=showHD?'#fff':'var(--mid)';
+  }
+  sendHeight();
+}
 function showStep(id){
   document.getElementById(id).classList.add('visible');
   setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth',block:'nearest'});sendHeight();},80);
