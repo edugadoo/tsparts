@@ -289,7 +289,7 @@ Promise.all([
 .then(([data,trans])=>{
   PRODUCTS=data.brackets;
   MODELS=data.models;
-  LOCALE=data.locales[LANG]||data.locales['en'];
+  LOCALE=(data.locales&&(data.locales[LANG]||data.locales['en']))||{baseUrl:'https://ts-parts.eu/en_US',shopUrl:'https://ts-parts.eu/en_US/c/Roof-racks/105',contactUrl:'https://ts-parts.eu/en_US/contact'};
   T=trans[LANG]||trans['en'];
   applyTranslations();
   document.getElementById('step1').style.opacity='1';
