@@ -314,7 +314,7 @@
     "install": {
       "title": "Instrukcja montażu",
       "steps": [
-        { "title": "Sprawdź profil rynienki dachowej", "text": "Wszystkie uchwyty TS-PARTS zaciskają się na fabrycznej rynieniu dachowej (krawędzi kapania) biegnącej wzdłuż górnej krawędzi nadwozia. Wyczyść powierzchnię rynienki i sprawdź, czy nie ma uszkodzeń ani rdzy przed montażem." },
+        { "title": "Sprawdź profil rynienki dachowej", "text": "Wszystkie uchwyty TS-PARTS zaciskają się na fabrycznej rynience dachowej biegnącej wzdłuż górnej krawędzi nadwozia. Wyczyść powierzchnię rynienki i sprawdź, czy nie ma uszkodzeń ani rdzy przed montażem." },
         { "title": "Wybierz właściwą wysokość uchwytu", "text": "Użyj Kreatora, aby dopasować wysokość uchwytu do swojego pojazdu. Pojazdy ze standardowym dachem zazwyczaj używają uchwytów 169 mm lub 260 mm; pojazdy z wysokim dachem lub dachem uchylnym — uchwytów 357 mm. Wysokość uchwytu określa, jak wysoko poprzeczka znajduje się ponad dachem." },
         { "title": "Zaznacz pozycje uchwytów wzdłuż rynienki", "text": "Rozmieść uchwyty równomiernie wzdłuż obu stron rynienki. Zalecany rozstaw: 1 para na 75 cm użytecznej długości dachu. Zawsze umieszczaj jedną parę z przodu i jedną z tyłu; dodaj pośrednie pary przy dłuższych dachach." },
         { "title": "Zamocuj rurę poprzeczki", "text": "Przesuń rurę poprzeczki przez głowice uchwytów na pełną szerokość pojazdu przed dokręceniem. Upewnij się, że rura wystaje równomiernie po obu stronach. Wyreguluj pozycję wszystkich par przed ostatecznym dokręceniem." },
