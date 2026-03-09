@@ -1,0 +1,499 @@
+{
+  "en": {
+    "pageTitle": "Roof Rack Bracket Wizard — TS-PARTS",
+    "title": "Roof Rack Bracket Wizard",
+    "sub": "Find the correct bracket for your vehicle and calculate how many pairs you need",
+    "tabs": {
+      "wizard": "Bracket Wizard",
+      "desc": "Description",
+      "install": "Installation Guide"
+    },
+    "introTitle": "Find the right brackets for your roof rack",
+    "introText": "Answer 5 quick questions about your vehicle and roof dimensions. The wizard will identify the correct bracket model and calculate exactly how many pairs you need.",
+    "loading": "Loading product data…",
+    "loadError": "⚠ Could not load product data. Please refresh.",
+    "steps": {
+      "s1title": "Select your vehicle make",
+      "s2title": "Select your model",
+      "s3title": "Roof height / profile",
+      "s4title": "Usable roof length",
+      "s5title": "Intended use & load",
+      "resultTitle": "Your recommended configuration"
+    },
+    "makes": {
+      "vw":       { "sub": "T2, T3 Vanagon, LT I, LT II" },
+      "mercedes": { "sub": "Vario, Sprinter, T1, T2, G460" },
+      "ford":     { "sub": "Transit 3H (2009+)" },
+      "landrover":{ "sub": "Discovery 1 & 2, Defender" },
+      "volvo":    { "sub": "C303, C304, C306" },
+      "iveco":    { "sub": "Daily 40-10" },
+      "uaz":      { "sub": "UAZ-452 (Buhanka)" },
+      "other":    { "label": "Other / Custom", "sub": "Enter dimensions manually" }
+    },
+    "roof": {
+      "lowLabel": "Low / Standard",
+      "lowSub": "Flat or gently curved\nFactory standard height",
+      "highLabel": "High roof",
+      "highSub": "Raised or pop-up roof\nWestfalia, California, custom",
+      "unknownLabel": "Not sure",
+      "unknownSub": "I will specify bracket\nheight manually below",
+      "manualLabel": "Required bracket height (mm) — distance from roof rail to crossbar centre:",
+      "manualUnit": "mm"
+    },
+    "roofLen": {
+      "instruction": "Measure the usable roof length — front to rear mounting point, excluding windscreen and rear screen overhang.",
+      "hint": "Common values: VW T3 ≈ 140 cm · MB Vario ≈ 200 cm · Ford Transit LWB ≈ 260 cm",
+      "exactLabel": "Or enter exact length:",
+      "unit": "cm",
+      "nextBtn": "Next →"
+    },
+    "use": {
+      "instruction": "How will the roof rack be used? This determines the maximum load per bracket and the required spacing.",
+      "stationaryLabel": "Stationary",
+      "stationarySub": "Roof deck, solar panels, fixed equipment — vehicle not moving under load",
+      "travelLabel": "Travelling with load",
+      "travelSub": "Luggage, camping gear, jerrycans — carried while driving on road",
+      "offroadLabel": "Off-road / Heavy duty",
+      "offroadSub": "Overland use, rough terrain, heavy loads — vibration and dynamic forces apply",
+      "perBracket": "per bracket",
+      "maxSpacing": "max spacing",
+      "manualTitle": "Or enter total load manually:",
+      "totalLoadLabel": "Total load on rack:",
+      "kgUnit": "kg",
+      "bracketsNeeded": "→ brackets needed:",
+      "calcBtn": "Calculate my brackets →"
+    },
+    "result": {
+      "pairsNeeded": "Bracket Pairs Needed",
+      "pairsSub_spacing": "driven by spacing rule",
+      "pairsSub_load": "driven by load weight",
+      "spacing": "Spacing Between Pairs",
+      "spacingMax": "Max allowed:",
+      "spacingUse": "Use:",
+      "capacity": "Total Rack Capacity",
+      "height": "Bracket Height",
+      "hd": "Heavy Duty",
+      "std": "Standard",
+      "closest": "closest match",
+      "custom": "Custom",
+      "noteLoad": "Spacing rule alone would require <strong>{pairsFromSpacing} pairs</strong>, but your load of <strong>{customLoad} kg</strong> requires at least <strong>{pairsFromLoad} pairs</strong> at {kgPerBracket} kg/bracket{hdNote}. Load is the limiting factor.",
+      "hdNote": " (HD rate)",
+      "diagramTitle": "Bracket spacing — top view ({len} cm roof, front → rear)",
+      "diagramSub": "Each marker = 1 pair of brackets (left + right side). Spacing: <strong>{spacing} cm</strong> between pairs.",
+      "qtyLabel": "Qty:",
+      "viewBtn": "View →",
+      "noMatch": "No exact match found. Please <a href=\"https://ts-parts.eu/en_US/contact\" style=\"color:var(--accent)\">contact us</a>.",
+      "startOver": "← Start over",
+      "shopBtn": "View all roof rack products in shop →",
+      "shopUrl": "https://ts-parts.eu/en_US/c/Roof-racks/105",
+      "contactUrl": "https://ts-parts.eu/en_US/contact"
+    },
+    "tags": {
+      "Required": "Required",
+      "Recommended": "Recommended",
+      "Platform": "Platform",
+      "Optional": "Optional",
+      "Accessory": "Accessory"
+    },
+    "bom": {
+      "s1": "1 — Required to build the rack",
+      "s2": "2 — Recommended additions",
+      "s3": "3 — Optional accessories",
+      "s4": "4 — Extras"
+    },
+    "products": {
+      "crossbarTube": {
+        "name": "Roof rack crossbar tube",
+        "detail": "Round steel tube (powder-coated black) that slides through the bracket heads to form each crossbar. One tube spans the full vehicle width per pair.",
+        "qtyLabel": "pcs"
+      },
+      "hdUpgrade": {
+        "nameSuffix": " (HD upgrade)",
+        "detail": "Thicker HD profile — recommended for sustained heavy loads, travelling with cargo, or off-road use.",
+        "qtyLabel": "pcs"
+      },
+      "supportBeam": {
+        "name": "Trunk support beam 147cm / 6cm",
+        "detail": "Steel longitudinal beam (147 cm) connecting all crossbars front-to-rear. Creates a rigid ladder-frame platform. Essential for roof decks and distributing static loads evenly. Typically 2 pcs per installation (left + right).",
+        "qtyLabel": "pcs (left + right)"
+      },
+      "platformDisco1": {
+        "name": "Expedition trunk / Roof Rack Platform — Land Rover Discovery 1",
+        "detail": "Complete integrated roof platform — replaces the full bracket + beam + deck combination with a single factory-fit unit.",
+        "qtyLabel": "unit"
+      },
+      "platformT2T3": {
+        "name": "VW T2 / T3 / SYNCRO expedition trunk / Roof Rack Platform",
+        "detail": "Complete integrated expedition roof platform for VW T2, T3 and Syncro. Replaces the full bracket + beam kit with a single factory-fit unit.",
+        "qtyLabel": "unit"
+      },
+      "handleHigh": {
+        "name": "Accessory handle — High rack brackets v2",
+        "detail": "Grab handle for high-roof bracket uprights. Strongly recommended for high-roof vehicles for safe cargo access.",
+        "qtyLabel": "pcs (1 per bracket)"
+      },
+      "handleLow": {
+        "name": "Accessory handle — Low rack brackets v1",
+        "detail": "Grab handle for standard-height bracket uprights. Clips on without tools.",
+        "qtyLabel": "pcs (1 per bracket)"
+      },
+      "bottleOpener": {
+        "name": "Rack Mounted Bottle Opener",
+        "detail": "Stainless steel bottle opener, mounts onto any bracket upright or crossbar tube. Powder-coated black.",
+        "qtyLabel": "pc"
+      },
+      "bracketDetail": "Height: {height} mm · {hdLabel} · Zinc-phosphate + powder coat black"
+    },
+    "desc": {
+      "title": "About TS-PARTS Roof Rack Brackets",
+      "p1": "TS-PARTS roof rack brackets are precision-made steel clamps designed to mount roof rack crossbars directly onto the factory roof gutters (drip rails) of commercial vans, campers and 4x4 vehicles. They require no drilling and leave no permanent marks on the vehicle bodywork.",
+      "p2": "Each bracket is manufactured from high-grade steel, hot-dip galvanised and powder-coated black for long-term corrosion resistance. HD (Heavy Duty) variants use a thicker profile for increased load capacity — recommended for heavy loads or frequent off-road use.",
+      "p3": "Brackets are available in multiple height variants — 123 mm, 169 mm, 220 mm, 240 mm, 260 mm, 357 mm, and 510 mm — to match the roof profile and gutter depth of different vehicles. The correct height places the crossbar at a consistent level above the roofline.",
+      "p4": "Brackets are sold individually. A complete rack installation requires a minimum of 2 pairs (4 brackets). For longer vehicles or heavier loads, additional intermediate pairs are recommended. Use the Wizard to calculate the correct quantity for your specific roof length.",
+      "p5": "Optional accessory handles (v1 low / v2 high) can be added to each bracket to provide a grab handle for loading cargo onto the roof rack. Recommended for high-roof vehicles where reaching the rack requires extra assistance."
+    },
+    "install": {
+      "title": "Installation Guide",
+      "steps": [
+        { "title": "Identify your roof gutter profile", "text": "All TS-PARTS brackets clamp onto the factory roof gutter (drip rail) running along the top edge of the vehicle body. Clean the gutter surface and check for damage or rust before fitting." },
+        { "title": "Select the correct bracket height", "text": "Use the Wizard to match bracket height to your vehicle. Standard-roof vehicles typically use 169 mm or 260 mm brackets; high-roof or pop-top vehicles use 357 mm brackets. Bracket height determines how far the crossbar sits above the roofline." },
+        { "title": "Mark bracket positions along the gutter", "text": "Place brackets at even intervals along both sides of the gutter. Recommended spacing: 1 pair per 75 cm of usable roof length. Always position one pair at the front and one at the rear; add intermediate pairs for longer roofs." },
+        { "title": "Fit the crossbar tube", "text": "Slide the crossbar tube through the bracket heads across the full roof width before tightening. Ensure the tube overhangs evenly on both sides. Adjust the position of all pairs before any final tightening." },
+        { "title": "Clamp and torque", "text": "Slide each bracket clamp over the gutter rail and tighten the clamping bolt. Recommended torque: 12–15 Nm. Do not overtighten — excessive force can deform the gutter rail. Recheck all fasteners after the first 100 km of use." },
+        { "title": "Attach accessory handles (optional)", "text": "Accessory handles v1 (low) and v2 (high) clip onto the bracket uprights to provide grab handles for easier loading. Recommended especially for high-roof vehicles. Fit one handle per bracket on the outside face." }
+      ]
+    }
+  },
+
+  "pl": {
+    "pageTitle": "Kreator uchwytów bagażnika dachowego — TS-PARTS",
+    "title": "Kreator uchwytów bagażnika dachowego",
+    "sub": "Znajdź właściwy uchwyt do swojego pojazdu i oblicz, ile par potrzebujesz",
+    "tabs": {
+      "wizard": "Kreator",
+      "desc": "Opis produktu",
+      "install": "Instrukcja montażu"
+    },
+    "introTitle": "Dobierz właściwe uchwyty do swojego bagażnika",
+    "introText": "Odpowiedz na 5 krótkich pytań o swoim pojeździe i wymiarach dachu. Kreator dobierze odpowiedni model uchwytu i obliczy dokładną liczbę par, jakich potrzebujesz.",
+    "loading": "Ładowanie danych produktów…",
+    "loadError": "⚠ Nie udało się załadować danych. Odśwież stronę.",
+    "steps": {
+      "s1title": "Wybierz markę pojazdu",
+      "s2title": "Wybierz model",
+      "s3title": "Wysokość / profil dachu",
+      "s4title": "Użyteczna długość dachu",
+      "s5title": "Przeznaczenie i obciążenie",
+      "resultTitle": "Twoja rekomendowana konfiguracja"
+    },
+    "makes": {
+      "vw":       { "sub": "T2, T3 Vanagon, LT I, LT II" },
+      "mercedes": { "sub": "Vario, Sprinter, T1, T2, G460" },
+      "ford":     { "sub": "Transit 3H (2009+)" },
+      "landrover":{ "sub": "Discovery 1 i 2, Defender" },
+      "volvo":    { "sub": "C303, C304, C306" },
+      "iveco":    { "sub": "Daily 40-10" },
+      "uaz":      { "sub": "UAZ-452 (Buhanka)" },
+      "other":    { "label": "Inny / Własny", "sub": "Wprowadź wymiary ręcznie" }
+    },
+    "roof": {
+      "lowLabel": "Niski / Standardowy",
+      "lowSub": "Płaski lub lekko zaokrąglony\nStandardowa wysokość fabryczna",
+      "highLabel": "Wysoki dach",
+      "highSub": "Podwyższony lub uchylny dach\nWestfalia, California, własny",
+      "unknownLabel": "Nie jestem pewien",
+      "unknownSub": "Wprowadzę wysokość uchwytu\nręcznie poniżej",
+      "manualLabel": "Wymagana wysokość uchwytu (mm) — odległość od rynny dachowej do osi poprzeczki:",
+      "manualUnit": "mm"
+    },
+    "roofLen": {
+      "instruction": "Zmierz użyteczną długość dachu — od przedniego do tylnego punktu mocowania, bez uwzględnienia nawisu przedniej i tylnej szyby.",
+      "hint": "Typowe wartości: VW T3 ≈ 140 cm · MB Vario ≈ 200 cm · Ford Transit LWB ≈ 260 cm",
+      "exactLabel": "Lub wpisz dokładną długość:",
+      "unit": "cm",
+      "nextBtn": "Dalej →"
+    },
+    "use": {
+      "instruction": "Do czego będzie służył bagażnik dachowy? To określa maksymalne obciążenie na uchwyt i wymagany rozstaw.",
+      "stationaryLabel": "Stacjonarny",
+      "stationarySub": "Platforma dachowa, panele słoneczne, stały sprzęt — pojazd nie porusza się pod obciążeniem",
+      "travelLabel": "Jazda z ładunkiem",
+      "travelSub": "Bagaż, sprzęt kempingowy, kanistrki — przewożone podczas jazdy po drodze",
+      "offroadLabel": "Teren / Heavy duty",
+      "offroadSub": "Jazda terenowa, wymagające warunki, ciężkie ładunki — działają wibracje i siły dynamiczne",
+      "perBracket": "na uchwyt",
+      "maxSpacing": "maks. rozstaw",
+      "manualTitle": "Lub wprowadź całkowite obciążenie ręcznie:",
+      "totalLoadLabel": "Całkowite obciążenie bagażnika:",
+      "kgUnit": "kg",
+      "bracketsNeeded": "→ potrzebne uchwyty:",
+      "calcBtn": "Oblicz moje uchwyty →"
+    },
+    "result": {
+      "pairsNeeded": "Potrzebne pary uchwytów",
+      "pairsSub_spacing": "wynik reguły rozstawu",
+      "pairsSub_load": "wynik obciążenia",
+      "spacing": "Rozstaw między parami",
+      "spacingMax": "Maks. dopuszczalny:",
+      "spacingUse": "Tryb:",
+      "capacity": "Całkowita nośność bagażnika",
+      "height": "Wysokość uchwytu",
+      "hd": "Heavy Duty",
+      "std": "Standardowy",
+      "closest": "najbliższe dopasowanie",
+      "custom": "Własny",
+      "noteLoad": "Sama reguła rozstawu wymagałaby <strong>{pairsFromSpacing} par</strong>, ale Twoje obciążenie <strong>{customLoad} kg</strong> wymaga co najmniej <strong>{pairsFromLoad} par</strong> przy {kgPerBracket} kg/uchwyt{hdNote}. Obciążenie jest czynnikiem limitującym.",
+      "hdNote": " (norma HD)",
+      "diagramTitle": "Rozstaw uchwytów — widok z góry (dach {len} cm, przód → tył)",
+      "diagramSub": "Każdy znacznik = 1 para uchwytów (lewa + prawa strona). Rozstaw: <strong>{spacing} cm</strong> między parami.",
+      "qtyLabel": "Ilość:",
+      "viewBtn": "Zobacz →",
+      "noMatch": "Nie znaleziono dokładnego dopasowania. Prosimy o <a href=\"https://ts-parts.eu/pl_PL/contact\" style=\"color:var(--accent)\">kontakt</a>.",
+      "startOver": "← Zacznij od nowa",
+      "shopBtn": "Zobacz wszystkie produkty w sklepie →",
+      "shopUrl": "https://ts-parts.eu/pl_PL/c/Roof-racks/105",
+      "contactUrl": "https://ts-parts.eu/pl_PL/contact"
+    },
+    "tags": {
+      "Required": "Wymagane",
+      "Recommended": "Zalecane",
+      "Platform": "Platforma",
+      "Optional": "Opcjonalne",
+      "Accessory": "Akcesoria"
+    },
+    "bom": {
+      "s1": "1 — Wymagane do budowy bagażnika",
+      "s2": "2 — Zalecane dodatki",
+      "s3": "3 — Akcesoria opcjonalne",
+      "s4": "4 — Dodatki"
+    },
+    "products": {
+      "crossbarTube": {
+        "name": "Rura poprzeczki bagażnika dachowego",
+        "detail": "Okrągła stalowa rura (lakierowana proszkowo na czarno) wsuwana przez głowice uchwytów, tworząca każdą poprzeczkę. Jedna rura na parę uchwytów, rozpiętość na pełną szerokość pojazdu.",
+        "qtyLabel": "szt."
+      },
+      "hdUpgrade": {
+        "nameSuffix": " (wersja HD)",
+        "detail": "Grubszy profil HD — zalecany przy długotrwałych ciężkich obciążeniach, jeździe z ładunkiem lub użytkowaniu w terenie.",
+        "qtyLabel": "szt."
+      },
+      "supportBeam": {
+        "name": "Belka podłużna 147cm / 6cm",
+        "detail": "Stalowa belka podłużna (147 cm) łącząca wszystkie poprzeczki wzdłuż dachu. Tworzy sztywną ramę drabinkową. Niezbędna przy platformach dachowych i równomiernym rozkładzie obciążeń statycznych. Zwykle 2 szt. na instalację (lewy + prawy bok).",
+        "qtyLabel": "szt. (lewy + prawy)"
+      },
+      "platformDisco1": {
+        "name": "Skrzynia ekspedycyjna / platforma dachowa — Land Rover Discovery 1",
+        "detail": "Kompletna zintegrowana platforma dachowa — zastępuje zestaw uchwytów, belek i podłogi jedną gotową jednostką.",
+        "qtyLabel": "szt."
+      },
+      "platformT2T3": {
+        "name": "VW T2 / T3 / SYNCRO skrzynia ekspedycyjna / platforma dachowa",
+        "detail": "Kompletna ekspedycyjna platforma dachowa dla VW T2, T3 i Syncro. Zastępuje pełny zestaw uchwytów i belek jedną jednostką.",
+        "qtyLabel": "szt."
+      },
+      "handleHigh": {
+        "name": "Uchwyt pomocniczy — wysokie wsporniki v2",
+        "detail": "Uchwyt chwytny do wsporników z wysokim profilem. Zdecydowanie zalecany przy pojazdach z wysokim dachem dla bezpiecznego dostępu do ładunku.",
+        "qtyLabel": "szt. (1 na uchwyt)"
+      },
+      "handleLow": {
+        "name": "Uchwyt pomocniczy — niskie wsporniki v1",
+        "detail": "Uchwyt chwytny do wsporników o standardowej wysokości. Montaż bez narzędzi.",
+        "qtyLabel": "szt. (1 na uchwyt)"
+      },
+      "bottleOpener": {
+        "name": "Otwieracz do butelek na bagażnik",
+        "detail": "Otwieracz ze stali nierdzewnej, montowany na wsporniku lub rurze poprzeczki. Lakierowany proszkowo na czarno.",
+        "qtyLabel": "szt."
+      },
+      "bracketDetail": "Wysokość: {height} mm · {hdLabel} · Fosforanowanie cynkowe + lakier proszkowy czarny"
+    },
+    "desc": {
+      "title": "O uchwytach bagażnika dachowego TS-PARTS",
+      "p1": "Uchwyty bagażnika dachowego TS-PARTS to precyzyjnie wykonane stalowe zaciski przeznaczone do montażu poprzeczek bagażnika bezpośrednio na fabrycznych rynienach dachowych (krawędzi kapania) pojazdów użytkowych, kamperów i samochodów terenowych. Nie wymagają wiercenia i nie pozostawiają trwałych śladów na nadwoziu.",
+      "p2": "Każdy uchwyt wykonany jest z wysokogatunkowej stali, ocynkowanej ogniowo i lakierowanej proszkowo na czarno, co zapewnia długotrwałą odporność na korozję. Warianty HD (Heavy Duty) mają grubszy profil zwiększający nośność — zalecane przy ciężkich ładunkach lub częstej jeździe w terenie.",
+      "p3": "Uchwyty dostępne są w wielu wariantach wysokości — 123 mm, 169 mm, 220 mm, 240 mm, 260 mm, 357 mm i 510 mm — dopasowanych do profilu dachu i głębokości rynienki różnych pojazdów. Właściwa wysokość zapewnia równy poziom poprzeczki ponad dachem.",
+      "p4": "Uchwyty sprzedawane są pojedynczo. Kompletny montaż bagażnika wymaga co najmniej 2 par (4 uchwytów). Przy dłuższych pojazdach lub cięższych ładunkach zaleca się dodatkowe pary pośrednie. Użyj Kreatora, aby obliczyć właściwą ilość dla swojego dachu.",
+      "p5": "Opcjonalne uchwyty pomocnicze (v1 niski / v2 wysoki) można dodać do każdego wspornika, zapewniając uchwyt chwytny ułatwiający załadunek. Zalecane szczególnie przy pojazdach z wysokim dachem."
+    },
+    "install": {
+      "title": "Instrukcja montażu",
+      "steps": [
+        { "title": "Sprawdź profil rynienki dachowej", "text": "Wszystkie uchwyty TS-PARTS zaciskają się na fabrycznej rynieniu dachowej (krawędzi kapania) biegnącej wzdłuż górnej krawędzi nadwozia. Wyczyść powierzchnię rynienki i sprawdź, czy nie ma uszkodzeń ani rdzy przed montażem." },
+        { "title": "Wybierz właściwą wysokość uchwytu", "text": "Użyj Kreatora, aby dopasować wysokość uchwytu do swojego pojazdu. Pojazdy ze standardowym dachem zazwyczaj używają uchwytów 169 mm lub 260 mm; pojazdy z wysokim dachem lub dachem uchylnym — uchwytów 357 mm. Wysokość uchwytu określa, jak wysoko poprzeczka znajduje się ponad dachem." },
+        { "title": "Zaznacz pozycje uchwytów wzdłuż rynienki", "text": "Rozmieść uchwyty równomiernie wzdłuż obu stron rynienki. Zalecany rozstaw: 1 para na 75 cm użytecznej długości dachu. Zawsze umieszczaj jedną parę z przodu i jedną z tyłu; dodaj pośrednie pary przy dłuższych dachach." },
+        { "title": "Zamocuj rurę poprzeczki", "text": "Przesuń rurę poprzeczki przez głowice uchwytów na pełną szerokość pojazdu przed dokręceniem. Upewnij się, że rura wystaje równomiernie po obu stronach. Wyreguluj pozycję wszystkich par przed ostatecznym dokręceniem." },
+        { "title": "Zaciśnij i dokręć momentem", "text": "Nasadź zacisk każdego uchwytu na rynienkę i dokręć śrubę zaciskową. Zalecany moment dokręcania: 12–15 Nm. Nie dokręcaj za mocno — nadmierny nacisk może odkształcić rynienkę. Sprawdź wszystkie połączenia po pierwszych 100 km jazdy." },
+        { "title": "Zamocuj uchwyty pomocnicze (opcjonalnie)", "text": "Uchwyty pomocnicze v1 (niskie) i v2 (wysokie) mocowane są na wspornikach uchwytów, zapewniając uchwyty chwytne ułatwiające załadunek. Zalecane szczególnie przy pojazdach z wysokim dachem. Montuj jeden uchwyt na wspornik od zewnętrznej strony." }
+      ]
+    }
+  },
+
+  "de": {
+    "pageTitle": "Dachgepäckträger-Halter-Assistent — TS-PARTS",
+    "title": "Dachgepäckträger-Halter-Assistent",
+    "sub": "Den richtigen Halter für Ihr Fahrzeug finden und die benötigte Anzahl Paare berechnen",
+    "tabs": {
+      "wizard": "Halter-Assistent",
+      "desc": "Produktbeschreibung",
+      "install": "Montageanleitung"
+    },
+    "introTitle": "Die richtigen Halter für Ihren Dachgepäckträger finden",
+    "introText": "Beantworten Sie 5 kurze Fragen zu Ihrem Fahrzeug und den Dachmaßen. Der Assistent ermittelt das richtige Haltermodell und berechnet genau, wie viele Paare Sie benötigen.",
+    "loading": "Produktdaten werden geladen…",
+    "loadError": "⚠ Produktdaten konnten nicht geladen werden. Bitte Seite neu laden.",
+    "steps": {
+      "s1title": "Fahrzeugmarke wählen",
+      "s2title": "Modell wählen",
+      "s3title": "Dachhöhe / Profil",
+      "s4title": "Nutzbare Dachlänge",
+      "s5title": "Verwendungszweck & Last",
+      "resultTitle": "Ihre empfohlene Konfiguration"
+    },
+    "makes": {
+      "vw":       { "sub": "T2, T3 Vanagon, LT I, LT II" },
+      "mercedes": { "sub": "Vario, Sprinter, T1, T2, G460" },
+      "ford":     { "sub": "Transit 3H (2009+)" },
+      "landrover":{ "sub": "Discovery 1 & 2, Defender" },
+      "volvo":    { "sub": "C303, C304, C306" },
+      "iveco":    { "sub": "Daily 40-10" },
+      "uaz":      { "sub": "UAZ-452 (Buhanka)" },
+      "other":    { "label": "Andere / Eigene Maße", "sub": "Abmessungen manuell eingeben" }
+    },
+    "roof": {
+      "lowLabel": "Niedrig / Standard",
+      "lowSub": "Flach oder leicht gewölbt\nSerienstandard-Dachhöhe",
+      "highLabel": "Hochdach",
+      "highSub": "Erhöhtes oder Aufstelldach\nWestfalia, California, individuell",
+      "unknownLabel": "Nicht sicher",
+      "unknownSub": "Ich gebe die Halterhöhe\nmanuell ein",
+      "manualLabel": "Erforderliche Halterhöhe (mm) — Abstand von der Dachrinne zur Mitte der Querstrebe:",
+      "manualUnit": "mm"
+    },
+    "roofLen": {
+      "instruction": "Messen Sie die nutzbare Dachlänge — vom vorderen zum hinteren Befestigungspunkt, ohne Überhang der Wind- und Heckscheibe.",
+      "hint": "Typische Werte: VW T3 ≈ 140 cm · MB Vario ≈ 200 cm · Ford Transit LWB ≈ 260 cm",
+      "exactLabel": "Oder genaue Länge eingeben:",
+      "unit": "cm",
+      "nextBtn": "Weiter →"
+    },
+    "use": {
+      "instruction": "Wie wird der Dachgepäckträger genutzt? Dies bestimmt die maximale Last pro Halter und den erforderlichen Abstand.",
+      "stationaryLabel": "Stationär",
+      "stationarySub": "Dachterrasse, Solarmodule, feste Ausrüstung — Fahrzeug steht unter Last",
+      "travelLabel": "Fahren mit Beladung",
+      "travelSub": "Gepäck, Campingausrüstung, Reservekanister — während der Fahrt auf der Straße",
+      "offroadLabel": "Gelände / Heavy Duty",
+      "offroadSub": "Overlanding, anspruchsvolles Gelände, schwere Lasten — Vibrationen und dynamische Kräfte wirken",
+      "perBracket": "pro Halter",
+      "maxSpacing": "max. Abstand",
+      "manualTitle": "Oder Gesamtlast manuell eingeben:",
+      "totalLoadLabel": "Gesamtlast auf dem Träger:",
+      "kgUnit": "kg",
+      "bracketsNeeded": "→ benötigte Halter:",
+      "calcBtn": "Meine Halter berechnen →"
+    },
+    "result": {
+      "pairsNeeded": "Benötigte Halterpaare",
+      "pairsSub_spacing": "durch Abstandsregel bestimmt",
+      "pairsSub_load": "durch Lastgewicht bestimmt",
+      "spacing": "Abstand zwischen Paaren",
+      "spacingMax": "Max. zulässig:",
+      "spacingUse": "Nutzung:",
+      "capacity": "Gesamttragfähigkeit",
+      "height": "Halterhöhe",
+      "hd": "Heavy Duty",
+      "std": "Standard",
+      "closest": "nächste Übereinstimmung",
+      "custom": "Individuell",
+      "noteLoad": "Die Abstandsregel allein würde <strong>{pairsFromSpacing} Paare</strong> erfordern, aber Ihre Last von <strong>{customLoad} kg</strong> benötigt mindestens <strong>{pairsFromLoad} Paare</strong> bei {kgPerBracket} kg/Halter{hdNote}. Die Last ist der begrenzende Faktor.",
+      "hdNote": " (HD-Rate)",
+      "diagramTitle": "Halterabstand — Draufsicht (Dach {len} cm, vorne → hinten)",
+      "diagramSub": "Jede Markierung = 1 Halterpaar (linke + rechte Fahrzeugseite). Abstand: <strong>{spacing} cm</strong> zwischen Paaren.",
+      "qtyLabel": "Menge:",
+      "viewBtn": "Ansehen →",
+      "noMatch": "Keine genaue Übereinstimmung gefunden. Bitte <a href=\"https://ts-parts.eu/de_DE/contact\" style=\"color:var(--accent)\">kontaktieren Sie uns</a>.",
+      "startOver": "← Neu starten",
+      "shopBtn": "Alle Dachgepäckträger-Produkte im Shop ansehen →",
+      "shopUrl": "https://ts-parts.eu/de_DE/c/Roof-racks/105",
+      "contactUrl": "https://ts-parts.eu/de_DE/contact"
+    },
+    "tags": {
+      "Required": "Erforderlich",
+      "Recommended": "Empfohlen",
+      "Platform": "Plattform",
+      "Optional": "Optional",
+      "Accessory": "Zubehör"
+    },
+    "bom": {
+      "s1": "1 — Erforderlich für den Aufbau",
+      "s2": "2 — Empfohlene Ergänzungen",
+      "s3": "3 — Optionales Zubehör",
+      "s4": "4 — Extras"
+    },
+    "products": {
+      "crossbarTube": {
+        "name": "Querstrebenrohr für Dachgepäckträger",
+        "detail": "Rundes Stahlrohr (schwarz pulverbeschichtet), das durch die Halterköpfe geschoben wird und jede Querstrebe bildet. Ein Rohr pro Halterpaar über die volle Fahrzeugbreite.",
+        "qtyLabel": "Stk."
+      },
+      "hdUpgrade": {
+        "nameSuffix": " (HD-Upgrade)",
+        "detail": "Stärkeres HD-Profil — empfohlen bei dauerhaften Schwerlasten, Fahrt mit Beladung oder Geländeeinsatz.",
+        "qtyLabel": "Stk."
+      },
+      "supportBeam": {
+        "name": "Längsträger 147cm / 6cm",
+        "detail": "Stahl-Längsträger (147 cm), der alle Querstreben von vorne nach hinten verbindet. Bildet einen steifen Leiterrahmen. Unverzichtbar für Dachterrassen und gleichmäßige Lastverteilung. Typisch 2 Stk. pro Einbau (links + rechts).",
+        "qtyLabel": "Stk. (links + rechts)"
+      },
+      "platformDisco1": {
+        "name": "Expeditions-Kofferraum / Dachgepäckträger-Plattform — Land Rover Discovery 1",
+        "detail": "Vollständig integrierte Dachplattform — ersetzt die komplette Kombination aus Haltern, Trägern und Boden durch eine einzige werksfertige Einheit.",
+        "qtyLabel": "Stk."
+      },
+      "platformT2T3": {
+        "name": "VW T2 / T3 / SYNCRO Expeditions-Kofferraum / Dachplattform",
+        "detail": "Vollständige Expeditions-Dachplattform für VW T2, T3 und Syncro. Ersetzt das komplette Halter- und Trägerset durch eine einzige Einheit.",
+        "qtyLabel": "Stk."
+      },
+      "handleHigh": {
+        "name": "Griff-Zubehör — Hochdach-Halter v2",
+        "detail": "Haltegriff für Hochdach-Halterstreben. Dringend empfohlen bei Hochdachfahrzeugen für sicheren Zugang zur Dachladung.",
+        "qtyLabel": "Stk. (1 pro Halter)"
+      },
+      "handleLow": {
+        "name": "Griff-Zubehör — Niedrigdach-Halter v1",
+        "detail": "Haltegriff für Halterstreben in Standardhöhe. Werkzeuglos montierbar.",
+        "qtyLabel": "Stk. (1 pro Halter)"
+      },
+      "bottleOpener": {
+        "name": "Flaschenöffner für Dachgepäckträger",
+        "detail": "Edelstahl-Flaschenöffner, montierbar an jeder Halterstrebe oder am Querstrebenrohr. Schwarz pulverbeschichtet.",
+        "qtyLabel": "Stk."
+      },
+      "bracketDetail": "Höhe: {height} mm · {hdLabel} · Zinkphosphatierung + schwarz pulverbeschichtet"
+    },
+    "desc": {
+      "title": "Über TS-PARTS Dachgepäckträger-Halter",
+      "p1": "Die Dachgepäckträger-Halter von TS-PARTS sind präzisionsgefertigte Stahlklemmen, die Querstreben direkt in die Werks-Dachrinnen (Tropfschienen) von Transportern, Campern und Geländefahrzeugen einspannen. Sie erfordern kein Bohren und hinterlassen keine bleibenden Spuren am Fahrzeugaufbau.",
+      "p2": "Jeder Halter besteht aus hochwertigem Stahl, feuerverzinkt und schwarz pulverbeschichtet für dauerhaften Korrosionsschutz. HD-Varianten (Heavy Duty) haben ein stärkeres Profil für erhöhte Traglast — empfohlen bei schweren Lasten oder häufigem Geländeeinsatz.",
+      "p3": "Halter sind in mehreren Höhenvarianten erhältlich — 123 mm, 169 mm, 220 mm, 240 mm, 260 mm, 357 mm und 510 mm — passend zum Dachprofil und zur Rinnentiefe verschiedener Fahrzeuge. Die richtige Höhe positioniert die Querstrebe gleichmäßig über der Dachlinie.",
+      "p4": "Halter werden einzeln verkauft. Eine vollständige Trägerinstallation erfordert mindestens 2 Paare (4 Halter). Bei längeren Fahrzeugen oder schwereren Lasten werden zusätzliche Zwischenpaare empfohlen. Nutzen Sie den Assistenten, um die richtige Menge für Ihre spezifische Dachlänge zu berechnen.",
+      "p5": "Optionale Griffe (v1 niedrig / v2 hoch) können an jedem Halter angebracht werden, um das Beladen des Dachgepäckträgers zu erleichtern. Besonders empfohlen bei Hochdachfahrzeugen."
+    },
+    "install": {
+      "title": "Montageanleitung",
+      "steps": [
+        { "title": "Dachrinnen-Profil prüfen", "text": "Alle TS-PARTS Halter klemmen an die Werks-Dachrinne (Tropfschiene), die entlang der oberen Kante des Fahrzeugaufbaus verläuft. Reinigen Sie die Rinnenfläche und prüfen Sie auf Beschädigungen oder Rost vor der Montage." },
+        { "title": "Richtige Halterhöhe wählen", "text": "Nutzen Sie den Assistenten, um die Halterhöhe an Ihr Fahrzeug anzupassen. Standarddach-Fahrzeuge verwenden typischerweise 169-mm- oder 260-mm-Halter; Hochdach- oder Aufstelldach-Fahrzeuge 357-mm-Halter. Die Halterhöhe bestimmt, wie weit die Querstrebe über der Dachlinie sitzt." },
+        { "title": "Halterpositionen entlang der Rinne markieren", "text": "Halter gleichmäßig entlang beider Seiten der Rinne verteilen. Empfohlener Abstand: 1 Paar pro 75 cm nutzbarer Dachlänge. Immer ein Paar vorne und eines hinten positionieren; bei längeren Dächern Zwischenpaare hinzufügen." },
+        { "title": "Querstrebenrohr einsetzen", "text": "Das Querstrebenrohr vor dem Anziehen durch die Halterköpfe über die volle Fahrzeugbreite schieben. Sicherstellen, dass das Rohr auf beiden Seiten gleichmäßig übersteht. Position aller Paare vor dem endgültigen Anziehen einstellen." },
+        { "title": "Klemmen und Anzugsmoment", "text": "Die Klemmung jedes Halters über die Dachrinne schieben und die Klemmschraube anziehen. Empfohlenes Anzugsmoment: 12–15 Nm. Nicht überdrehen — übermäßige Kraft kann die Dachrinne verformen. Alle Befestigungen nach den ersten 100 km Fahrt nachprüfen." },
+        { "title": "Griffe befestigen (optional)", "text": "Griffzubehör v1 (niedrig) und v2 (hoch) werden an den Halterstreben eingehängt und bieten Haltegriffe für einfacheres Beladen. Besonders bei Hochdachfahrzeugen empfohlen. Je einen Griff pro Halter an der Außenseite montieren." }
+      ]
+    }
+  }
+}

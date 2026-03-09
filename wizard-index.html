@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,6 @@
   --accent-light:#fff1ec;
   --yellow-bg:#fffbe6;
 }
-/* No topbar, no breadcrumb, no min-height — clean for iframe */
 html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',sans-serif;font-weight:400;}
 
 .page{max-width:1000px;margin:0 auto;padding:24px 20px 48px}
@@ -81,8 +80,6 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
 .rec-footer{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .rec-qty{font-size:13px;color:var(--mid)}
 .rec-qty strong{color:var(--dark);font-weight:600}
-.rec-price{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent);margin-left:auto}
-.rec-price .per{font-size:12px;color:var(--muted);font-family:'Source Sans 3',sans-serif;font-weight:400}
 
 .spacing-diagram{margin:20px 0;padding:16px 16px 12px;background:var(--bg);border:1px solid var(--border)}
 .diagram-title{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:56px}
@@ -99,14 +96,9 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
 .bom-section-title{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .bom-section-title h3{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dark)}
 .bom-section-title .section-rule{flex:1;height:1px;background:var(--border)}
-.bom-total{background:var(--dark);color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;margin-top:4px;flex-wrap:wrap}
-.bom-total .bt-label{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#aaa}
-.bom-total .bt-val{font-family:'Oswald',sans-serif;font-size:24px;font-weight:600;color:#fff}
-.bom-total .bt-sub{font-size:12px;color:#aaa;margin-top:2px}
-.bom-total .bt-note{margin-left:auto;font-size:12px;color:#888;max-width:240px;text-align:right}
 
-.btn-wizard{border:none;background:var(--accent);color:#fff;font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:12px 28px;cursor:pointer;margin-top:20px;transition:background .15s}
-.btn-wizard:hover{background:var(--accent-hover)}
+.btn-wizard{border:none;background:var(--accent);color:#fff;font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:12px 28px;cursor:pointer;margin-top:20px;transition:background .15s;text-decoration:none;display:inline-block}
+.btn-wizard:hover{background:var(--accent-hover);color:#fff}
 .btn-wizard.secondary{background:none;border:1px solid var(--border);color:var(--mid);margin-right:10px}
 .btn-wizard.secondary:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
 
@@ -130,7 +122,6 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
 @media(max-width:720px){
   .opt-grid.cols3,.opt-grid.cols4{grid-template-columns:1fr 1fr}
   .result-summary{grid-template-columns:1fr}
-  .bom-total{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:480px){
   .opt-grid.cols3,.opt-grid.cols4{grid-template-columns:1fr}
@@ -138,56 +129,46 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
 </style>
 </head>
 <body>
-
 <div class="page">
 
-  <h1 class="page-title">Roof Rack Bracket Wizard</h1>
-  <p class="page-sub">Find the correct bracket for your vehicle and calculate how many pairs you need</p>
+  <h1 class="page-title" id="uTitle"></h1>
+  <p class="page-sub" id="uSub"></p>
 
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('wizard',this)">Bracket Wizard</button>
-    <button class="tab" onclick="switchTab('desc',this)">Description</button>
-    <button class="tab" onclick="switchTab('install',this)">Installation Guide</button>
+    <button class="tab active" id="tabWizard" onclick="switchTab('wizard',this)"></button>
+    <button class="tab" id="tabDesc" onclick="switchTab('desc',this)"></button>
+    <button class="tab" id="tabInstall" onclick="switchTab('install',this)"></button>
   </div>
 
   <!-- WIZARD -->
   <div id="tab-wizard" class="tab-panel active">
     <div class="wizard-intro">
-      <h2>Find the right brackets for your roof rack</h2>
-      <p>Answer 4 quick questions about your vehicle and roof dimensions. The wizard will identify the correct bracket model and calculate exactly how many pairs you need — using the recommended 1 pair per 75 cm spacing rule.</p>
+      <h2 id="uIntroTitle"></h2>
+      <p id="uIntroText"></p>
     </div>
 
     <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
 
     <div id="dataStatus" style="font-size:13px;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px">
-      <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite"></span>
-      Loading product data…
+      <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite" id="loadSpinner"></span>
+      <span id="uLoading">Loading…</span>
     </div>
 
     <div class="step visible" id="step1" style="opacity:0.4;pointer-events:none">
       <div class="step-header">
         <div class="step-num">1</div>
-        <div class="step-title">Select your vehicle make</div>
+        <div class="step-title" id="uS1Title"></div>
         <div class="step-done-label" id="step1-done">✓ <span></span></div>
       </div>
       <div class="step-body">
-        <div class="opt-grid cols4" id="makeGrid">
-          <button class="opt-btn" onclick="selectMake('vw','Volkswagen')"><div class="veh-icon">🚐</div><div class="ol">Volkswagen</div><div class="os">T2, T3 Vanagon, LT II</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('mercedes','Mercedes-Benz')"><div class="veh-icon">🚌</div><div class="ol">Mercedes-Benz</div><div class="os">Vario, Sprinter, T1, T2, G460</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('ford','Ford')"><div class="veh-icon">🚛</div><div class="ol">Ford</div><div class="os">Transit 3H (2009+)</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('landrover','Land Rover')"><div class="veh-icon">🚙</div><div class="ol">Land Rover</div><div class="os">Discovery 1 &amp; 2, Defender</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('volvo','Volvo / TGB')"><div class="veh-icon">🚐</div><div class="ol">Volvo / TGB</div><div class="os">C303, C304, C306</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('iveco','Iveco')"><div class="veh-icon">🚚</div><div class="ol">Iveco</div><div class="os">Daily 40-10</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('uaz','UAZ')"><div class="veh-icon">🚐</div><div class="ol">UAZ</div><div class="os">UAZ-452 (Buhanka)</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectMake('other','Other / Custom')"><div class="veh-icon">🔧</div><div class="ol">Other / Custom</div><div class="os">Enter dimensions manually</div><div class="check">✓</div></button>
-        </div>
+        <div class="opt-grid cols4" id="makeGrid"></div>
       </div>
     </div>
 
     <div class="step" id="step2">
       <div class="step-header">
         <div class="step-num">2</div>
-        <div class="step-title">Select your model</div>
+        <div class="step-title" id="uS2Title"></div>
         <div class="step-done-label" id="step2-done">✓ <span></span></div>
       </div>
       <div class="step-body">
@@ -198,19 +179,17 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
     <div class="step" id="step3">
       <div class="step-header">
         <div class="step-num">3</div>
-        <div class="step-title">Roof height / profile</div>
+        <div class="step-title" id="uS3Title"></div>
         <div class="step-done-label" id="step3-done">✓ <span></span></div>
       </div>
       <div class="step-body">
-        <div class="opt-grid cols3">
-          <button class="opt-btn" onclick="selectHeight('low','Low / Standard roof')"><div class="ol">Low / Standard</div><div class="os">Flat or gently curved<br>Factory standard height</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectHeight('high','High roof')"><div class="ol">High roof</div><div class="os">Raised or pop-up roof<br>Westfalia, California, custom</div><div class="check">✓</div></button>
-          <button class="opt-btn" onclick="selectHeight('unknown','Manual entry')"><div class="ol">Not sure</div><div class="os">I will specify bracket<br>height manually below</div><div class="check">✓</div></button>
-        </div>
+        <div class="opt-grid cols3" id="roofHeightGrid"></div>
         <div id="manualHeightWrap" style="display:none;margin-top:16px">
-          <label style="font-size:13px;color:var(--mid);display:block;margin-bottom:6px">Required bracket height (mm) — distance from roof rail to crossbar centre:</label>
-          <input type="number" id="manualHeight" value="169" min="100" max="600" style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:120px" oninput="S.manualHeight=parseInt(this.value)||169">
-          <span style="font-size:12px;color:var(--muted);margin-left:8px">mm</span>
+          <label id="uManualHeightLabel" style="font-size:13px;color:var(--mid);display:block;margin-bottom:6px"></label>
+          <input type="number" id="manualHeight" value="169" min="100" max="600"
+            style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:120px"
+            oninput="S.manualHeight=parseInt(this.value)||169">
+          <span id="uManualUnit" style="font-size:12px;color:var(--muted);margin-left:8px"></span>
         </div>
       </div>
     </div>
@@ -218,142 +197,228 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
     <div class="step" id="step4">
       <div class="step-header">
         <div class="step-num">4</div>
-        <div class="step-title">Usable roof length</div>
+        <div class="step-title" id="uS4Title"></div>
         <div class="step-done-label" id="step4-done">✓ <span></span></div>
       </div>
       <div class="step-body">
-        <p style="font-size:13px;color:var(--mid);margin-bottom:16px">Measure the usable roof length — front to rear mounting point, excluding windscreen and rear screen overhang.</p>
+        <p id="uRoofLenInstruction" style="font-size:13px;color:var(--mid);margin-bottom:16px"></p>
         <div class="slider-row">
           <input type="range" id="roofLen" min="80" max="320" value="160" step="5" oninput="updateRoofLen()">
           <div class="slider-val" id="roofLenVal">160 cm</div>
         </div>
         <div class="slider-ticks">
-          <span>80 cm</span><span>120 cm</span><span>160 cm</span><span>200 cm</span><span>240 cm</span><span>280 cm</span><span>320 cm</span>
+          <span>80 cm</span><span>120 cm</span><span>160 cm</span><span>200 cm</span>
+          <span>240 cm</span><span>280 cm</span><span>320 cm</span>
         </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:12px">Common values: VW T3 ≈ 140 cm · MB Vario ≈ 200 cm · Ford Transit LWB ≈ 260 cm</p>
+        <p id="uRoofLenHint" style="font-size:12px;color:var(--muted);margin-top:12px"></p>
         <div style="margin-top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <label style="font-size:13px;color:var(--mid)">Or enter exact length:</label>
-          <input type="number" id="roofLenNum" value="160" min="80" max="320" style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:90px" oninput="syncRoofLen(this.value)">
-          <span style="font-size:12px;color:var(--muted)">cm</span>
+          <label id="uRoofLenExactLabel" style="font-size:13px;color:var(--mid)"></label>
+          <input type="number" id="roofLenNum" value="160" min="80" max="320"
+            style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:90px"
+            oninput="syncRoofLen(this.value)">
+          <span id="uRoofLenUnit" style="font-size:12px;color:var(--muted)"></span>
         </div>
-        <button class="btn-wizard" onclick="advanceToWeight()">Next →</button>
+        <button class="btn-wizard" id="uNextBtn" onclick="advanceToWeight()"></button>
       </div>
     </div>
 
     <div class="step" id="step5">
       <div class="step-header">
         <div class="step-num">5</div>
-        <div class="step-title">Intended use &amp; load</div>
+        <div class="step-title" id="uS5Title"></div>
         <div class="step-done-label" id="step5-done">✓ <span></span></div>
       </div>
       <div class="step-body">
-        <p style="font-size:13px;color:var(--mid);margin-bottom:20px">How will the roof rack be used? This determines the maximum load per bracket and the required spacing.</p>
-        <div class="opt-grid cols3">
-          <button class="opt-btn" onclick="selectUse('stationary','Stationary / Roof deck',25,75)">
-            <div class="ol">Stationary</div>
-            <div class="os">Roof deck, solar panels, fixed equipment — vehicle not moving under load</div>
-            <div style="margin-top:10px;display:flex;gap:16px">
-              <div><div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent)">25 kg</div><div style="font-size:11px;color:var(--muted)">per bracket</div></div>
-              <div><div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent)">75 cm</div><div style="font-size:11px;color:var(--muted)">max spacing</div></div>
-            </div>
-            <div class="check">✓</div>
-          </button>
-          <button class="opt-btn" onclick="selectUse('travel','Travelling with load',10,50)">
-            <div class="ol">Travelling with load</div>
-            <div class="os">Luggage, camping gear, jerrycans — carried while driving on road</div>
-            <div style="margin-top:10px;display:flex;gap:16px">
-              <div><div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent)">10 kg</div><div style="font-size:11px;color:var(--muted)">per bracket</div></div>
-              <div><div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent)">50 cm</div><div style="font-size:11px;color:var(--muted)">max spacing</div></div>
-            </div>
-            <div class="check">✓</div>
-          </button>
-          <button class="opt-btn" onclick="selectUse('offroad','Off-road / Heavy duty',10,40)">
-            <div class="ol">Off-road / Heavy duty</div>
-            <div class="os">Overland use, rough terrain, heavy loads — vibration and dynamic forces apply</div>
-            <div style="margin-top:10px;display:flex;gap:16px">
-              <div><div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent)">10 kg</div><div style="font-size:11px;color:var(--muted)">per bracket</div></div>
-              <div><div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent)">40 cm</div><div style="font-size:11px;color:var(--muted)">max spacing</div></div>
-            </div>
-            <div class="check">✓</div>
-          </button>
-        </div>
+        <p id="uUseInstruction" style="font-size:13px;color:var(--mid);margin-bottom:20px"></p>
+        <div class="opt-grid cols3" id="useGrid"></div>
         <div id="customLoadWrap" style="margin-top:20px;padding:16px;background:var(--bg);border:1px solid var(--border)">
-          <div style="font-size:13px;font-weight:600;margin-bottom:12px;font-family:'Oswald',sans-serif;letter-spacing:.5px">Or enter total load manually:</div>
+          <div id="uManualLoadTitle" style="font-size:13px;font-weight:600;margin-bottom:12px;font-family:'Oswald',sans-serif;letter-spacing:.5px"></div>
           <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-            <label style="font-size:13px;color:var(--mid)">Total load on rack:</label>
-            <input type="number" id="totalLoad" value="80" min="1" max="1000" style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:80px" oninput="updateCustomLoad()">
-            <span style="font-size:12px;color:var(--muted)">kg</span>
-            <span style="font-size:12px;color:var(--muted);margin-left:8px">→ brackets needed: <strong id="customBracketCount">—</strong></span>
+            <label id="uTotalLoadLabel" style="font-size:13px;color:var(--mid)"></label>
+            <input type="number" id="totalLoad" value="80" min="1" max="1000"
+              style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:80px"
+              oninput="updateCustomLoad()">
+            <span id="uKgUnit" style="font-size:12px;color:var(--muted)"></span>
+            <span style="font-size:12px;color:var(--muted);margin-left:8px">
+              <span id="uBracketsNeeded"></span> <strong id="customBracketCount">—</strong>
+            </span>
           </div>
         </div>
-        <button class="btn-wizard" onclick="showResult()" id="calcBtn" style="display:none">Calculate my brackets →</button>
+        <button class="btn-wizard" onclick="showResult()" id="calcBtn" style="display:none"></button>
       </div>
     </div>
 
     <div class="step" id="stepResult">
       <div class="step-header" style="background:var(--accent)">
         <div class="step-num" style="background:rgba(255,255,255,.25)">✓</div>
-        <div class="step-title">Your recommended configuration</div>
+        <div class="step-title" id="uResultTitle"></div>
       </div>
       <div class="step-body" style="padding:0">
         <div id="resultContent" style="padding:24px"></div>
       </div>
     </div>
-  </div>
+  </div><!-- /tab-wizard -->
 
   <!-- DESCRIPTION -->
   <div id="tab-desc" class="tab-panel">
-    <div class="content-block">
-      <h2>About TS-PARTS Roof Rack Brackets</h2>
-      <p>TS-PARTS roof rack brackets are precision-made steel clamps designed to mount roof rack crossbars directly onto the factory roof gutters (drip rails) of commercial vans, campers and 4x4 vehicles. They require no drilling and leave no permanent marks on the vehicle bodywork.</p>
-      <p>Each bracket is manufactured from high-grade steel, hot-dip galvanised and powder-coated black for long-term corrosion resistance. HD (Heavy Duty) variants use a thicker profile for increased load capacity — recommended for heavy loads or frequent off-road use.</p>
-      <p>Brackets are available in multiple height variants — 123 mm, 169 mm, 220 mm, 240 mm, 260 mm, 357 mm, and 510 mm — to match the roof profile and gutter depth of different vehicles. The correct height places the crossbar at a consistent level above the roofline.</p>
-      <p>Brackets are sold individually. A complete rack installation requires a minimum of 2 pairs (4 brackets). For longer vehicles or heavier loads, additional intermediate pairs are recommended. Use the Wizard to calculate the correct quantity for your specific roof length.</p>
-      <p>Optional accessory handles (v1 low / v2 high) can be added to each bracket to provide a grab handle for loading cargo onto the roof rack. Recommended for high-roof vehicles where reaching the rack requires extra assistance.</p>
-    </div>
+    <div class="content-block" id="descBlock"></div>
   </div>
 
   <!-- INSTALLATION -->
   <div id="tab-install" class="tab-panel">
-    <div class="content-block">
-      <h2>Installation Guide</h2>
-      <div class="install-step"><div class="install-num">1</div><div><strong>Identify your roof gutter profile</strong><p>All TS-PARTS brackets clamp onto the factory roof gutter (drip rail) running along the top edge of the vehicle body. Clean the gutter surface and check for damage or rust before fitting.</p></div></div>
-      <div class="install-step"><div class="install-num">2</div><div><strong>Select the correct bracket height</strong><p>Use the Wizard to match bracket height to your vehicle. Standard-roof vehicles typically use 169 mm or 260 mm brackets; high-roof or pop-top vehicles use 357 mm brackets. Bracket height determines how far the crossbar sits above the roofline.</p></div></div>
-      <div class="install-step"><div class="install-num">3</div><div><strong>Mark bracket positions along the gutter</strong><p>Place brackets at even intervals along both sides of the gutter. Recommended spacing: 1 pair per 75 cm of usable roof length. Always position one pair at the front and one at the rear; add intermediate pairs for longer roofs.</p></div></div>
-      <div class="install-step"><div class="install-num">4</div><div><strong>Fit the crossbar tube</strong><p>Slide the crossbar tube through the bracket heads across the full roof width before tightening. Ensure the tube overhangs evenly on both sides. Adjust the position of all pairs before any final tightening.</p></div></div>
-      <div class="install-step"><div class="install-num">5</div><div><strong>Clamp and torque</strong><p>Slide each bracket clamp over the gutter rail and tighten the clamping bolt. Recommended torque: 12–15 Nm. Do not overtighten — excessive force can deform the gutter rail. Recheck all fasteners after the first 100 km of use.</p></div></div>
-      <div class="install-step"><div class="install-num">6</div><div><strong>Attach accessory handles (optional)</strong><p>Accessory handles v1 (low) and v2 (high) clip onto the bracket uprights to provide grab handles for easier loading. Recommended especially for high-roof vehicles. Fit one handle per bracket on the outside face.</p></div></div>
-    </div>
+    <div class="content-block" id="installBlock"></div>
   </div>
 
 </div><!-- /page -->
 
 <script>
+// ── language ──────────────────────────────────────────────────────────────
+const LANG=(new URLSearchParams(window.location.search).get('lang')||'en').toLowerCase();
+document.getElementById('htmlRoot').lang=LANG;
+
+// ── state ─────────────────────────────────────────────────────────────────
 let S={make:null,makeLabel:null,model:null,modelLabel:null,height:null,heightLabel:null,
        roofLen:160,manualHeight:169,useMode:null,customLoad:null};
+let PRODUCTS=[], MODELS={}, T={};
 
-// Data loaded from data.json
-let PRODUCTS=[], MODELS={}, PRICES={};
+// ── boot ──────────────────────────────────────────────────────────────────
+Promise.all([
+  fetch('data.json').then(r=>r.json()),
+  fetch('translations.json').then(r=>r.json())
+])
+.then(([data,trans])=>{
+  PRODUCTS=data.brackets;
+  MODELS=data.models;
+  T=trans[LANG]||trans['en'];
+  applyTranslations();
+  document.getElementById('step1').style.opacity='1';
+  document.getElementById('step1').style.pointerEvents='auto';
+  document.getElementById('dataStatus').style.display='none';
+})
+.catch(()=>{
+  document.getElementById('uLoading').textContent='⚠ Could not load data. Please refresh.';
+  document.getElementById('uLoading').style.color='#c0392b';
+  document.getElementById('loadSpinner').style.display='none';
+});
 
-function price(id){return PRICES[String(id)]||null;}
+// ── apply translations ────────────────────────────────────────────────────
+function applyTranslations(){
+  document.title=T.pageTitle;
+  setT('uTitle',T.title);
+  setT('uSub',T.sub);
+  setT('tabWizard',T.tabs.wizard);
+  setT('tabDesc',T.tabs.desc);
+  setT('tabInstall',T.tabs.install);
+  setT('uIntroTitle',T.introTitle);
+  setT('uIntroText',T.introText);
+  setT('uLoading',T.loading);
+  setT('uS1Title',T.steps.s1title);
+  setT('uS2Title',T.steps.s2title);
+  setT('uS3Title',T.steps.s3title);
+  setT('uS4Title',T.steps.s4title);
+  setT('uS5Title',T.steps.s5title);
+  setT('uResultTitle',T.steps.resultTitle);
+  setT('uManualHeightLabel',T.roof.manualLabel);
+  setT('uManualUnit',T.roof.manualUnit);
+  setT('uRoofLenInstruction',T.roofLen.instruction);
+  setT('uRoofLenHint',T.roofLen.hint);
+  setT('uRoofLenExactLabel',T.roofLen.exactLabel);
+  setT('uRoofLenUnit',T.roofLen.unit);
+  setT('uNextBtn',T.roofLen.nextBtn);
+  setT('uUseInstruction',T.use.instruction);
+  setT('uManualLoadTitle',T.use.manualTitle);
+  setT('uTotalLoadLabel',T.use.totalLoadLabel);
+  setT('uKgUnit',T.use.kgUnit);
+  setT('uBracketsNeeded',T.use.bracketsNeeded);
+  setT('calcBtn',T.use.calcBtn);
+  buildMakeGrid();
+  buildRoofHeightGrid();
+  buildUseGrid();
+  buildDescTab();
+  buildInstallTab();
+}
+function setT(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
 
-// Fetch data.json on load — wizard is disabled until data arrives
-fetch('data.json')
-  .then(r=>r.json())
-  .then(d=>{
-    PRODUCTS=d.brackets;
-    MODELS=d.models;
-    PRICES=d.prices;
-    document.getElementById('step1').style.opacity='1';
-    document.getElementById('step1').style.pointerEvents='auto';
-    document.getElementById('dataStatus').style.display='none';
-  })
-  .catch(()=>{
-    document.getElementById('dataStatus').textContent='⚠ Could not load product data. Please refresh.';
-    document.getElementById('dataStatus').style.color='#c0392b';
+function buildMakeGrid(){
+  const DEFS=[
+    {id:'vw',        icon:'🚐',label:'Volkswagen'},
+    {id:'mercedes',  icon:'🚌',label:'Mercedes-Benz'},
+    {id:'ford',      icon:'🚛',label:'Ford'},
+    {id:'landrover', icon:'🚙',label:'Land Rover'},
+    {id:'volvo',     icon:'🚐',label:'Volvo / TGB'},
+    {id:'iveco',     icon:'🚚',label:'Iveco'},
+    {id:'uaz',       icon:'🚙',label:'UAZ'},
+    {id:'other',     icon:'🔧',label:null},
+  ];
+  const g=document.getElementById('makeGrid');g.innerHTML='';
+  DEFS.forEach(m=>{
+    const tm=T.makes[m.id]||{};
+    const label=tm.label||m.label;
+    const sub=tm.sub||'';
+    const b=document.createElement('button');b.className='opt-btn';
+    b.innerHTML=`<div class="veh-icon">${m.icon}</div><div class="ol">${label}</div><div class="os">${sub}</div><div class="check">✓</div>`;
+    b.onclick=()=>selectMake(m.id,label);
+    g.appendChild(b);
   });
+}
 
+function buildRoofHeightGrid(){
+  const defs=[
+    {id:'low',     label:T.roof.lowLabel,     sub:T.roof.lowSub},
+    {id:'high',    label:T.roof.highLabel,    sub:T.roof.highSub},
+    {id:'unknown', label:T.roof.unknownLabel, sub:T.roof.unknownSub},
+  ];
+  const g=document.getElementById('roofHeightGrid');g.innerHTML='';
+  defs.forEach(d=>{
+    const b=document.createElement('button');b.className='opt-btn';
+    b.innerHTML=`<div class="ol">${d.label}</div><div class="os">${d.sub.replace(/\n/g,'<br>')}</div><div class="check">✓</div>`;
+    b.onclick=()=>{
+      document.querySelectorAll('#roofHeightGrid .opt-btn').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+      selectHeight(d.id,d.label);
+    };
+    g.appendChild(b);
+  });
+}
 
+function buildUseGrid(){
+  const defs=[
+    {id:'stationary',label:T.use.stationaryLabel,sub:T.use.stationarySub,kg:25,sp:75},
+    {id:'travel',    label:T.use.travelLabel,    sub:T.use.travelSub,    kg:10,sp:50},
+    {id:'offroad',   label:T.use.offroadLabel,   sub:T.use.offroadSub,   kg:10,sp:40},
+  ];
+  const g=document.getElementById('useGrid');g.innerHTML='';
+  defs.forEach(d=>{
+    const b=document.createElement('button');b.className='opt-btn';
+    b.innerHTML=`
+      <div class="ol">${d.label}</div>
+      <div class="os">${d.sub}</div>
+      <div style="margin-top:10px;display:flex;gap:16px">
+        <div><div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent)">${d.kg} kg</div><div style="font-size:11px;color:var(--muted)">${T.use.perBracket}</div></div>
+        <div><div style="font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--accent)">${d.sp} cm</div><div style="font-size:11px;color:var(--muted)">${T.use.maxSpacing}</div></div>
+      </div>
+      <div class="check">✓</div>`;
+    b.onclick=()=>selectUse(d.id,d.label,d.kg,d.sp);
+    g.appendChild(b);
+  });
+}
+
+function buildDescTab(){
+  const d=T.desc;
+  document.getElementById('descBlock').innerHTML=
+    `<h2>${d.title}</h2><p>${d.p1}</p><p>${d.p2}</p><p>${d.p3}</p><p>${d.p4}</p><p>${d.p5}</p>`;
+}
+
+function buildInstallTab(){
+  const inst=T.install;
+  document.getElementById('installBlock').innerHTML=
+    `<h2>${inst.title}</h2>`+
+    inst.steps.map((s,i)=>
+      `<div class="install-step"><div class="install-num">${i+1}</div><div><strong>${s.title}</strong><p>${s.text}</p></div></div>`
+    ).join('');
+}
+
+// ── wizard steps ──────────────────────────────────────────────────────────
 function selectMake(make,label){
   S.make=make;S.makeLabel=label;S.model=null;S.modelLabel=null;
   document.querySelectorAll('#makeGrid .opt-btn').forEach(b=>b.classList.remove('selected'));
@@ -367,15 +432,14 @@ function selectMake(make,label){
       S.model=m.id;S.modelLabel=m.label;
       document.querySelectorAll('#modelGrid .opt-btn').forEach(x=>x.classList.remove('selected'));
       b.classList.add('selected');setDone('step2',m.label);showStep('step3');updateProgress(40);
-    };g.appendChild(b);
+    };
+    g.appendChild(b);
   });
   showStep('step2');updateProgress(20);
 }
 
 function selectHeight(h,label){
   S.height=h;S.heightLabel=label;
-  document.querySelectorAll('#step3 .opt-btn').forEach(b=>b.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
   document.getElementById('manualHeightWrap').style.display=(h==='unknown')?'block':'none';
   if(h!=='unknown') setDone('step3',label);
   showStep('step4');updateProgress(60);
@@ -402,7 +466,7 @@ function advanceToWeight(){
 
 function selectUse(id,label,kgPerBracket,maxSpacingCm){
   S.useMode={id,label,kgPerBracket,maxSpacingCm};S.customLoad=null;
-  document.querySelectorAll('#step5 .opt-btn').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('#useGrid .opt-btn').forEach(b=>b.classList.remove('selected'));
   event.currentTarget.classList.add('selected');
   setDone('step5',label);
   updateCustomLoad();
@@ -412,199 +476,197 @@ function selectUse(id,label,kgPerBracket,maxSpacingCm){
 function updateCustomLoad(){
   const v=parseInt(document.getElementById('totalLoad').value)||0;
   S.customLoad=v>0?v:null;
-  if(!S.useMode) return;
-  // Use base rate for the hint (HD not yet known at this step)
-  const minBrackets=S.customLoad?Math.ceil(S.customLoad/S.useMode.kgPerBracket):null;
-  document.getElementById('customBracketCount').textContent=minBrackets?`≥${minBrackets} brackets (${Math.ceil(minBrackets/2)} pairs) — refined after bracket selection`:'—';
+  if(!S.useMode)return;
+  const mb=S.customLoad?Math.ceil(S.customLoad/S.useMode.kgPerBracket):null;
+  document.getElementById('customBracketCount').textContent=
+    mb?`≥${mb} (${Math.ceil(mb/2)} pairs)`:'—';
 }
 
 function calcBrackets(isHD){
   const len=S.roofLen;
   const mode=S.useMode||{kgPerBracket:25,maxSpacingCm:75,label:'Stationary'};
-  const kgPerBracket=isHD?mode.kgPerBracket*1.1:mode.kgPerBracket;
-  const pairsFromSpacing=Math.max(2,Math.ceil(len/mode.maxSpacingCm)+1);
-  let pairsFromLoad=null;
+  const kgPB=isHD?mode.kgPerBracket*1.1:mode.kgPerBracket;
+  const pFS=Math.max(2,Math.ceil(len/mode.maxSpacingCm)+1);
+  let pFL=null;
   if(S.customLoad){
-    const bracketsNeeded=Math.ceil(S.customLoad/kgPerBracket);
-    pairsFromLoad=Math.max(2,Math.ceil(bracketsNeeded/2));
+    const bn=Math.ceil(S.customLoad/kgPB);
+    pFL=Math.max(2,Math.ceil(bn/2));
   }
-  const pairs=pairsFromLoad?Math.max(pairsFromSpacing,pairsFromLoad):pairsFromSpacing;
+  const pairs=pFL?Math.max(pFS,pFL):pFS;
   const tot=pairs*2;
   const actualSpacing=pairs>1?Math.round(len/(pairs-1)):0;
-  const totalCapacity=Math.round(kgPerBracket*tot);
-  return {pairs,tot,actualSpacing,totalCapacity,kgPerBracket:Math.round(kgPerBracket*10)/10,pairsFromSpacing,pairsFromLoad,mode};
+  const totalCapacity=Math.round(kgPB*tot);
+  return {pairs,tot,actualSpacing,totalCapacity,
+    kgPerBracket:Math.round(kgPB*10)/10,
+    pairsFromSpacing:pFS,pairsFromLoad:pFL,mode};
 }
 
-function recRow(tag,name,detail,qty,qtyLabel,priceNet,priceGross,url,isPrimary){
+function recRow(tag,name,detail,qty,qtyLabel,url,isPrimary){
   const tagColors={Required:'#1a1a1a',Recommended:'#1d5a2a',Platform:'#7c4a00',Optional:'#3d3d3d',Accessory:'#5f3d99'};
+  const tagLabel=T.tags[tag]||tag;
   const bg=tagColors[tag]||'#888';
   const borderStyle=isPrimary?'border-color:var(--accent);border-width:2px':'';
-  const priceStr=priceNet
-    ?`<div class="rec-price">€${(priceNet*qty).toFixed(2)} <span class="per">net</span></div>`
-    :`<div class="rec-price" style="font-size:13px;color:var(--muted)">Contact for price</div>`;
+  const viewBtn=url
+    ?`<a href="${url}" onclick="openPopup(event,this.href)" class="btn-rec ${isPrimary?'':'outline'}">${T.result.viewBtn}</a>`
+    :'';
   return `<div class="rec-row" style="${borderStyle}">
     <div style="width:5px;flex-shrink:0;background:${bg}"></div>
     <div class="rec-content">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-        <span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;font-family:'Oswald',sans-serif;background:${bg};color:#fff">${tag}</span>
+        <span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;font-family:'Oswald',sans-serif;background:${bg};color:#fff">${tagLabel}</span>
         <div class="rec-name" style="margin-bottom:0">${name}</div>
       </div>
       <div class="rec-detail">${detail}</div>
       <div class="rec-footer">
-        <div class="rec-qty">Qty: <strong>${qty} ${qtyLabel}</strong></div>
-        ${priceStr}
-        <a href="${url}" target="_blank" class="btn-rec ${isPrimary?'':'outline'}">View →</a>
+        <div class="rec-qty">${T.result.qtyLabel} <strong>${qty} ${qtyLabel}</strong></div>
+        ${viewBtn}
       </div>
     </div>
   </div>`;
 }
 
 function bomSection(title,rows){
-  if(!rows||!rows.length) return '';
+  if(!rows||!rows.length)return'';
   return `<div class="bom-section">
     <div class="bom-section-title"><h3>${title}</h3><div class="section-rule"></div></div>
     <div class="product-recs">${rows.join('')}</div>
   </div>`;
 }
 
+function fmt(str,vars){
+  return str.replace(/\{(\w+)\}/g,(_,k)=>vars[k]!==undefined?vars[k]:'{'+k+'}');
+}
+
 function showResult(){
   updateProgress(100);
   const len=S.roofLen;
+  const P=T.products;
+  const R=T.result;
 
-  // Pass 1 — identify primary bracket (needed to know if it's HD)
   let c=PRODUCTS.filter(p=>p.height>0);
-  if(S.make&&S.make!=='other') c=c.filter(p=>p.make===S.make);
+  if(S.make&&S.make!=='other')    c=c.filter(p=>p.make===S.make);
   if(S.model&&S.model!=='custom') c=c.filter(p=>p.model===S.model);
-  if(S.height==='low') c=c.filter(p=>p.roofType.includes('low'));
-  if(S.height==='high') c=c.filter(p=>p.roofType.includes('high'));
+  if(S.height==='low')     c=c.filter(p=>p.roofType.includes('low'));
+  if(S.height==='high')    c=c.filter(p=>p.roofType.includes('high'));
   if(S.height==='unknown') c=c.sort((a,b)=>Math.abs(a.height-S.manualHeight)-Math.abs(b.height-S.manualHeight));
   const std=c.filter(p=>!p.hd),hd=c.filter(p=>p.hd);
-  // For off-road use we default to HD; otherwise prefer std with HD as upgrade option
   const modePreview=S.useMode||{id:'stationary'};
   const primary=(modePreview.id==='offroad'?(hd[0]||std[0]):(std[0]||hd[0]))||null;
   const hdOpt=(hd[0]&&hd[0].id!==primary?.id)?hd[0]:null;
 
-  // Pass 2 — calculate pairs knowing whether primary bracket is HD
-  const {pairs,tot,actualSpacing,totalCapacity,kgPerBracket,pairsFromSpacing,pairsFromLoad,mode}=calcBrackets(primary?.hd||false);
+  const {pairs,tot,actualSpacing,totalCapacity,kgPerBracket,pairsFromSpacing,pairsFromLoad,mode}
+    =calcBrackets(primary?.hd||false);
   const drivenByLoad=pairsFromLoad&&pairsFromLoad>pairsFromSpacing;
 
   const pos=[];for(let i=0;i<pairs;i++)pos.push(Math.round(i*(len/Math.max(pairs-1,1))));
 
+  // 1 — Required
   const req=[];
   if(primary){
-    const pP=price(primary.id);
+    const hdLabel=primary.hd?R.hd:R.std;
     req.push(recRow('Required',primary.name,
-      `Height: ${primary.height} mm · ${primary.hd?'Heavy Duty':'Standard'} · Zinc-phosphate + powder coat black`,
-      tot,'pcs',pP?.net,pP?.gross,primary.url,true,primary.id));
+      fmt(P.bracketDetail,{height:primary.height,hdLabel}),
+      tot,'pcs',primary.url,true));
   } else {
-    req.push(`<div style="padding:14px 18px;color:var(--muted);font-size:14px">No exact match found. Please <a href="https://ts-parts.eu/en_US/contact" style="color:var(--accent)">contact us</a>.</div>`);
+    req.push(`<div style="padding:14px 18px;color:var(--muted);font-size:14px">${R.noMatch}</div>`);
   }
-  req.push(recRow('Required','Roof rack crossbar tube',
-    'Round steel tube (powder-coated black) that slides through the bracket heads to form each crossbar. One tube spans the full vehicle width per pair.',
-    pairs,'pcs',null,null,'https://ts-parts.eu/en_US/c/Roof-racks/105',false));
+  req.push(recRow('Required',P.crossbarTube.name,P.crossbarTube.detail,
+    pairs,P.crossbarTube.qtyLabel,'https://ts-parts.eu/en_US/c/Roof-racks/105',false));
 
+  // 2 — Recommended
   const rec=[];
-  if(hdOpt){
-    const pHD=price(hdOpt.id);
-    rec.push(recRow('Recommended',hdOpt.name+' (HD upgrade)',
-      'Thicker HD profile — recommended for sustained heavy loads, travelling with cargo, or off-road use.',
-      tot,'pcs',pHD?.net,pHD?.gross,hdOpt.url,false));
-  }
-  const pBeam=price(522);
-  rec.push(recRow('Recommended','Trunk support beam 147cm / 6cm',
-    'Steel longitudinal beam (147 cm) connecting all crossbars front-to-rear. Creates a rigid ladder-frame platform. Essential for roof decks and distributing static loads evenly. Typically 2 pcs per installation (left + right).',
-    2,'pcs (left + right)',pBeam?.net,pBeam?.gross,'https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522',false));
-  if(S.make==='landrover'&&S.model==='disco1'){
-    const pLR=price(488);
-    rec.push(recRow('Platform','Expedition trunk / Roof Rack Platform — Land Rover Discovery 1',
-      'Complete integrated roof platform — replaces the full bracket + beam + deck combination with a single factory-fit unit.',
-      1,'unit',pLR?.net,pLR?.gross,'https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488',false));
-  }
-  if(S.make==='vw'&&(S.model==='t2t3'||S.model==='t3')){
-    const pVW=price(490);
-    rec.push(recRow('Platform','VW T2 / T3 / SYNCRO expedition trunk / Roof Rack Platform',
-      'Complete integrated expedition roof platform for VW T2, T3 and Syncro. Replaces the full bracket + beam kit with a single factory-fit unit.',
-      1,'unit',pVW?.net,pVW?.gross,'https://ts-parts.eu/en_US/p/VW-T2-T3-SYNCRO-expedition-trunk-Roof-Rack-Platform/490',false));
-  }
+  if(hdOpt) rec.push(recRow('Recommended',hdOpt.name+P.hdUpgrade.nameSuffix,P.hdUpgrade.detail,
+    tot,P.hdUpgrade.qtyLabel,hdOpt.url,false));
+  rec.push(recRow('Recommended',P.supportBeam.name,P.supportBeam.detail,
+    2,P.supportBeam.qtyLabel,'https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522',false));
+  if(S.make==='landrover'&&S.model==='disco1')
+    rec.push(recRow('Platform',P.platformDisco1.name,P.platformDisco1.detail,
+      1,P.platformDisco1.qtyLabel,'https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488',false));
+  if(S.make==='vw'&&(S.model==='t2t3'||S.model==='t3'))
+    rec.push(recRow('Platform',P.platformT2T3.name,P.platformT2T3.detail,
+      1,P.platformT2T3.qtyLabel,'https://ts-parts.eu/en_US/p/VW-T2-T3-SYNCRO-expedition-trunk-Roof-Rack-Platform/490',false));
 
-  const handleId=S.height==='high'||S.height==='unknown'?521:520;
-  const pHandle=price(handleId);
+  // 3 — Optional
   const opt=[];
-  if(S.height==='high'||S.height==='unknown'){
-    opt.push(recRow('Optional','Accessory handle — High rack brackets v2',
-      'Grab handle for high-roof bracket uprights. Strongly recommended for high-roof vehicles for safe cargo access.',
-      tot,'pcs (1 per bracket)',pHandle?.net,pHandle?.gross,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-high-rack-brackets-v2/521',false));
-  } else {
-    opt.push(recRow('Optional','Accessory handle — Low rack brackets v1',
-      'Grab handle for standard-height bracket uprights. Clips on without tools.',
-      tot,'pcs (1 per bracket)',pHandle?.net,pHandle?.gross,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-low-rack-brackets-v1/520',false));
-  }
+  if(S.height==='high'||S.height==='unknown')
+    opt.push(recRow('Optional',P.handleHigh.name,P.handleHigh.detail,
+      tot,P.handleHigh.qtyLabel,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-high-rack-brackets-v2/521',false));
+  else
+    opt.push(recRow('Optional',P.handleLow.name,P.handleLow.detail,
+      tot,P.handleLow.qtyLabel,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-low-rack-brackets-v1/520',false));
 
+  // 4 — Extras
   const acc=[];
-  const pBO=price(497);
-  acc.push(recRow('Accessory','Rack Mounted Bottle Opener',
-    'Stainless steel bottle opener, mounts onto any bracket upright or crossbar tube. Powder-coated black.',
-    1,'pc',pBO?.net,pBO?.gross,'https://ts-parts.eu/en_US/p/Rack-Mounted-Bottle-Opener-Roof-bracket/497',false));
+  acc.push(recRow('Accessory',P.bottleOpener.name,P.bottleOpener.detail,
+    1,P.bottleOpener.qtyLabel,'https://ts-parts.eu/en_US/p/Rack-Mounted-Bottle-Opener-Roof-bracket/497',false));
 
-  const pP=price(primary?.id);
-  const knownNet=(pP?pP.net*tot:0)+(pHandle?pHandle.net*tot:0)+(pBO?pBO.net:0)+(pBeam?pBeam.net*2:0);
-  const knownGross=(pP?pP.gross*tot:0)+(pHandle?pHandle.gross*tot:0)+(pBO?pBO.gross:0)+(pBeam?pBeam.gross*2:0);
+  const noteHtml=drivenByLoad
+    ?`<div class="note-box" style="margin-bottom:20px"><span class="icon">⚠</span><span>${
+        fmt(R.noteLoad,{pairsFromSpacing,customLoad:S.customLoad,pairsFromLoad,
+          kgPerBracket,hdNote:primary?.hd?R.hdNote:''})
+      }</span></div>`:'';
 
   document.getElementById('resultContent').innerHTML=`
     <div class="result-summary">
-      <div class="res-card highlight"><div class="rc-label">Bracket Pairs Needed</div><div class="rc-val">${pairs} pairs</div><div class="rc-sub">${tot} brackets total · ${drivenByLoad?'driven by load weight':'driven by spacing rule'}</div></div>
-      <div class="res-card"><div class="rc-label">Spacing Between Pairs</div><div class="rc-val">${actualSpacing} cm</div><div class="rc-sub">Max allowed: ${mode.maxSpacingCm} cm · Use: ${mode.label}</div></div>
-      <div class="res-card"><div class="rc-label">Total Rack Capacity</div><div class="rc-val">${totalCapacity} kg</div><div class="rc-sub">${kgPerBracket} kg × ${tot} brackets${primary?.hd?' (HD +10%)':''}${S.customLoad?` · entered: ${S.customLoad} kg`:''}</div></div>
-      <div class="res-card"><div class="rc-label">Bracket Height</div><div class="rc-val">${primary?primary.height:S.manualHeight} mm</div><div class="rc-sub">${primary?(primary.hd?'Heavy Duty':'Standard'):'closest match'} · ${S.makeLabel||'Custom'} ${S.modelLabel||''}</div></div>
+      <div class="res-card highlight">
+        <div class="rc-label">${R.pairsNeeded}</div>
+        <div class="rc-val">${pairs} pairs</div>
+        <div class="rc-sub">${tot} brackets · ${drivenByLoad?R.pairsSub_load:R.pairsSub_spacing}</div>
+      </div>
+      <div class="res-card">
+        <div class="rc-label">${R.spacing}</div>
+        <div class="rc-val">${actualSpacing} cm</div>
+        <div class="rc-sub">${R.spacingMax} ${mode.maxSpacingCm} cm · ${R.spacingUse} ${mode.label}</div>
+      </div>
+      <div class="res-card">
+        <div class="rc-label">${R.capacity}</div>
+        <div class="rc-val">${totalCapacity} kg</div>
+        <div class="rc-sub">${kgPerBracket} kg × ${tot}${primary?.hd?' (HD +10%)':''}${S.customLoad?` · ${S.customLoad} kg`:''}</div>
+      </div>
+      <div class="res-card">
+        <div class="rc-label">${R.height}</div>
+        <div class="rc-val">${primary?primary.height:S.manualHeight} mm</div>
+        <div class="rc-sub">${primary?(primary.hd?R.hd:R.std):R.closest} · ${S.makeLabel||R.custom} ${S.modelLabel||''}</div>
+      </div>
     </div>
-    ${drivenByLoad?`<div class="note-box" style="margin-bottom:20px"><span class="icon">⚠</span><span>Spacing rule alone would require <strong>${pairsFromSpacing} pairs</strong>, but your load of <strong>${S.customLoad} kg</strong> requires at least <strong>${pairsFromLoad} pairs</strong> at ${kgPerBracket} kg/bracket${primary?.hd?' (HD rate)':''}. Load is the limiting factor.</span></div>`:''}
+    ${noteHtml}
     <div class="spacing-diagram">
-      <div class="diagram-title">Bracket spacing — top view (${len} cm roof, front → rear)</div>
+      <div class="diagram-title">${fmt(R.diagramTitle,{len})}</div>
       <div class="rack-visual">
         <div class="rack-bar"></div>
         ${pos.map((p,i)=>`<div class="rack-bracket" style="left:${(p/len)*100}%"><div class="rack-label">P${i+1}&nbsp;·&nbsp;${p}cm</div></div>`).join('')}
       </div>
-      <div style="margin-top:8px;font-size:12px;color:var(--muted)">Each marker = 1 pair of brackets (left + right side). Spacing: <strong>${actualSpacing} cm</strong> between pairs.</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--muted)">${fmt(R.diagramSub,{spacing:actualSpacing})}</div>
     </div>
-    ${bomSection('1 — Required to build the rack',req)}
-    ${bomSection('2 — Recommended additions',rec)}
-    ${bomSection('3 — Optional accessories',opt)}
-    ${bomSection('4 — Extras',acc)}
-    <div class="bom-total">
-      <div>
-        <div class="bt-label">Estimated cost (priced items)</div>
-        <div class="bt-val">€${knownNet.toFixed(2)} <span style="font-size:14px;font-weight:400;color:#aaa">net</span></div>
-        <div class="bt-sub">€${knownGross.toFixed(2)} gross incl. VAT · Brackets + beams + handles + bottle opener</div>
-      </div>
-      <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-        <div class="bt-note" style="margin-left:0">Crossbar tubes require separate pricing — contact TS-PARTS.</div>
-      </div>
-    </div>
+    ${bomSection(T.bom.s1,req)}
+    ${bomSection(T.bom.s2,rec)}
+    ${bomSection(T.bom.s3,opt)}
+    ${bomSection(T.bom.s4,acc)}
     <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-      <button class="btn-wizard secondary" onclick="resetWizard()">← Start over</button>
-      <a href="https://ts-parts.eu/en_US/c/Roof-racks/105" target="_blank" class="btn-wizard">View all roof rack products in shop →</a>
+      <button class="btn-wizard secondary" onclick="resetWizard()">${R.startOver}</button>
+      <a href="${R.shopUrl}" class="btn-wizard">${R.shopBtn}</a>
     </div>`;
 
   showStep('stepResult');
   sendHeight();
 }
 
+// ── utilities ─────────────────────────────────────────────────────────────
 function showStep(id){
   document.getElementById(id).classList.add('visible');
-  setTimeout(()=>{
-    document.getElementById(id).scrollIntoView({behavior:'smooth',block:'nearest'});
-    sendHeight();
-  },80);
+  setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth',block:'nearest'});sendHeight();},80);
 }
 function setDone(stepId,val){
   document.getElementById(stepId).classList.add('done');
   document.getElementById(stepId+'-done').querySelector('span').textContent=val;
 }
-function updateProgress(pct){
-  document.getElementById('progressFill').style.width=pct+'%';
-  sendHeight();
+function updateProgress(pct){document.getElementById('progressFill').style.width=pct+'%';sendHeight();}
+function openPopup(e,url){
+  e.preventDefault();
+  const w=Math.min(1100,screen.width-60),h=Math.min(800,screen.height-60);
+  const left=Math.round((screen.width-w)/2),top=Math.round((screen.height-h)/2);
+  window.open(url,'tsparts_product','width='+w+',height='+h+',left='+left+',top='+top+',resizable=yes,scrollbars=yes,toolbar=no,menubar=no');
 }
-
 function resetWizard(){
   S={make:null,makeLabel:null,model:null,modelLabel:null,height:null,heightLabel:null,
      roofLen:160,manualHeight:169,useMode:null,customLoad:null};
@@ -622,7 +684,6 @@ function resetWizard(){
   document.getElementById('customBracketCount').textContent='—';
   sendHeight();
 }
-
 function switchTab(id,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
@@ -630,13 +691,9 @@ function switchTab(id,btn){
   document.getElementById('tab-'+id).classList.add('active');
   setTimeout(sendHeight,50);
 }
-
-// ── iframe auto-resize: posts document height to parent page ──────────────
 function sendHeight(){
-  const h=document.documentElement.scrollHeight;
-  window.parent.postMessage({type:'tsw-resize',height:h},'*');
+  window.parent.postMessage({type:'tsw-resize',height:document.documentElement.scrollHeight},'*');
 }
-// fire on load and on any DOM change
 window.addEventListener('load',sendHeight);
 new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:true,attributes:true});
 </script>
