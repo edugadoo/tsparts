@@ -568,9 +568,10 @@ function showResult(){
 
   // 1 — Required
   const req=[];
+  const bName=b=>b.name.replace(/^Roof bracket/,P.bracketPrefix);
   if(primary){
     const hdLabel=primary.hd?R.hd:R.std;
-    req.push(recRow('Required',primary.name,
+    req.push(recRow('Required',bName(primary),
       fmt(P.bracketDetail,{height:primary.height,hdLabel}),
       tot,'pcs',(LANG==='pl'?primary.url_pl:LANG==='de'?primary.url_de:primary.url)||`${LOCALE.baseUrl}/p/${primary.id}`,true));
   } else {
@@ -580,7 +581,7 @@ function showResult(){
 
   // 2 — Recommended
   const rec=[];
-  if(hdOpt) rec.push(recRow('Recommended',hdOpt.name+P.hdUpgrade.nameSuffix,P.hdUpgrade.detail,
+  if(hdOpt) rec.push(recRow('Recommended',bName(hdOpt)+P.hdUpgrade.nameSuffix,P.hdUpgrade.detail,
     tot,P.hdUpgrade.qtyLabel,(LANG==='pl'?hdOpt.url_pl:LANG==='de'?hdOpt.url_de:hdOpt.url)||`${LOCALE.baseUrl}/p/${hdOpt.id}`,false));
   req.push(recRow('Required',P.supportBeam.name,P.supportBeam.detail,
     pairs,P.supportBeam.qtyLabel,(ACC_URLS[522]&&(LANG==='pl'?ACC_URLS[522].pl:LANG==='de'?ACC_URLS[522].de:ACC_URLS[522].en))||`${LOCALE.baseUrl}/p/522`,false));

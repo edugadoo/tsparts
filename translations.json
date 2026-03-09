@@ -138,6 +138,7 @@
         "detail": "Stainless steel bottle opener, mounts onto any bracket upright or crossbar tube. Powder-coated black.",
         "qtyLabel": "pc"
       },
+      "bracketPrefix": "Roof bracket",
       "bracketDetail": "Height: {height} mm · {hdLabel} · Zinc-phosphate + powder coat black"
     },
     "desc": {
@@ -299,6 +300,7 @@
         "detail": "Otwieracz ze stali nierdzewnej, montowany na wsporniku lub rurze poprzeczki. Lakierowany proszkowo na czarno.",
         "qtyLabel": "szt."
       },
+      "bracketPrefix": "ŁAPA Bagażnika",
       "bracketDetail": "Wysokość: {height} mm · {hdLabel} · Fosforanowanie cynkowe + lakier proszkowy czarny"
     },
     "desc": {
@@ -460,6 +462,7 @@
         "detail": "Edelstahl-Flaschenöffner, montierbar an jeder Halterstrebe oder am Querstrebenrohr. Schwarz pulverbeschichtet.",
         "qtyLabel": "Stk."
       },
+      "bracketPrefix": "Dachhalterung",
       "bracketDetail": "Höhe: {height} mm · {hdLabel} · Zinkphosphatierung + schwarz pulverbeschichtet"
     },
     "desc": {
