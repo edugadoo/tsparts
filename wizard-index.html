@@ -114,12 +114,6 @@ html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',san
 .btn-rec:hover{background:var(--accent-hover);color:#fff}
 .btn-rec.outline{background:none;border:1px solid var(--border);color:var(--mid)}
 .btn-rec.outline:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
-.btn-rec.cart{background:var(--dark);color:#fff}
-.btn-rec.cart:hover{background:#333;color:#fff}
-.btn-rec.fav{background:none;border:1px solid var(--border);color:#c0392b;padding:7px 10px;font-size:14px}
-.btn-rec.fav:hover{background:#fff0f0;border-color:#c0392b;color:#c0392b}
-.btn-shop-all{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--accent);background:none;color:var(--accent);font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:12px 24px;cursor:pointer;text-decoration:none;transition:all .15s;margin-top:20px}
-.btn-shop-all:hover{background:var(--accent);color:#fff}
 
 .content-block{background:var(--white);border:1px solid var(--border);padding:28px 32px}
 .content-block h2{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;margin-bottom:16px}
@@ -441,19 +435,13 @@ function calcBrackets(isHD){
   return {pairs,tot,actualSpacing,totalCapacity,kgPerBracket:Math.round(kgPerBracket*10)/10,pairsFromSpacing,pairsFromLoad,mode};
 }
 
-function recRow(tag,name,detail,qty,qtyLabel,priceNet,priceGross,url,isPrimary,productId){
+function recRow(tag,name,detail,qty,qtyLabel,priceNet,priceGross,url,isPrimary){
   const tagColors={Required:'#1a1a1a',Recommended:'#1d5a2a',Platform:'#7c4a00',Optional:'#3d3d3d',Accessory:'#5f3d99'};
   const bg=tagColors[tag]||'#888';
   const borderStyle=isPrimary?'border-color:var(--accent);border-width:2px':'';
   const priceStr=priceNet
     ?`<div class="rec-price">€${(priceNet*qty).toFixed(2)} <span class="per">net</span></div>`
     :`<div class="rec-price" style="font-size:13px;color:var(--muted)">Contact for price</div>`;
-  const cartBtn=productId
-    ?`<a href="${url}" target="_blank" class="btn-rec cart" title="Opens product page — add to cart from there">🛒 Add to cart</a>`
-    :'';
-  const favBtn=productId
-    ?`<a href="${url}" target="_blank" class="btn-rec fav" title="Opens product page — save to favourites from there">♡</a>`
-    :'';
   return `<div class="rec-row" style="${borderStyle}">
     <div style="width:5px;flex-shrink:0;background:${bg}"></div>
     <div class="rec-content">
@@ -466,8 +454,6 @@ function recRow(tag,name,detail,qty,qtyLabel,priceNet,priceGross,url,isPrimary,p
         <div class="rec-qty">Qty: <strong>${qty} ${qtyLabel}</strong></div>
         ${priceStr}
         <a href="${url}" target="_blank" class="btn-rec ${isPrimary?'':'outline'}">View →</a>
-        ${cartBtn}
-        ${favBtn}
       </div>
     </div>
   </div>`;
@@ -515,30 +501,30 @@ function showResult(){
   }
   req.push(recRow('Required','Roof rack crossbar tube',
     'Round steel tube (powder-coated black) that slides through the bracket heads to form each crossbar. One tube spans the full vehicle width per pair.',
-    pairs,'pcs',null,null,'https://ts-parts.eu/en_US/c/Roof-racks/105',false,null));
+    pairs,'pcs',null,null,'https://ts-parts.eu/en_US/c/Roof-racks/105',false));
 
   const rec=[];
   if(hdOpt){
     const pHD=price(hdOpt.id);
     rec.push(recRow('Recommended',hdOpt.name+' (HD upgrade)',
       'Thicker HD profile — recommended for sustained heavy loads, travelling with cargo, or off-road use.',
-      tot,'pcs',pHD?.net,pHD?.gross,hdOpt.url,false,hdOpt.id));
+      tot,'pcs',pHD?.net,pHD?.gross,hdOpt.url,false));
   }
   const pBeam=price(522);
   rec.push(recRow('Recommended','Trunk support beam 147cm / 6cm',
     'Steel longitudinal beam (147 cm) connecting all crossbars front-to-rear. Creates a rigid ladder-frame platform. Essential for roof decks and distributing static loads evenly. Typically 2 pcs per installation (left + right).',
-    2,'pcs (left + right)',pBeam?.net,pBeam?.gross,'https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522',false,522));
+    2,'pcs (left + right)',pBeam?.net,pBeam?.gross,'https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522',false));
   if(S.make==='landrover'&&S.model==='disco1'){
     const pLR=price(488);
     rec.push(recRow('Platform','Expedition trunk / Roof Rack Platform — Land Rover Discovery 1',
       'Complete integrated roof platform — replaces the full bracket + beam + deck combination with a single factory-fit unit.',
-      1,'unit',pLR?.net,pLR?.gross,'https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488',false,488));
+      1,'unit',pLR?.net,pLR?.gross,'https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488',false));
   }
   if(S.make==='vw'&&(S.model==='t2t3'||S.model==='t3')){
     const pVW=price(490);
     rec.push(recRow('Platform','VW T2 / T3 / SYNCRO expedition trunk / Roof Rack Platform',
       'Complete integrated expedition roof platform for VW T2, T3 and Syncro. Replaces the full bracket + beam kit with a single factory-fit unit.',
-      1,'unit',pVW?.net,pVW?.gross,'https://ts-parts.eu/en_US/p/VW-T2-T3-SYNCRO-expedition-trunk-Roof-Rack-Platform/490',false,490));
+      1,'unit',pVW?.net,pVW?.gross,'https://ts-parts.eu/en_US/p/VW-T2-T3-SYNCRO-expedition-trunk-Roof-Rack-Platform/490',false));
   }
 
   const handleId=S.height==='high'||S.height==='unknown'?521:520;
@@ -547,27 +533,18 @@ function showResult(){
   if(S.height==='high'||S.height==='unknown'){
     opt.push(recRow('Optional','Accessory handle — High rack brackets v2',
       'Grab handle for high-roof bracket uprights. Strongly recommended for high-roof vehicles for safe cargo access.',
-      tot,'pcs (1 per bracket)',pHandle?.net,pHandle?.gross,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-high-rack-brackets-v2/521',false,521));
+      tot,'pcs (1 per bracket)',pHandle?.net,pHandle?.gross,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-high-rack-brackets-v2/521',false));
   } else {
     opt.push(recRow('Optional','Accessory handle — Low rack brackets v1',
       'Grab handle for standard-height bracket uprights. Clips on without tools.',
-      tot,'pcs (1 per bracket)',pHandle?.net,pHandle?.gross,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-low-rack-brackets-v1/520',false,520));
+      tot,'pcs (1 per bracket)',pHandle?.net,pHandle?.gross,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-low-rack-brackets-v1/520',false));
   }
 
   const acc=[];
   const pBO=price(497);
   acc.push(recRow('Accessory','Rack Mounted Bottle Opener',
     'Stainless steel bottle opener, mounts onto any bracket upright or crossbar tube. Powder-coated black.',
-    1,'pc',pBO?.net,pBO?.gross,'https://ts-parts.eu/en_US/p/Rack-Mounted-Bottle-Opener-Roof-bracket/497',false,497));
-
-  // Collect all product IDs in this BOM for the "view all" search
-  const bomIds=[primary?.id,hdOpt?.id,522,
-    (S.make==='landrover'&&S.model==='disco1')?488:null,
-    (S.make==='vw'&&(S.model==='t2t3'||S.model==='t3'))?490:null,
-    handleId,497].filter(Boolean);
-  // Build a search query using the primary bracket name for best results
-  const searchTerm=primary?encodeURIComponent('roof bracket '+primary.height+'mm'):'roof+bracket';
-  const viewAllUrl=`https://ts-parts.eu/en_US/search?search_keywords=${searchTerm}`;
+    1,'pc',pBO?.net,pBO?.gross,'https://ts-parts.eu/en_US/p/Rack-Mounted-Bottle-Opener-Roof-bracket/497',false));
 
   const pP=price(primary?.id);
   const knownNet=(pP?pP.net*tot:0)+(pHandle?pHandle.net*tot:0)+(pBO?pBO.net:0)+(pBeam?pBeam.net*2:0);
@@ -605,10 +582,7 @@ function showResult(){
     </div>
     <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
       <button class="btn-wizard secondary" onclick="resetWizard()">← Start over</button>
-      <a href="${viewAllUrl}" target="_blank" class="btn-shop-all">🔍 View all recommended products in shop →</a>
-    </div>
-    <div style="margin-top:12px;font-size:12px;color:var(--muted);line-height:1.6">
-      <strong>🛒 Add to cart</strong> and <strong>♡ Favourites</strong> buttons open the product page in a new tab — add to cart or save to wishlist from there. Favourites require a TS-PARTS account.
+      <a href="https://ts-parts.eu/en_US/c/Roof-racks/105" target="_blank" class="btn-wizard">View all roof rack products in shop →</a>
     </div>`;
 
   showStep('stepResult');
