@@ -2,6 +2,7 @@
   "brackets": [
     {"id":526,"name":"Roof bracket 169HD — VW T2/T3 Vanagon","make":"vw","model":"t2t3","height":169,"hd":true,"url":"https://ts-parts.eu/en_US/p/Roof-bracket-169HD-VW-T2-T3-Vanagon/526","roofType":["low"]},
     {"id":493,"name":"Roof bracket 169mm — VW T3","make":"vw","model":"t3","height":169,"hd":false,"url":"https://ts-parts.eu/en_US/p/Roof-bracket-169mm-VW-T3/493","roofType":["low"]},
+    {"id":545,"name":"Roof bracket 220mm — VW LT I (1975–1995)","make":"vw","model":"lt1","height":220,"hd":false,"url":"https://ts-parts.eu/en_US/p/Roof-bracket-220mm-VW-LT1-75-95/545","roofType":["low","high"]},
     {"id":451,"name":"Roof bracket 123mmHD — VW LT 35 (1996–2006)","make":"vw","model":"lt2","height":123,"hd":true,"url":"https://ts-parts.eu/en_US/p/Roof-bracket-123mmHD-Volkswagen-LT-35-96-06/451","roofType":["low"]},
     {"id":479,"name":"Roof bracket 357mm — VW LT II","make":"vw","model":"lt2","height":357,"hd":false,"url":"https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-VW-LT-II/479","roofType":["high"]},
     {"id":474,"name":"Roof bracket 357HD — VW LT II (1996–2006)","make":"vw","model":"lt2","height":357,"hd":true,"url":"https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Volkswagen-LT-II-1996-2006-/474","roofType":["high"]},
@@ -24,6 +25,7 @@
     {"id":492,"name":"Roof bracket 260mm — Land Rover Discovery 1","make":"landrover","model":"disco1","height":260,"hd":false,"url":"https://ts-parts.eu/en_US/p/Roof-Bracket-260mm-Land-Rover-Discovery-1/492","roofType":["low","high"]},
     {"id":525,"name":"Roof bracket 260mm — Land Rover Discovery 2","make":"landrover","model":"disco2","height":260,"hd":false,"url":"https://ts-parts.eu/en_US/p/Roof-Bracket-260-Land-Rover-Discovery-2/525","roofType":["low","high"]},
     {"id":472,"name":"Roof bracket 220mm — Land Rover Defender 90/110","make":"landrover","model":"def1","height":220,"hd":false,"url":"https://ts-parts.eu/en_US/p/Roof-bracket-220mm-Land-Rover-Defender-90110/472","roofType":["low","high"]},
+    {"id":544,"name":"Roof bracket 240HD — Land Rover Defender","make":"landrover","model":"def1","height":240,"hd":true,"url":"https://ts-parts.eu/en_US/p/Roof-Bracket-240HD-Land-Rover-Deffender/544","roofType":["low","high"]},
     {"id":483,"name":"Roof bracket 240HD — Volvo TGB C303/C304/C306","make":"volvo","model":"tgb","height":240,"hd":true,"url":"https://ts-parts.eu/en_US/p/Roof-Bracket-240HD-Volvo-TGB-C303-C304-C306/483","roofType":["low","high"]},
     {"id":530,"name":"Roof bracket 357mm — Iveco Daily 40-10","make":"iveco","model":"daily","height":357,"hd":false,"url":"https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-IVECO-DAILY-4010/530","roofType":["high"]},
     {"id":531,"name":"Roof bracket 357HD — Iveco Daily 40-10","make":"iveco","model":"daily","height":357,"hd":true,"url":"https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-IVECO-DAILY-4010/531","roofType":["high"]},
@@ -42,6 +44,7 @@
   ],
 
   "prices": {
+    "545": {"net": 35.16, "gross": 43.24},
     "526": {"net": 35.55, "gross": 43.73},
     "493": {"net": 35.16, "gross": 43.24},
     "451": {"net": 35.16, "gross": 43.24},
@@ -57,7 +60,7 @@
     "450": {"net": 35.16, "gross": 43.24},
     "478": {"net": 37.86, "gross": 46.57},
     "475": {"net": 40.74, "gross": 50.11},
-    "485": {"net": 37.44, "gross": 46.05},
+    "485": {"net": 37.86, "gross": 46.57},
     "484": {"net": 40.74, "gross": 50.11},
     "523": {"net": 36.51, "gross": 44.91},
     "532": {"net": 35.16, "gross": 43.24},
@@ -65,6 +68,7 @@
     "477": {"net": 40.74, "gross": 50.11},
     "492": {"net": 36.51, "gross": 44.91},
     "525": {"net": 36.51, "gross": 44.91},
+    "544": {"net": 40.74, "gross": 50.11},
     "472": {"net": 35.16, "gross": 43.24},
     "483": {"net": 37.48, "gross": 46.09},
     "530": {"net": 37.86, "gross": 46.57},
@@ -81,7 +85,7 @@
   },
 
   "models": {
-    "vw":        [{"id":"t2t3","label":"VW T2 / T3 Vanagon","sub":"1967–1992"},{"id":"t3","label":"VW T3","sub":"1979–1992"},{"id":"lt2","label":"VW LT II / LT 35","sub":"1996–2006"}],
+    "vw":        [{"id":"t2t3","label":"VW T2 / T3 Vanagon","sub":"1967–1992"},{"id":"t3","label":"VW T3","sub":"1979–1992"},{"id":"lt1","label":"VW LT I","sub":"1975–1995"},{"id":"lt2","label":"VW LT II / LT 35","sub":"1996–2006"}],
     "mercedes":  [{"id":"vario","label":"MB Vario","sub":"1996–2013"},{"id":"sprinter","label":"MB Sprinter W901-905","sub":"1995–2006"},{"id":"t1","label":"MB T1","sub":"1977–1995"},{"id":"t2711","label":"MB T2 711D","sub":"heavy truck"},{"id":"dudo","label":"MB T2 Dudo","sub":"1967–1996"},{"id":"g460","label":"MB G-Wagen G460","sub":"1979–2018"}],
     "ford":      [{"id":"transit","label":"Ford Transit 3H","sub":"2009+"}],
     "landrover": [{"id":"disco1","label":"Discovery 1","sub":"1989–1998"},{"id":"disco2","label":"Discovery 2","sub":"1998–2004"},{"id":"def1","label":"Defender 90/110","sub":"1983–2016"}],
