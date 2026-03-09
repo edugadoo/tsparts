@@ -387,45 +387,51 @@ function buildRoofHeightGrid(){
   });
 }
 
+// ── use mode spec table ───────────────────────────────────────────────────
+const USE_MODES={
+  stationary: {std:{kg:28,sp:75}, hd:{kg:35,sp:90}},
+  travel:     {std:{kg:25,sp:55}, hd:{kg:33,sp:75}},
+  offroad:    {std:{kg:20,sp:40}, hd:{kg:25,sp:55}},
+};
+
 function buildUseGrid(){
-  // kg = std bracket capacity per bracket; sp = std max spacing cm
-  // HD brackets get sp×1.2 spacing, same kg capacity
   const defs=[
-    {id:'stationary',label:T.use.stationaryLabel,sub:T.use.stationarySub,kg:25,sp:75},
-    {id:'travel',    label:T.use.travelLabel,    sub:T.use.travelSub,    kg:15,sp:50},
-    {id:'offroad',   label:T.use.offroadLabel,   sub:T.use.offroadSub,   kg:15,sp:40},
+    {id:'stationary', label:null, sub:null},
+    {id:'travel',     label:null, sub:null},
+    {id:'offroad',    label:null, sub:null},
   ];
   const g=document.getElementById('useGrid');g.innerHTML='';
   let defaultBtn=null;
   defs.forEach(d=>{
-    const hdSp=Math.round(d.sp*1.2);
+    d.label=T.use[d.id+'Label'];
+    d.sub=T.use[d.id+'Sub'];
+    const spec=USE_MODES[d.id];
     const b=document.createElement('button');b.className='opt-btn';
     b.innerHTML=`
       <div class="ol">${d.label}</div>
       <div class="os">${d.sub}</div>
-      <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px">
         <div style="background:var(--bg);padding:6px 8px;border:1px solid var(--border)">
           <div style="font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:2px">Std</div>
-          <div style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--accent)">${d.kg} kg</div>
-          <div style="font-size:10px;color:var(--muted)">${d.sp} cm max</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;color:var(--accent)">${spec.std.kg} kg</div>
+          <div style="font-size:10px;color:var(--muted)">${spec.std.sp} cm max</div>
         </div>
         <div style="background:var(--bg);padding:6px 8px;border:1px solid var(--border)">
           <div style="font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:2px">HD</div>
-          <div style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--accent)">${d.kg} kg</div>
-          <div style="font-size:10px;color:var(--muted)">${hdSp} cm max</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;color:var(--accent)">${spec.hd.kg} kg</div>
+          <div style="font-size:10px;color:var(--muted)">${spec.hd.sp} cm max</div>
         </div>
       </div>
       <div class="check">✓</div>`;
-    b.onclick=()=>selectUse(d.id,d.label,d.kg,d.sp,b);
+    b.onclick=()=>selectUse(d.id,d.label,b);
     g.appendChild(b);
     if(d.id==='stationary') defaultBtn=b;
   });
   // Pre-select stationary
   if(defaultBtn){
-    const first=defs[0];
     defaultBtn.classList.add('selected');
-    S.useMode={id:first.id,label:first.label,kgPerBracket:first.kg,maxSpacingCm:first.sp};
-    setDone('step5',first.label);
+    S.useMode={id:'stationary',label:defs[0].label};
+    setDone('step5',defs[0].label);
     document.getElementById('calcBtn').style.display='inline-block';
   }
 }
@@ -491,8 +497,8 @@ function advanceToWeight(){
   showStep('step5');updateProgress(80);
 }
 
-function selectUse(id,label,kgPerBracket,maxSpacingCm,btn){
-  S.useMode={id,label,kgPerBracket,maxSpacingCm};S.customLoad=null;
+function selectUse(id,label,btn){
+  S.useMode={id,label};S.customLoad=null;
   document.querySelectorAll('#useGrid .opt-btn').forEach(b=>b.classList.remove('selected'));
   (btn||event.currentTarget).classList.add('selected');
   setDone('step5',label);
@@ -503,19 +509,27 @@ function selectUse(id,label,kgPerBracket,maxSpacingCm,btn){
 function updateCustomLoad(){
   const v=parseInt(document.getElementById('totalLoad').value)||0;
   S.customLoad=v>0?v:null;
-  if(!S.useMode)return;
-  const mb=S.customLoad?Math.ceil(S.customLoad/S.useMode.kgPerBracket):null;
+  if(!S.useMode) return;
+  const spec=USE_MODES[S.useMode.id]||USE_MODES.stationary;
+  // Show min brackets needed for both std and HD
+  const stdB=S.customLoad?Math.ceil(S.customLoad/spec.std.kg):null;
+  const hdB =S.customLoad?Math.ceil(S.customLoad/spec.hd.kg):null;
   document.getElementById('customBracketCount').textContent=
-    mb?`≥${mb} (${Math.ceil(mb/2)} pairs)`:'—';
+    stdB?`Std ≥${stdB} / HD ≥${hdB} brackets`:'—';
 }
 
 function calcBrackets(isHD){
   const len=S.roofLen;
-  const mode=S.useMode||{kgPerBracket:25,maxSpacingCm:75,label:'Stationary'};
-  // HD gets 20% wider spacing allowance, same weight per bracket
-  const spacingCm=isHD?Math.round(mode.maxSpacingCm*1.2):mode.maxSpacingCm;
-  const kgPB=mode.kgPerBracket;
+  const modeId=(S.useMode||{id:'stationary'}).id;
+  const modeLabel=(S.useMode||{label:'Stationary'}).label;
+  const spec=USE_MODES[modeId]||USE_MODES.stationary;
+  const s=isHD?spec.hd:spec.std;
+  const kgPB=s.kg;
+  const spacingCm=s.sp;
+
+  // Pairs from spacing rule (min 2 pairs = 4 brackets)
   const pFS=Math.max(2,Math.ceil(len/spacingCm)+1);
+  // Pairs from load (if entered)
   let pFL=null;
   if(S.customLoad){
     const bn=Math.ceil(S.customLoad/kgPB);
@@ -524,17 +538,15 @@ function calcBrackets(isHD){
   const pairs=pFL?Math.max(pFS,pFL):pFS;
   const tot=pairs*2;
   const actualSpacing=pairs>1?Math.round(len/(pairs-1)):0;
-  const totalCapacity=Math.round(kgPB*tot);
+  const totalCapacity=kgPB*tot;
   return {pairs,tot,actualSpacing,totalCapacity,
     kgPerBracket:kgPB,maxSpacingCm:spacingCm,
-    pairsFromSpacing:pFS,pairsFromLoad:pFL,mode};
+    pairsFromSpacing:pFS,pairsFromLoad:pFL,modeLabel};
 }
 
 // Calculate both std and HD variants for display
 function calcBoth(){
-  const std=calcBrackets(false);
-  const hd=calcBrackets(true);
-  return {std,hd};
+  return {std:calcBrackets(false), hd:calcBrackets(true)};
 }
 
 function recRow(tag,name,detail,qty,qtyLabel,url,isPrimary){
