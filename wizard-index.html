@@ -511,9 +511,9 @@ function recRow(tag,name,detail,qty,qtyLabel,url,isPrimary){
   const tagColors={Required:'#1a1a1a',Recommended:'#1d5a2a',Platform:'#7c4a00',Optional:'#3d3d3d',Accessory:'#5f3d99'};
   const tagLabel=T.tags[tag]||tag;
   const bg=tagColors[tag]||'#888';
-  const borderStyle=isPrimary?'border-color:var(--accent);border-width:2px':'';
+  const borderStyle='';
   const viewBtn=url
-    ?`<a href="${url}" onclick="openPopup(event,this.href)" class="btn-rec ${isPrimary?'':'outline'}">${T.result.viewBtn}</a>`
+    ?`<a href="${url}" onclick="openPopup(event,this.href)" class="btn-rec">${T.result.viewBtn}</a>`
     :'';
   return `<div class="rec-row" style="${borderStyle}">
     <div style="width:5px;flex-shrink:0;background:${bg}"></div>
