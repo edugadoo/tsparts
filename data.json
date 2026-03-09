@@ -85,7 +85,7 @@
       "roofType": [
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357-VW-LT-II/479",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-VW-LT-II/479"
     },
     {
@@ -155,7 +155,7 @@
       "roofType": [
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357HD-MB-Vario/473",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-MB-Vario/473"
     },
     {
@@ -282,7 +282,7 @@
         "low",
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-260-MB-T2-DUDO/523",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-LAPA-260mm-MB-T2-Dudo/523"
     },
     {
@@ -310,7 +310,7 @@
       "roofType": [
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357-Ford-Transit-3H-2009/482",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-Ford-Transit-3H-2009/482"
     },
     {
@@ -324,7 +324,7 @@
       "roofType": [
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357HD-Ford-Transit-3H-2009/477",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-Ford-Transit-3H-2009/477"
     },
     {
@@ -339,7 +339,7 @@
         "low",
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-260mm-Land-Rover-Discovery-1/492",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-LAPA-260mm-Land-Rover-Discovery-1/492"
     },
     {
@@ -354,7 +354,7 @@
         "low",
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-260-Land-Rover-Discovery-2/525",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-LAPA-260mm-Land-Rover-Discovery-2/525"
     },
     {
@@ -399,7 +399,7 @@
         "low",
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-240HD-Volvo-TGB-C303-C304-C306/483",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-240HD-Volvo-TGB-C303-C304-C306/483"
     },
     {
@@ -427,7 +427,7 @@
       "roofType": [
         "high"
       ],
-      "url_pl": null,
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357HD-IVECO-DAILY-4010/531",
       "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-IVECO-DAILY-4010/531"
     },
     {
@@ -478,8 +478,8 @@
   "accessories": [
     {
       "id": 522,
-      "name": "Trunk support beam 147cm / 6cm",
-      "url": "https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522",
+      "name": "Roof rack crossbar tube 147cm / 6cm",
+      "url": "https://ts-parts.eu/en_US/p/Roof-rack-crossbar-tube-147cm-6cm/522",
       "url_pl": "https://ts-parts.pl/pl/p/Belka-nosna-bagaznika-147cm-6cm/522",
       "url_de": "https://ts-parts.de/de_DE/p/Dachtrager-Quertrager-147-cm-6-cm/522"
     },

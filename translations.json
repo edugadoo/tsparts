@@ -113,9 +113,10 @@
         "qtyLabel": "pcs"
       },
       "supportBeam": {
-        "name": "Trunk support beam 147cm / 6cm",
-        "detail": "Steel longitudinal beam (147 cm) connecting all crossbars front-to-rear. Creates a rigid ladder-frame platform. Essential for roof decks and distributing static loads evenly. Typically 2 pcs per installation (left + right).",
-        "qtyLabel": "pcs (left + right)"
+        "name": "Roof rack crossbar tube 147cm / 6cm",
+        "detail": "Steel crossbar tube (147 cm, 6 cm wide), powder-coated black. Works with all standard (non-HD) brackets. Width adjustable ±5 cm during installation. Designed for Sprinter W901–905 and VW LT II. Typically 1 tube per pair of brackets.",
+        "qtyLabel": "pcs"
+
       },
       "platformDisco1": {
         "name": "Expedition trunk / Roof Rack Platform — Land Rover Discovery 1",
@@ -279,9 +280,9 @@
         "qtyLabel": "szt."
       },
       "supportBeam": {
-        "name": "Belka podłużna 147cm / 6cm",
-        "detail": "Stalowa belka podłużna (147 cm) łącząca wszystkie poprzeczki wzdłuż dachu. Tworzy sztywną ramę drabinkową. Niezbędna przy platformach dachowych i równomiernym rozkładzie obciążeń statycznych. Zwykle 2 szt. na instalację (lewy + prawy bok).",
-        "qtyLabel": "szt. (lewy + prawy)"
+        "name": "Belka nośna bagażnika 147cm / 6cm",
+        "detail": "Stalowa poprzeczka (147 cm, szerokość 6 cm), malowana proszkowo na czarno. Pasuje do wszystkich standardowych uchwytów (nie HD). Szerokość regulowana ±5 cm podczas montażu. Dedykowana do Sprintera W901–905 i VW LT II. Zazwyczaj 1 szt. na parę uchwytów.",
+        "qtyLabel": "szt."
       },
       "platformDisco1": {
         "name": "Skrzynia ekspedycyjna / platforma dachowa — Land Rover Discovery 1",
@@ -445,9 +446,9 @@
         "qtyLabel": "Stk."
       },
       "supportBeam": {
-        "name": "Längsträger 147cm / 6cm",
-        "detail": "Stahl-Längsträger (147 cm), der alle Querstreben von vorne nach hinten verbindet. Bildet einen steifen Leiterrahmen. Unverzichtbar für Dachterrassen und gleichmäßige Lastverteilung. Typisch 2 Stk. pro Einbau (links + rechts).",
-        "qtyLabel": "Stk. (links + rechts)"
+        "name": "Dachträger-Querträger 147 cm / 6 cm",
+        "detail": "Stahl-Querrohr (147 cm, 6 cm breit), schwarz pulverbeschichtet. Passt zu allen Standard-Halterungen (nicht HD). Breite während der Montage um ±5 cm einstellbar. Ausgelegt für Sprinter W901–905 und VW LT II. Typisch 1 Stk. pro Halterpaar.",
+        "qtyLabel": "Stk."
       },
       "platformDisco1": {
         "name": "Expeditions-Kofferraum / Dachgepäckträger-Plattform — Land Rover Discovery 1",
