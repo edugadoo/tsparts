@@ -27,7 +27,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-169HD-VW-T2-T3-Vanagon/526",
       "roofType": [
         "low"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-169HD-VW-T2-T3-Bus/526",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-169HD-VW-T2-T3-Bus/526"
     },
     {
       "id": 493,
@@ -39,7 +41,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-169mm-VW-T3/493",
       "roofType": [
         "low"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-169mm-VW-T3-Bus/493",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-169mm-VW-T3/493"
     },
     {
       "id": 545,
@@ -52,7 +56,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-220mm-VW-LT1-75-95/545",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-220mm-VW-LT-I/545"
     },
     {
       "id": 451,
@@ -64,7 +70,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-123mmHD-Volkswagen-LT-35-96-06/451",
       "roofType": [
         "low"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-123mmHD-Volkswagen-LT-35-96-06/451",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-123mmHD-Volkswagen-LT-35-96-06/451"
     },
     {
       "id": 479,
@@ -76,7 +84,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-VW-LT-II/479",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-VW-LT-II/479"
     },
     {
       "id": 474,
@@ -88,7 +98,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Volkswagen-LT-II-1996-2006-/474",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357HD-Volkswagen-LT-II-1996-2006-/474",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-Volkswagen-LT-II-1996-2006-/474"
     },
     {
       "id": 501,
@@ -100,7 +112,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-169mm-MB-Vario/501",
       "roofType": [
         "low"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-169mm-MB-Vario/501",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-169mm-MB-Vario/501"
     },
     {
       "id": 502,
@@ -112,7 +126,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-169mmHD-MB-Vario/502",
       "roofType": [
         "low"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-169mmHD-MB-Vario/502",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-169mmHD-MB-Vario/502"
     },
     {
       "id": 480,
@@ -124,7 +140,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-MB-Vario/480",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357mm-MB-Vario/480",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-MB-Vario/480"
     },
     {
       "id": 473,
@@ -136,7 +154,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-MB-Vario/473",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-MB-Vario/473"
     },
     {
       "id": 452,
@@ -148,7 +168,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-123mmHD-Mercedes-Sprinter-W901-W902-W903-W904-W905-/452",
       "roofType": [
         "low"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-123mmHD-Mercedes-Sprinter-W901-W902-W903-W904-W905-/452",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-123mmHD-Mercedes-Sprinter-W901-W902-W903-W904-W905-/452"
     },
     {
       "id": 481,
@@ -160,7 +182,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-MB-W901-w905-Sprinter/481",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357mm-MB-W901-w905-Sprinter/481",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-MB-W901-w905-Sprinter/481"
     },
     {
       "id": 476,
@@ -172,7 +196,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-MB-W901-905-Sprinter/476",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357HD-MB-W901-905-Sprinter/476",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-MB-W901-905-Sprinter/476"
     },
     {
       "id": 450,
@@ -184,7 +210,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-123mmHD-Mercedes-MB-T1/450",
       "roofType": [
         "low"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-123mmHD-Mercedes-MB-T1/450",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-123mmHD-Mercedes-MB-T1/450"
     },
     {
       "id": 478,
@@ -196,7 +224,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-Mercedes-MB-T1/478",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357mm-Mercedes-MB-T1/478",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-Mercedes-MB-T1/478"
     },
     {
       "id": 475,
@@ -208,7 +238,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Mercedes-MB-T1/475",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357HD-Mercedes-MB-T1/475",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-Mercedes-MB-T1/475"
     },
     {
       "id": 485,
@@ -220,7 +252,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-Mercedes-T2-711D/485",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357mm-Mercedes-T2-711D/485",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-Mercedes-T2-711D/485"
     },
     {
       "id": 484,
@@ -232,7 +266,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Mercedes-T2-711D/484",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357HD-Mercedes-T2-711D/484",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-Mercedes-T2-711D/484"
     },
     {
       "id": 523,
@@ -245,7 +281,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-LAPA-260mm-MB-T2-Dudo/523"
     },
     {
       "id": 532,
@@ -257,7 +295,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-169mm-MB-G460/532",
       "roofType": [
         "low"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-169mm-MB-G460/532",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-169mm-MB-G460/532"
     },
     {
       "id": 482,
@@ -269,7 +309,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-Ford-Transit-3H-2009/482",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-Ford-Transit-3H-2009/482"
     },
     {
       "id": 477,
@@ -281,7 +323,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-Ford-Transit-3H-2009/477",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-Ford-Transit-3H-2009/477"
     },
     {
       "id": 492,
@@ -294,7 +338,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-LAPA-260mm-Land-Rover-Discovery-1/492"
     },
     {
       "id": 525,
@@ -307,7 +353,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-LAPA-260mm-Land-Rover-Discovery-2/525"
     },
     {
       "id": 472,
@@ -320,7 +368,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-220mm-Land-Rover-Defender-90110/472",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-220mm-Land-Rover-Defender-90-110/472"
     },
     {
       "id": 544,
@@ -333,7 +383,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-240HD-Land-Rover-Deffender/544",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-240HD-Land-Rover-Defender/544"
     },
     {
       "id": 483,
@@ -346,7 +398,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-240HD-Volvo-TGB-C303-C304-C306/483"
     },
     {
       "id": 530,
@@ -358,7 +412,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357mm-IVECO-DAILY-4010/530",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-357mm-IVECO-DAILY-4010/530",
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357mm-IVECO-DAILY-4010/530"
     },
     {
       "id": 531,
@@ -370,7 +426,9 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-Bracket-357HD-IVECO-DAILY-4010/531",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": null,
+      "url_de": "https://ts-parts.de/de_DE/p/FuBsatz-StutzfuBsatz-357HD-IVECO-DAILY-4010/531"
     },
     {
       "id": 456,
@@ -383,7 +441,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-169mm-UAZ-452-Buhanka/456",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-169mm-UAZ-452-Buhanka/456"
     },
     {
       "id": 457,
@@ -396,7 +456,9 @@
       "roofType": [
         "low",
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-169mmHD-UAZ-452-Buhanka/457",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-169mmHD-UAZ-452-Buhanka/457"
     },
     {
       "id": 458,
@@ -408,39 +470,53 @@
       "url": "https://ts-parts.eu/en_US/p/Roof-bracket-510mm-UAZ-452-Buhanka/458",
       "roofType": [
         "high"
-      ]
+      ],
+      "url_pl": "https://ts-parts.pl/pl/p/LAPA-Bagaznika-510mm-UAZ-452-Buhanka-wysoki-dach/458",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachhalterung-510mm-UAZ-452-Buhanka/458"
     }
   ],
   "accessories": [
     {
       "id": 522,
       "name": "Trunk support beam 147cm / 6cm",
-      "url": "https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522"
+      "url": "https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522",
+      "url_pl": "https://ts-parts.pl/pl/p/Belka-nosna-bagaznika-147cm-6cm/522",
+      "url_de": "https://ts-parts.de/de_DE/p/Dachtrager-Quertrager-147-cm-6-cm/522"
     },
     {
       "id": 488,
       "name": "Expedition trunk / Roof Rack Platform — Land Rover Discovery 1",
-      "url": "https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488"
+      "url": "https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488",
+      "url_pl": "https://ts-parts.pl/pl/p/Wyprawowy-bagaznik-Land-Rover-Discovery-1/488",
+      "url_de": "https://ts-parts.de/de_DE/p/Expeditionskofferraum-Modulare-Dachtrager-Plattform-Land-Rover-Discovery-1/488"
     },
     {
       "id": 490,
       "name": "VW T2 / T3 / SYNCRO expedition trunk / Roof Rack Platform",
-      "url": "https://ts-parts.eu/en_US/p/VW-T2-T3-SYNCRO-expedition-trunk-Roof-Rack-Platform/490"
+      "url": "https://ts-parts.eu/en_US/p/VW-T2-T3-SYNCRO-expedition-trunk-Roof-Rack-Platform/490",
+      "url_pl": "https://ts-parts.pl/pl/p/Wyprawowy-bagaznik-VW-T2-T3-SYNCRO/490",
+      "url_de": "https://ts-parts.de/de_DE/p/VW-T2-T3-SYNCRO-Expeditionskofferraum-Modulare-Dachtrager-Plattform/490"
     },
     {
       "id": 520,
       "name": "Accessory handle — Low rack brackets v1",
-      "url": "https://ts-parts.eu/en_US/p/Accessory-handle-roof-low-rack-brackets-v1/520"
+      "url": "https://ts-parts.eu/en_US/p/Accessory-handle-roof-low-rack-brackets-v1/520",
+      "url_pl": "https://ts-parts.pl/pl/p/Uchwyt-akcesoryjny-lapy-bagaznika-niska-V1/520",
+      "url_de": "https://ts-parts.de/de_DE/p/Zubehor-Griff-Dachtrager-Halterungen-v1/520"
     },
     {
       "id": 521,
       "name": "Accessory handle — High rack brackets v2",
-      "url": "https://ts-parts.eu/en_US/p/Accessory-handle-roof-high-rack-brackets-v2/521"
+      "url": "https://ts-parts.eu/en_US/p/Accessory-handle-roof-high-rack-brackets-v2/521",
+      "url_pl": "https://ts-parts.pl/pl/p/Uchwyt-akcesoryjny-lapy-bagaznika-wysoka-v2/521",
+      "url_de": "https://ts-parts.de/de_DE/p/Zubehor-Griff-Dachtrager-Halterungen-v2/521"
     },
     {
       "id": 497,
       "name": "Rack Mounted Bottle Opener",
-      "url": "https://ts-parts.eu/en_US/p/Rack-Mounted-Bottle-Opener-Roof-bracket/497"
+      "url": "https://ts-parts.eu/en_US/p/Rack-Mounted-Bottle-Opener-Roof-bracket/497",
+      "url_pl": "https://ts-parts.pl/pl/p/Akcesoryjny-otwieracz-do-Piwa-butelek/497",
+      "url_de": "https://ts-parts.de/de_DE/p/Zubehor-Flaschenoffner/497"
     }
   ],
   "prices": {

@@ -289,6 +289,11 @@ Promise.all([
 .then(([data,trans])=>{
   PRODUCTS=data.brackets;
   MODELS=data.models;
+  // Build accessory URL map keyed by id
+  window.ACC_URLS={};
+  (data.accessories||[]).forEach(a=>{
+    if(a.id) ACC_URLS[a.id]={en:a.url,pl:a.url_pl,de:a.url_de};
+  });
   LOCALE=(data.locales&&(data.locales[LANG]||data.locales['en']))||{baseUrl:'https://ts-parts.eu/en_US',shopUrl:'https://ts-parts.eu/en_US/c/Roof-racks/105',contactUrl:'https://ts-parts.eu/en_US/contact'};
   T=trans[LANG]||trans['en'];
   applyTranslations();
@@ -567,7 +572,7 @@ function showResult(){
     const hdLabel=primary.hd?R.hd:R.std;
     req.push(recRow('Required',primary.name,
       fmt(P.bracketDetail,{height:primary.height,hdLabel}),
-      tot,'pcs',`${LOCALE.baseUrl}/p/${primary.id}`,true));
+      tot,'pcs',(LANG==='pl'?primary.url_pl:LANG==='de'?primary.url_de:primary.url)||`${LOCALE.baseUrl}/p/${primary.id}`,true));
   } else {
     req.push(`<div style="padding:14px 18px;color:var(--muted);font-size:14px">${fmt(R.noMatch,{contactUrl:LOCALE.contactUrl})}</div>`);
   }
@@ -577,29 +582,29 @@ function showResult(){
   // 2 — Recommended
   const rec=[];
   if(hdOpt) rec.push(recRow('Recommended',hdOpt.name+P.hdUpgrade.nameSuffix,P.hdUpgrade.detail,
-    tot,P.hdUpgrade.qtyLabel,`${LOCALE.baseUrl}/p/${hdOpt.id}`,false));
+    tot,P.hdUpgrade.qtyLabel,(LANG==='pl'?hdOpt.url_pl:LANG==='de'?hdOpt.url_de:hdOpt.url)||`${LOCALE.baseUrl}/p/${hdOpt.id}`,false));
   rec.push(recRow('Recommended',P.supportBeam.name,P.supportBeam.detail,
-    2,P.supportBeam.qtyLabel,`${LOCALE.baseUrl}/p/522`,false));
+    2,P.supportBeam.qtyLabel,(ACC_URLS[522]&&(LANG==='pl'?ACC_URLS[522].pl:LANG==='de'?ACC_URLS[522].de:ACC_URLS[522].en))||`${LOCALE.baseUrl}/p/522`,false));
   if(S.make==='landrover'&&S.model==='disco1')
     rec.push(recRow('Platform',P.platformDisco1.name,P.platformDisco1.detail,
-      1,P.platformDisco1.qtyLabel,`${LOCALE.baseUrl}/p/488`,false));
+      1,P.platformDisco1.qtyLabel,(ACC_URLS[488]&&(LANG==='pl'?ACC_URLS[488].pl:LANG==='de'?ACC_URLS[488].de:ACC_URLS[488].en))||`${LOCALE.baseUrl}/p/488`,false));
   if(S.make==='vw'&&(S.model==='t2t3'||S.model==='t3'))
     rec.push(recRow('Platform',P.platformT2T3.name,P.platformT2T3.detail,
-      1,P.platformT2T3.qtyLabel,`${LOCALE.baseUrl}/p/490`,false));
+      1,P.platformT2T3.qtyLabel,(ACC_URLS[490]&&(LANG==='pl'?ACC_URLS[490].pl:LANG==='de'?ACC_URLS[490].de:ACC_URLS[490].en))||`${LOCALE.baseUrl}/p/490`,false));
 
   // 3 — Optional
   const opt=[];
   if(S.height==='high'||S.height==='unknown')
     opt.push(recRow('Optional',P.handleHigh.name,P.handleHigh.detail,
-      tot,P.handleHigh.qtyLabel,`${LOCALE.baseUrl}/p/521`,false));
+      tot,P.handleHigh.qtyLabel,(ACC_URLS[521]&&(LANG==='pl'?ACC_URLS[521].pl:LANG==='de'?ACC_URLS[521].de:ACC_URLS[521].en))||`${LOCALE.baseUrl}/p/521`,false));
   else
     opt.push(recRow('Optional',P.handleLow.name,P.handleLow.detail,
-      tot,P.handleLow.qtyLabel,`${LOCALE.baseUrl}/p/520`,false));
+      tot,P.handleLow.qtyLabel,(ACC_URLS[520]&&(LANG==='pl'?ACC_URLS[520].pl:LANG==='de'?ACC_URLS[520].de:ACC_URLS[520].en))||`${LOCALE.baseUrl}/p/520`,false));
 
   // 4 — Extras
   const acc=[];
   acc.push(recRow('Accessory',P.bottleOpener.name,P.bottleOpener.detail,
-    1,P.bottleOpener.qtyLabel,`${LOCALE.baseUrl}/p/497`,false));
+    1,P.bottleOpener.qtyLabel,(ACC_URLS[497]&&(LANG==='pl'?ACC_URLS[497].pl:LANG==='de'?ACC_URLS[497].de:ACC_URLS[497].en))||`${LOCALE.baseUrl}/p/497`,false));
 
   const noteHtml=drivenByLoad
     ?`<div class="note-box" style="margin-bottom:20px"><span class="icon">⚠</span><span>${
