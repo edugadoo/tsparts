@@ -279,7 +279,7 @@ document.getElementById('htmlRoot').lang=LANG;
 // ── state ─────────────────────────────────────────────────────────────────
 let S={make:null,makeLabel:null,model:null,modelLabel:null,height:null,heightLabel:null,
        roofLen:160,manualHeight:169,useMode:null,customLoad:null};
-let PRODUCTS=[], MODELS={}, T={};
+let PRODUCTS=[], MODELS={}, T={}, LOCALE={};
 
 // ── boot ──────────────────────────────────────────────────────────────────
 Promise.all([
@@ -289,6 +289,7 @@ Promise.all([
 .then(([data,trans])=>{
   PRODUCTS=data.brackets;
   MODELS=data.models;
+  LOCALE=data.locales[LANG]||data.locales['en'];
   T=trans[LANG]||trans['en'];
   applyTranslations();
   document.getElementById('step1').style.opacity='1';
@@ -566,39 +567,39 @@ function showResult(){
     const hdLabel=primary.hd?R.hd:R.std;
     req.push(recRow('Required',primary.name,
       fmt(P.bracketDetail,{height:primary.height,hdLabel}),
-      tot,'pcs',primary.url,true));
+      tot,'pcs',`${LOCALE.baseUrl}/p/${primary.id}`,true));
   } else {
-    req.push(`<div style="padding:14px 18px;color:var(--muted);font-size:14px">${R.noMatch}</div>`);
+    req.push(`<div style="padding:14px 18px;color:var(--muted);font-size:14px">${fmt(R.noMatch,{contactUrl:LOCALE.contactUrl})}</div>`);
   }
   req.push(recRow('Required',P.crossbarTube.name,P.crossbarTube.detail,
-    pairs,P.crossbarTube.qtyLabel,'https://ts-parts.eu/en_US/c/Roof-racks/105',false));
+    pairs,P.crossbarTube.qtyLabel,`${LOCALE.shopUrl}`,false));
 
   // 2 — Recommended
   const rec=[];
   if(hdOpt) rec.push(recRow('Recommended',hdOpt.name+P.hdUpgrade.nameSuffix,P.hdUpgrade.detail,
-    tot,P.hdUpgrade.qtyLabel,hdOpt.url,false));
+    tot,P.hdUpgrade.qtyLabel,`${LOCALE.baseUrl}/p/${hdOpt.id}`,false));
   rec.push(recRow('Recommended',P.supportBeam.name,P.supportBeam.detail,
-    2,P.supportBeam.qtyLabel,'https://ts-parts.eu/en_US/p/Trunk-support-beam-147cm-6cm/522',false));
+    2,P.supportBeam.qtyLabel,`${LOCALE.baseUrl}/p/522`,false));
   if(S.make==='landrover'&&S.model==='disco1')
     rec.push(recRow('Platform',P.platformDisco1.name,P.platformDisco1.detail,
-      1,P.platformDisco1.qtyLabel,'https://ts-parts.eu/en_US/p/Expedition-trunk-Roof-Rack-Platform-Land-Rover-Discovery-1/488',false));
+      1,P.platformDisco1.qtyLabel,`${LOCALE.baseUrl}/p/488`,false));
   if(S.make==='vw'&&(S.model==='t2t3'||S.model==='t3'))
     rec.push(recRow('Platform',P.platformT2T3.name,P.platformT2T3.detail,
-      1,P.platformT2T3.qtyLabel,'https://ts-parts.eu/en_US/p/VW-T2-T3-SYNCRO-expedition-trunk-Roof-Rack-Platform/490',false));
+      1,P.platformT2T3.qtyLabel,`${LOCALE.baseUrl}/p/490`,false));
 
   // 3 — Optional
   const opt=[];
   if(S.height==='high'||S.height==='unknown')
     opt.push(recRow('Optional',P.handleHigh.name,P.handleHigh.detail,
-      tot,P.handleHigh.qtyLabel,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-high-rack-brackets-v2/521',false));
+      tot,P.handleHigh.qtyLabel,`${LOCALE.baseUrl}/p/521`,false));
   else
     opt.push(recRow('Optional',P.handleLow.name,P.handleLow.detail,
-      tot,P.handleLow.qtyLabel,'https://ts-parts.eu/en_US/p/Accessory-handle-roof-low-rack-brackets-v1/520',false));
+      tot,P.handleLow.qtyLabel,`${LOCALE.baseUrl}/p/520`,false));
 
   // 4 — Extras
   const acc=[];
   acc.push(recRow('Accessory',P.bottleOpener.name,P.bottleOpener.detail,
-    1,P.bottleOpener.qtyLabel,'https://ts-parts.eu/en_US/p/Rack-Mounted-Bottle-Opener-Roof-bracket/497',false));
+    1,P.bottleOpener.qtyLabel,`${LOCALE.baseUrl}/p/497`,false));
 
   const noteHtml=drivenByLoad
     ?`<div class="note-box" style="margin-bottom:20px"><span class="icon">⚠</span><span>${
@@ -644,7 +645,7 @@ function showResult(){
     ${bomSection(T.bom.s4,acc)}
     <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
       <button class="btn-wizard secondary" onclick="resetWizard()">${R.startOver}</button>
-      <a href="${R.shopUrl}" class="btn-wizard">${R.shopBtn}</a>
+      <a href="${LOCALE.shopUrl}" class="btn-wizard">${R.shopBtn}</a>
     </div>`;
 
   showStep('stepResult');
