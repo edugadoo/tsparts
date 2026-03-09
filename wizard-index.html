@@ -576,8 +576,7 @@ function showResult(){
   } else {
     req.push(`<div style="padding:14px 18px;color:var(--muted);font-size:14px">${fmt(R.noMatch,{contactUrl:LOCALE.contactUrl})}</div>`);
   }
-  req.push(recRow('Required',P.crossbarTube.name,P.crossbarTube.detail,
-    pairs,P.crossbarTube.qtyLabel,`${LOCALE.shopUrl}`,false));
+
 
   // 2 — Recommended
   const rec=[];

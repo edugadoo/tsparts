@@ -102,11 +102,6 @@
       "s4": "4 — Extras"
     },
     "products": {
-      "crossbarTube": {
-        "name": "Roof rack crossbar tube",
-        "detail": "Round steel tube (powder-coated black) that slides through the bracket heads to form each crossbar. One tube spans the full vehicle width per pair.",
-        "qtyLabel": "pcs"
-      },
       "hdUpgrade": {
         "nameSuffix": " (HD upgrade)",
         "detail": "Thicker HD profile — recommended for sustained heavy loads, travelling with cargo, or off-road use.",
@@ -269,11 +264,6 @@
       "s4": "4 — Dodatki"
     },
     "products": {
-      "crossbarTube": {
-        "name": "Rura poprzeczki bagażnika dachowego",
-        "detail": "Okrągła stalowa rura (lakierowana proszkowo na czarno) wsuwana przez głowice uchwytów, tworząca każdą poprzeczkę. Jedna rura na parę uchwytów, rozpiętość na pełną szerokość pojazdu.",
-        "qtyLabel": "szt."
-      },
       "hdUpgrade": {
         "nameSuffix": " (wersja HD)",
         "detail": "Grubszy profil HD — zalecany przy długotrwałych ciężkich obciążeniach, jeździe z ładunkiem lub użytkowaniu w terenie.",
@@ -435,11 +425,6 @@
       "s4": "4 — Extras"
     },
     "products": {
-      "crossbarTube": {
-        "name": "Querstrebenrohr für Dachgepäckträger",
-        "detail": "Rundes Stahlrohr (schwarz pulverbeschichtet), das durch die Halterköpfe geschoben wird und jede Querstrebe bildet. Ein Rohr pro Halterpaar über die volle Fahrzeugbreite.",
-        "qtyLabel": "Stk."
-      },
       "hdUpgrade": {
         "nameSuffix": " (HD-Upgrade)",
         "detail": "Stärkeres HD-Profil — empfohlen bei dauerhaften Schwerlasten, Fahrt mit Beladung oder Geländeeinsatz.",
