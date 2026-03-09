@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roof Rack Bracket Wizard — TS-PARTS</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f2ee;
+  --white:#ffffff;
+  --dark:#1a1a1a;
+  --mid:#3d3d3d;
+  --muted:#888;
+  --border:#d8d4cc;
+  --accent:#d4380d;
+  --accent-hover:#b32a00;
+  --accent-light:#fff1ec;
+  --yellow-bg:#fffbe6;
+}
+html,body{background:var(--bg);color:var(--dark);font-family:'Source Sans 3',sans-serif;font-weight:400;}
+
+.page{max-width:1000px;margin:0 auto;padding:24px 20px 48px}
+
+.page-title{font-family:'Oswald',sans-serif;font-size:26px;font-weight:600;letter-spacing:.3px;margin-bottom:4px}
+.page-sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+
+.tabs{border-bottom:2px solid var(--border);display:flex;gap:0;margin-bottom:28px}
+.tab{padding:12px 24px;font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);background:none;border-top:none;border-left:none;border-right:none;transition:all .15s}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:hover:not(.active){color:var(--dark)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+.wizard-intro{background:var(--white);border:1px solid var(--border);padding:24px 28px;margin-bottom:24px}
+.wizard-intro h2{font-family:'Oswald',sans-serif;font-size:19px;font-weight:600;letter-spacing:.5px;margin-bottom:8px}
+.wizard-intro p{font-size:14px;color:var(--mid);line-height:1.6}
+
+.progress-bar{background:var(--border);height:3px;width:100%;margin-bottom:24px}
+.progress-fill{height:100%;background:var(--accent);transition:width .4s ease}
+
+.step{display:none}
+.step.visible{display:block}
+.step-header{background:var(--dark);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:14px;margin-bottom:1px}
+.step-num{background:var(--accent);color:#fff;font-family:'Oswald',sans-serif;font-size:13px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-title{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:.8px;text-transform:uppercase}
+.step-done-label{margin-left:auto;font-size:12px;color:#aaa;display:none}
+.step.done .step-done-label{display:block}
+.step-body{background:var(--white);border:1px solid var(--border);border-top:none;padding:24px}
+
+.opt-grid{display:grid;gap:10px}
+.opt-grid.cols3{grid-template-columns:1fr 1fr 1fr}
+.opt-grid.cols4{grid-template-columns:repeat(4,1fr)}
+.opt-btn{border:1px solid var(--border);background:var(--white);padding:14px 12px;cursor:pointer;text-align:left;transition:all .15s;display:flex;flex-direction:column;gap:4px;position:relative}
+.opt-btn:hover{border-color:var(--accent);background:var(--accent-light)}
+.opt-btn.selected{border-color:var(--accent);background:var(--accent-light);border-width:2px}
+.opt-btn .ol{font-family:'Oswald',sans-serif;font-size:14px;font-weight:500;color:var(--dark)}
+.opt-btn .os{font-size:12px;color:var(--muted);line-height:1.4}
+.opt-btn .check{position:absolute;top:8px;right:8px;width:18px;height:18px;background:var(--accent);color:#fff;display:none;align-items:center;justify-content:center;font-size:10px}
+.opt-btn.selected .check{display:flex}
+.veh-icon{font-size:28px;margin-bottom:4px;line-height:1}
+
+.slider-row{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+.slider-row input[type=range]{flex:1;accent-color:var(--accent)}
+.slider-val{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--accent);min-width:70px;text-align:right}
+.slider-ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:2px}
+
+.result-summary{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.res-card{background:var(--bg);border:1px solid var(--border);padding:16px}
+.res-card .rc-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.res-card .rc-val{font-family:'Oswald',sans-serif;font-size:24px;font-weight:600;color:var(--dark)}
+.res-card .rc-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.res-card.highlight .rc-val{color:var(--accent)}
+
+.product-recs{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.rec-row{border:1px solid var(--border);background:var(--white);display:flex;overflow:hidden}
+.rec-content{padding:14px 18px;flex:1}
+.rec-name{font-family:'Oswald',sans-serif;font-size:16px;font-weight:500;margin-bottom:4px}
+.rec-detail{font-size:13px;color:var(--muted);margin-bottom:10px}
+.rec-footer{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rec-qty{font-size:13px;color:var(--mid)}
+.rec-qty strong{color:var(--dark);font-weight:600}
+
+.spacing-diagram{margin:20px 0;padding:16px 16px 12px;background:var(--bg);border:1px solid var(--border)}
+.diagram-title{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:44px}
+.rack-visual{height:20px;position:relative;margin:0 8px}
+.rack-bar{height:4px;background:var(--border);width:100%;border-radius:2px;position:absolute;top:50%;transform:translateY(-50%)}
+.rack-bracket{position:absolute;top:50%;width:3px;height:16px;background:var(--accent);transform:translate(-50%,-50%)}
+.rack-bracket::after{content:'';position:absolute;bottom:-5px;left:-5px;width:13px;height:5px;background:var(--accent);opacity:.5}
+.rack-label{position:absolute;bottom:calc(100% + 20px);left:50%;transform:translateX(-50%);font-size:10px;color:var(--accent);white-space:nowrap;font-weight:600;background:var(--bg);padding:0 2px}
+
+.note-box{background:var(--yellow-bg);border:1px solid #ffe58f;padding:12px 16px;font-size:13px;color:#614700;display:flex;gap:10px;margin-top:16px}
+.note-box .icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+.bom-section{margin-bottom:28px}
+.bom-section-title{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bom-section-title h3{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--dark)}
+.bom-section-title .section-rule{flex:1;height:1px;background:var(--border)}
+
+.btn-wizard{border:none;background:var(--accent);color:#fff;font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:12px 28px;cursor:pointer;margin-top:20px;transition:background .15s;text-decoration:none;display:inline-block}
+.btn-wizard:hover{background:var(--accent-hover);color:#fff}
+.btn-wizard.secondary{background:none;border:1px solid var(--border);color:var(--mid);margin-right:10px}
+.btn-wizard.secondary:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+
+.btn-rec{border:none;background:var(--accent);color:#fff;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.6px;text-transform:uppercase;padding:7px 14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:background .15s;flex-shrink:0;white-space:nowrap}
+.btn-rec:hover{background:var(--accent-hover);color:#fff}
+.btn-rec.outline{background:none;border:1px solid var(--border);color:var(--mid)}
+.btn-rec.outline:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+
+.content-block{background:var(--white);border:1px solid var(--border);padding:28px 32px}
+.content-block h2{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;margin-bottom:16px}
+.content-block p{font-size:14px;line-height:1.8;color:var(--mid);margin-bottom:14px}
+.content-block p:last-child{margin-bottom:0}
+
+.install-step{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border)}
+.install-step:last-child{border-bottom:none}
+.install-num{background:var(--accent);color:#fff;font-family:'Oswald',sans-serif;width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:600}
+.install-step strong{font-size:14px;font-weight:600;display:block;margin-bottom:4px}
+.install-step p{font-size:13px;color:var(--mid);line-height:1.6;margin:0}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:720px){
+  .opt-grid.cols3,.opt-grid.cols4{grid-template-columns:1fr 1fr}
+  .result-summary{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .opt-grid.cols3,.opt-grid.cols4{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1 class="page-title" id="uTitle"></h1>
+  <p class="page-sub" id="uSub"></p>
+
+  <div class="tabs">
+    <button class="tab active" id="tabWizard" onclick="switchTab('wizard',this)"></button>
+    <button class="tab" id="tabDesc" onclick="switchTab('desc',this)"></button>
+    <button class="tab" id="tabInstall" onclick="switchTab('install',this)"></button>
+  </div>
+
+  <!-- WIZARD -->
+  <div id="tab-wizard" class="tab-panel active">
+    <div class="wizard-intro">
+      <h2 id="uIntroTitle"></h2>
+      <p id="uIntroText"></p>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+    <div id="dataStatus" style="font-size:13px;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+      <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite" id="loadSpinner"></span>
+      <span id="uLoading">Loading…</span>
+    </div>
+
+    <div class="step visible" id="step1" style="opacity:0.4;pointer-events:none">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <div class="step-title" id="uS1Title"></div>
+        <div class="step-done-label" id="step1-done">✓ <span></span></div>
+      </div>
+      <div class="step-body">
+        <div class="opt-grid cols4" id="makeGrid"></div>
+      </div>
+    </div>
+
+    <div class="step" id="step2">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <div class="step-title" id="uS2Title"></div>
+        <div class="step-done-label" id="step2-done">✓ <span></span></div>
+      </div>
+      <div class="step-body">
+        <div class="opt-grid cols3" id="modelGrid"></div>
+      </div>
+    </div>
+
+    <div class="step" id="step3">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <div class="step-title" id="uS3Title"></div>
+        <div class="step-done-label" id="step3-done">✓ <span></span></div>
+      </div>
+      <div class="step-body">
+        <div class="opt-grid cols3" id="roofHeightGrid"></div>
+        <div id="manualHeightWrap" style="display:none;margin-top:16px">
+          <label id="uManualHeightLabel" style="font-size:13px;color:var(--mid);display:block;margin-bottom:6px"></label>
+          <input type="number" id="manualHeight" value="169" min="100" max="600"
+            style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:120px"
+            oninput="S.manualHeight=parseInt(this.value)||169">
+          <span id="uManualUnit" style="font-size:12px;color:var(--muted);margin-left:8px"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" id="step4">
+      <div class="step-header">
+        <div class="step-num">4</div>
+        <div class="step-title" id="uS4Title"></div>
+        <div class="step-done-label" id="step4-done">✓ <span></span></div>
+      </div>
+      <div class="step-body">
+        <p id="uRoofLenInstruction" style="font-size:13px;color:var(--mid);margin-bottom:16px"></p>
+        <div class="slider-row">
+          <input type="range" id="roofLen" min="80" max="320" value="160" step="5" oninput="updateRoofLen()">
+          <div class="slider-val" id="roofLenVal">160 cm</div>
+        </div>
+        <div class="slider-ticks">
+          <span>80 cm</span><span>120 cm</span><span>160 cm</span><span>200 cm</span>
+          <span>240 cm</span><span>280 cm</span><span>320 cm</span>
+        </div>
+        <p id="uRoofLenHint" style="font-size:12px;color:var(--muted);margin-top:12px"></p>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label id="uRoofLenExactLabel" style="font-size:13px;color:var(--mid)"></label>
+          <input type="number" id="roofLenNum" value="160" min="80" max="320"
+            style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:90px"
+            oninput="syncRoofLen(this.value)">
+          <span id="uRoofLenUnit" style="font-size:12px;color:var(--muted)"></span>
+        </div>
+        <button class="btn-wizard" id="uNextBtn" onclick="advanceToWeight()"></button>
+      </div>
+    </div>
+
+    <div class="step" id="step5">
+      <div class="step-header">
+        <div class="step-num">5</div>
+        <div class="step-title" id="uS5Title"></div>
+        <div class="step-done-label" id="step5-done">✓ <span></span></div>
+      </div>
+      <div class="step-body">
+        <p id="uUseInstruction" style="font-size:13px;color:var(--mid);margin-bottom:20px"></p>
+        <div class="opt-grid cols3" id="useGrid"></div>
+        <div id="customLoadWrap" style="margin-top:20px;padding:16px;background:var(--bg);border:1px solid var(--border)">
+          <div id="uManualLoadTitle" style="font-size:13px;font-weight:600;margin-bottom:12px;font-family:'Oswald',sans-serif;letter-spacing:.5px"></div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <label id="uTotalLoadLabel" style="font-size:13px;color:var(--mid)"></label>
+            <input type="number" id="totalLoad" value="200" min="1" max="1000"
+              style="border:1px solid var(--border);padding:8px 12px;font-size:14px;width:80px"
+              oninput="updateCustomLoad()">
+            <span id="uKgUnit" style="font-size:12px;color:var(--muted)"></span>
+            <span style="font-size:12px;color:var(--muted);margin-left:8px">
+              <span id="uBracketsNeeded"></span> <strong id="customBracketCount">—</strong>
+            </span>
+          </div>
+        </div>
+        <button class="btn-wizard" onclick="showResult()" id="calcBtn" style="display:none"></button>
+      </div>
+    </div>
+
+    <div class="step" id="stepResult">
+      <div class="step-header" style="background:var(--accent)">
+        <div class="step-num" style="background:rgba(255,255,255,.25)">✓</div>
+        <div class="step-title" id="uResultTitle"></div>
+      </div>
+      <div class="step-body" style="padding:0">
+        <div id="resultContent" style="padding:24px"></div>
+      </div>
+    </div>
+  </div><!-- /tab-wizard -->
+
+  <!-- DESCRIPTION -->
+  <div id="tab-desc" class="tab-panel">
+    <div class="content-block" id="descBlock"></div>
+  </div>
+
+  <!-- INSTALLATION -->
+  <div id="tab-install" class="tab-panel">
+    <div class="content-block" id="installBlock"></div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ── language ──────────────────────────────────────────────────────────────
+const LANG=(new URLSearchParams(window.location.search).get('lang')||'en').toLowerCase();
+document.getElementById('htmlRoot').lang=LANG;
+
+// ── state ─────────────────────────────────────────────────────────────────
+let S={make:null,makeLabel:null,model:null,modelLabel:null,height:null,heightLabel:null,
+       roofLen:160,manualHeight:169,useMode:null,customLoad:null};
+let PRODUCTS=[], MODELS={}, T={}, LOCALE={};
+
+// ── boot ──────────────────────────────────────────────────────────────────
+Promise.all([
+  fetch('data.json').then(r=>r.json()),
+  fetch('translations.json').then(r=>r.json())
+])
+.then(([data,trans])=>{
+  PRODUCTS=data.brackets;
+  MODELS=data.models;
+  // Build accessory URL map keyed by id
+  window.ACC_URLS={};
+  (data.accessories||[]).forEach(a=>{
+    if(a.id) ACC_URLS[a.id]={en:a.url,pl:a.url_pl,de:a.url_de};
+  });
+  LOCALE=(data.locales&&(data.locales[LANG]||data.locales['en']))||{baseUrl:'https://ts-parts.eu/en_US',shopUrl:'https://ts-parts.eu/en_US/c/Roof-racks/105',contactUrl:'https://ts-parts.eu/en_US/contact'};
+  T=trans[LANG]||trans['en'];
+  applyTranslations();
+  document.getElementById('step1').style.opacity='1';
+  document.getElementById('step1').style.pointerEvents='auto';
+  document.getElementById('dataStatus').style.display='none';
+})
+.catch(()=>{
+  document.getElementById('uLoading').textContent='⚠ Could not load data. Please refresh.';
+  document.getElementById('uLoading').style.color='#c0392b';
+  document.getElementById('loadSpinner').style.display='none';
+});
+
+// ── apply translations ────────────────────────────────────────────────────
+function applyTranslations(){
+  document.title=T.pageTitle;
+  setT('uTitle',T.title);
+  setT('uSub',T.sub);
+  setT('tabWizard',T.tabs.wizard);
+  setT('tabDesc',T.tabs.desc);
+  setT('tabInstall',T.tabs.install);
+  setT('uIntroTitle',T.introTitle);
+  setT('uIntroText',T.introText);
+  setT('uLoading',T.loading);
+  setT('uS1Title',T.steps.s1title);
+  setT('uS2Title',T.steps.s2title);
+  setT('uS3Title',T.steps.s3title);
+  setT('uS4Title',T.steps.s4title);
+  setT('uS5Title',T.steps.s5title);
+  setT('uResultTitle',T.steps.resultTitle);
+  setT('uManualHeightLabel',T.roof.manualLabel);
+  setT('uManualUnit',T.roof.manualUnit);
+  setT('uRoofLenInstruction',T.roofLen.instruction);
+  setT('uRoofLenHint',T.roofLen.hint);
+  setT('uRoofLenExactLabel',T.roofLen.exactLabel);
+  setT('uRoofLenUnit',T.roofLen.unit);
+  setT('uNextBtn',T.roofLen.nextBtn);
+  setT('uUseInstruction',T.use.instruction);
+  setT('uManualLoadTitle',T.use.manualTitle);
+  setT('uTotalLoadLabel',T.use.totalLoadLabel);
+  setT('uKgUnit',T.use.kgUnit);
+  setT('uBracketsNeeded',T.use.bracketsNeeded);
+  setT('calcBtn',T.use.calcBtn);
+  buildMakeGrid();
+  buildRoofHeightGrid();
+  buildUseGrid();
+  buildDescTab();
+  buildInstallTab();
+}
+function setT(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
+
+function buildMakeGrid(){
+  const DEFS=[
+    {id:'vw',        icon:'🚐',label:'Volkswagen'},
+    {id:'mercedes',  icon:'🚌',label:'Mercedes-Benz'},
+    {id:'ford',      icon:'🚛',label:'Ford'},
+    {id:'landrover', icon:'🚙',label:'Land Rover'},
+    {id:'volvo',     icon:'🚐',label:'Volvo / TGB'},
+    {id:'iveco',     icon:'🚚',label:'Iveco'},
+    {id:'uaz',       icon:'🚙',label:'UAZ'},
+    {id:'other',     icon:'🔧',label:null},
+  ];
+  const g=document.getElementById('makeGrid');g.innerHTML='';
+  DEFS.forEach(m=>{
+    const tm=T.makes[m.id]||{};
+    const label=tm.label||m.label;
+    const sub=tm.sub||'';
+    const b=document.createElement('button');b.className='opt-btn';
+    b.innerHTML=`<div class="veh-icon">${m.icon}</div><div class="ol">${label}</div><div class="os">${sub}</div><div class="check">✓</div>`;
+    b.onclick=()=>selectMake(m.id,label);
+    g.appendChild(b);
+  });
+}
+
+function buildRoofHeightGrid(){
+  const defs=[
+    {id:'low',     label:T.roof.lowLabel,     sub:T.roof.lowSub},
+    {id:'high',    label:T.roof.highLabel,    sub:T.roof.highSub},
+    {id:'unknown', label:T.roof.unknownLabel, sub:T.roof.unknownSub},
+  ];
+  const g=document.getElementById('roofHeightGrid');g.innerHTML='';
+  defs.forEach(d=>{
+    const b=document.createElement('button');b.className='opt-btn';
+    b.innerHTML=`<div class="ol">${d.label}</div><div class="os">${d.sub.replace(/\n/g,'<br>')}</div><div class="check">✓</div>`;
+    b.onclick=()=>{
+      document.querySelectorAll('#roofHeightGrid .opt-btn').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+      selectHeight(d.id,d.label);
+    };
+    g.appendChild(b);
+  });
+}
+
+function buildUseGrid(){
+  // kg = std bracket capacity per bracket; sp = std max spacing cm
+  // HD brackets get sp×1.2 spacing, same kg capacity
+  const defs=[
+    {id:'stationary',label:T.use.stationaryLabel,sub:T.use.stationarySub,kg:25,sp:75},
+    {id:'travel',    label:T.use.travelLabel,    sub:T.use.travelSub,    kg:15,sp:50},
+    {id:'offroad',   label:T.use.offroadLabel,   sub:T.use.offroadSub,   kg:15,sp:40},
+  ];
+  const g=document.getElementById('useGrid');g.innerHTML='';
+  let defaultBtn=null;
+  defs.forEach(d=>{
+    const hdSp=Math.round(d.sp*1.2);
+    const b=document.createElement('button');b.className='opt-btn';
+    b.innerHTML=`
+      <div class="ol">${d.label}</div>
+      <div class="os">${d.sub}</div>
+      <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:var(--bg);padding:6px 8px;border:1px solid var(--border)">
+          <div style="font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:2px">Std</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--accent)">${d.kg} kg</div>
+          <div style="font-size:10px;color:var(--muted)">${d.sp} cm max</div>
+        </div>
+        <div style="background:var(--bg);padding:6px 8px;border:1px solid var(--border)">
+          <div style="font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:2px">HD</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--accent)">${d.kg} kg</div>
+          <div style="font-size:10px;color:var(--muted)">${hdSp} cm max</div>
+        </div>
+      </div>
+      <div class="check">✓</div>`;
+    b.onclick=()=>selectUse(d.id,d.label,d.kg,d.sp,b);
+    g.appendChild(b);
+    if(d.id==='stationary') defaultBtn=b;
+  });
+  // Pre-select stationary
+  if(defaultBtn){
+    const first=defs[0];
+    defaultBtn.classList.add('selected');
+    S.useMode={id:first.id,label:first.label,kgPerBracket:first.kg,maxSpacingCm:first.sp};
+    setDone('step5',first.label);
+    document.getElementById('calcBtn').style.display='inline-block';
+  }
+}
+
+function buildDescTab(){
+  const d=T.desc;
+  document.getElementById('descBlock').innerHTML=
+    `<h2>${d.title}</h2><p>${d.p1}</p><p>${d.p2}</p><p>${d.p3}</p><p>${d.p4}</p><p>${d.p5}</p>`;
+}
+
+function buildInstallTab(){
+  const inst=T.install;
+  document.getElementById('installBlock').innerHTML=
+    `<h2>${inst.title}</h2>`+
+    inst.steps.map((s,i)=>
+      `<div class="install-step"><div class="install-num">${i+1}</div><div><strong>${s.title}</strong><p>${s.text}</p></div></div>`
+    ).join('');
+}
+
+// ── wizard steps ──────────────────────────────────────────────────────────
+function selectMake(make,label){
+  S.make=make;S.makeLabel=label;S.model=null;S.modelLabel=null;
+  document.querySelectorAll('#makeGrid .opt-btn').forEach(b=>b.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  setDone('step1',label);
+  const g=document.getElementById('modelGrid');g.innerHTML='';
+  (MODELS[make]||[]).forEach(m=>{
+    const b=document.createElement('button');b.className='opt-btn';
+    b.innerHTML=`<div class="ol">${m.label}</div><div class="os">${m.sub}</div><div class="check">✓</div>`;
+    b.onclick=()=>{
+      S.model=m.id;S.modelLabel=m.label;
+      document.querySelectorAll('#modelGrid .opt-btn').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');setDone('step2',m.label);showStep('step3');updateProgress(40);
+    };
+    g.appendChild(b);
+  });
+  showStep('step2');updateProgress(20);
+}
+
+function selectHeight(h,label){
+  S.height=h;S.heightLabel=label;
+  document.getElementById('manualHeightWrap').style.display=(h==='unknown')?'block':'none';
+  if(h!=='unknown') setDone('step3',label);
+  showStep('step4');updateProgress(60);
+}
+
+function updateRoofLen(){
+  const v=parseInt(document.getElementById('roofLen').value);
+  S.roofLen=v;
+  document.getElementById('roofLenVal').textContent=v+' cm';
+  document.getElementById('roofLenNum').value=v;
+}
+
+function syncRoofLen(v){
+  v=Math.max(80,Math.min(320,parseInt(v)||160));
+  S.roofLen=v;
+  document.getElementById('roofLen').value=v;
+  document.getElementById('roofLenVal').textContent=v+' cm';
+}
+
+function advanceToWeight(){
+  setDone('step4',S.roofLen+' cm');
+  showStep('step5');updateProgress(80);
+}
+
+function selectUse(id,label,kgPerBracket,maxSpacingCm,btn){
+  S.useMode={id,label,kgPerBracket,maxSpacingCm};S.customLoad=null;
+  document.querySelectorAll('#useGrid .opt-btn').forEach(b=>b.classList.remove('selected'));
+  (btn||event.currentTarget).classList.add('selected');
+  setDone('step5',label);
+  updateCustomLoad();
+  document.getElementById('calcBtn').style.display='inline-block';
+}
+
+function updateCustomLoad(){
+  const v=parseInt(document.getElementById('totalLoad').value)||0;
+  S.customLoad=v>0?v:null;
+  if(!S.useMode)return;
+  const mb=S.customLoad?Math.ceil(S.customLoad/S.useMode.kgPerBracket):null;
+  document.getElementById('customBracketCount').textContent=
+    mb?`≥${mb} (${Math.ceil(mb/2)} pairs)`:'—';
+}
+
+function calcBrackets(isHD){
+  const len=S.roofLen;
+  const mode=S.useMode||{kgPerBracket:25,maxSpacingCm:75,label:'Stationary'};
+  // HD gets 20% wider spacing allowance, same weight per bracket
+  const spacingCm=isHD?Math.round(mode.maxSpacingCm*1.2):mode.maxSpacingCm;
+  const kgPB=mode.kgPerBracket;
+  const pFS=Math.max(2,Math.ceil(len/spacingCm)+1);
+  let pFL=null;
+  if(S.customLoad){
+    const bn=Math.ceil(S.customLoad/kgPB);
+    pFL=Math.max(2,Math.ceil(bn/2));
+  }
+  const pairs=pFL?Math.max(pFS,pFL):pFS;
+  const tot=pairs*2;
+  const actualSpacing=pairs>1?Math.round(len/(pairs-1)):0;
+  const totalCapacity=Math.round(kgPB*tot);
+  return {pairs,tot,actualSpacing,totalCapacity,
+    kgPerBracket:kgPB,maxSpacingCm:spacingCm,
+    pairsFromSpacing:pFS,pairsFromLoad:pFL,mode};
+}
+
+// Calculate both std and HD variants for display
+function calcBoth(){
+  const std=calcBrackets(false);
+  const hd=calcBrackets(true);
+  return {std,hd};
+}
+
+function recRow(tag,name,detail,qty,qtyLabel,url,isPrimary){
+  const tagColors={Required:'#1a1a1a',Recommended:'#1d5a2a',Platform:'#7c4a00',Optional:'#3d3d3d',Accessory:'#5f3d99'};
+  const tagLabel=T.tags[tag]||tag;
+  const bg=tagColors[tag]||'#888';
+  const borderStyle='';
+  const viewBtn=url
+    ?`<a href="${url}" onclick="openPopup(event,this.href)" class="btn-rec">${T.result.viewBtn}</a>`
+    :'';
+  return `<div class="rec-row" style="${borderStyle}">
+    <div style="width:5px;flex-shrink:0;background:${bg}"></div>
+    <div class="rec-content">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;font-family:'Oswald',sans-serif;background:${bg};color:#fff">${tagLabel}</span>
+        <div class="rec-name" style="margin-bottom:0">${name}</div>
+      </div>
+      <div class="rec-detail">${detail}</div>
+      <div class="rec-footer">
+        <div class="rec-qty">${T.result.qtyLabel} <strong>${qty} ${qtyLabel}</strong></div>
+        ${viewBtn}
+      </div>
+    </div>
+  </div>`;
+}
+
+function bomSection(title,rows){
+  if(!rows||!rows.length)return'';
+  return `<div class="bom-section">
+    <div class="bom-section-title"><h3>${title}</h3><div class="section-rule"></div></div>
+    <div class="product-recs">${rows.join('')}</div>
+  </div>`;
+}
+
+function fmt(str,vars){
+  return str.replace(/\{(\w+)\}/g,(_,k)=>vars[k]!==undefined?vars[k]:'{'+k+'}');
+}
+
+function bracketUrl(p){
+  return (LANG==='pl'?p.url_pl:LANG==='de'?p.url_de:p.url)||`${LOCALE.baseUrl}/p/${p.id}`;
+}
+function accUrl(id){
+  return (ACC_URLS[id]&&(LANG==='pl'?ACC_URLS[id].pl:LANG==='de'?ACC_URLS[id].de:ACC_URLS[id].en))||`${LOCALE.baseUrl}/p/${id}`;
+}
+function makeDiagram(calc,len,accentColor){
+  const {pairs,actualSpacing}=calc;
+  const pos=[];for(let i=0;i<pairs;i++)pos.push(Math.round(i*(len/Math.max(pairs-1,1))));
+  return `<div class="rack-visual">
+    <div class="rack-bar"></div>
+    ${pos.map((p,i)=>`<div class="rack-bracket" style="left:${(p/len)*100}%;background:${accentColor}"><div class="rack-label" style="color:${accentColor};background:var(--bg)">${i+1}&nbsp;·&nbsp;${p}cm</div></div>`).join('')}
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:var(--muted)">${pairs} pairs · spacing ${actualSpacing} cm · capacity ${calc.totalCapacity} kg</div>`;
+}
+
+function showResult(){
+  updateProgress(100);
+  const len=S.roofLen;
+  const P=T.products;
+  const R=T.result;
+
+  // Filter products to matching bracket candidates
+  let c=PRODUCTS.filter(p=>p.height>0);
+  if(S.make&&S.make!=='other')    c=c.filter(p=>p.make===S.make);
+  if(S.model&&S.model!=='custom') c=c.filter(p=>p.model===S.model);
+  if(S.height==='low')     c=c.filter(p=>p.roofType.includes('low'));
+  if(S.height==='high')    c=c.filter(p=>p.roofType.includes('high'));
+  if(S.height==='unknown') c=c.sort((a,b)=>Math.abs(a.height-S.manualHeight)-Math.abs(b.height-S.manualHeight));
+
+  const pStd=c.filter(p=>!p.hd)[0]||null;
+  const pHD=c.filter(p=>p.hd)[0]||null;
+  const bothExist=pStd&&pHD;
+  const modeId=(S.useMode||{id:'stationary'}).id;
+  const bName=b=>b.name.replace(/^Roof bracket/,P.bracketPrefix);
+
+  // Calc spacing/pairs for each type
+  const calcStd=calcBrackets(false);
+  const calcHD=calcBrackets(true);
+
+  // For the summary cards, use the "primary" recommendation
+  // Off-road → HD first, else std first
+  const primaryCalc=modeId==='offroad'
+    ?(pHD?calcHD:calcStd)
+    :(pStd?calcStd:calcHD);
+  const primaryProd=modeId==='offroad'?(pHD||pStd):(pStd||pHD);
+
+  // ── Bracket choice block ──────────────────────────────────────────────────
+  function bracketOption(prod,calc,isRecommended){
+    if(!prod) return '';
+    const badge=isRecommended
+      ?`<span style="background:var(--accent);color:#fff;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;font-family:'Oswald',sans-serif;margin-left:8px">★ Recommended</span>`
+      :`<span style="background:var(--mid);color:#fff;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;font-family:'Oswald',sans-serif;margin-left:8px">Alternative</span>`;
+    const accentColor=isRecommended?'var(--accent)':'#888';
+    const border=isRecommended?'2px solid var(--accent)':'1px solid var(--border)';
+    const {pairs,tot,actualSpacing,totalCapacity,kgPerBracket,maxSpacingCm}=calc;
+    return `<div style="border:${border};background:var(--white);margin-bottom:12px;overflow:hidden">
+      <div style="background:${isRecommended?'var(--accent)':'var(--mid)'};color:#fff;padding:8px 16px;display:flex;align-items:center;gap:8px">
+        <span style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:.5px">${prod.hd?'HD Heavy Duty':'Standard'}</span>
+        ${isRecommended?'<span style="font-size:11px;opacity:.85">— recommended for this use</span>':'<span style="font-size:11px;opacity:.75">— also available</span>'}
+      </div>
+      <div style="padding:14px 16px">
+        <div style="font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;margin-bottom:4px">${bName(prod)}</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Height: ${prod.height} mm · ${prod.hd?'Heavy Duty profile':'Standard profile'} · ${kgPerBracket} kg/bracket · max spacing ${maxSpacingCm} cm</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+          <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
+            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Pairs needed</div>
+            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:${accentColor}">${pairs}</div>
+            <div style="font-size:11px;color:var(--muted)">${tot} brackets total</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
+            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Spacing</div>
+            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:${accentColor}">${actualSpacing} cm</div>
+            <div style="font-size:11px;color:var(--muted)">max ${maxSpacingCm} cm</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
+            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Capacity</div>
+            <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:${accentColor}">${totalCapacity} kg</div>
+            <div style="font-size:11px;color:var(--muted)">${kgPerBracket} kg × ${tot}</div>
+          </div>
+        </div>
+        <div class="spacing-diagram" style="margin:0 0 12px 0">
+          <div class="diagram-title">Top view — ${len} cm roof · ${pairs} pairs</div>
+          ${makeDiagram(calc,len,isRecommended?'var(--accent)':'#888')}
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <div style="font-size:13px;color:var(--mid)">Qty: <strong>${tot} pcs</strong></div>
+          <a href="${bracketUrl(prod)}" onclick="openPopup(event,this.href)" class="btn-rec" style="${isRecommended?'':'background:var(--mid)'}">View product →</a>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Build bracket section
+  let bracketHtml='';
+  if(!pStd&&!pHD){
+    bracketHtml=`<div style="padding:14px 18px;color:var(--muted);font-size:14px">${fmt(R.noMatch,{contactUrl:LOCALE.contactUrl})}</div>`;
+  } else if(bothExist){
+    // Both types available — show as alternatives, recommended first
+    if(modeId==='offroad'){
+      bracketHtml=bracketOption(pHD,calcHD,true)+bracketOption(pStd,calcStd,false);
+    } else {
+      bracketHtml=bracketOption(pStd,calcStd,true)+bracketOption(pHD,calcHD,false);
+    }
+  } else {
+    // Only one type available — show it without "recommended/alternative" framing
+    const onlyProd=pStd||pHD;
+    const onlyCalc=pStd?calcStd:calcHD;
+    bracketHtml=bracketOption(onlyProd,onlyCalc,true);
+  }
+
+  // crossbar tube qty = max of the two pair counts (worst case)
+  const tubeQty=Math.max(calcStd.pairs,calcHD.pairs);
+
+  // 2 — Recommended (non-bracket additions)
+  const rec=[];
+  const tubeCalc=primaryCalc;
+  rec.push(recRow('Required',P.supportBeam.name,P.supportBeam.detail,
+    tubeQty,P.supportBeam.qtyLabel,accUrl(522),false));
+  if(S.make==='landrover'&&S.model==='disco1')
+    rec.push(recRow('Platform',P.platformDisco1.name,P.platformDisco1.detail,
+      1,P.platformDisco1.qtyLabel,accUrl(488),false));
+  if(S.make==='vw'&&(S.model==='t2t3'||S.model==='t3'))
+    rec.push(recRow('Platform',P.platformT2T3.name,P.platformT2T3.detail,
+      1,P.platformT2T3.qtyLabel,accUrl(490),false));
+
+  // 3 — Optional
+  const opt=[];
+  const handleTot=primaryCalc.tot;
+  if(S.height==='high'||S.height==='unknown')
+    opt.push(recRow('Optional',P.handleHigh.name,P.handleHigh.detail,handleTot,P.handleHigh.qtyLabel,accUrl(521),false));
+  else
+    opt.push(recRow('Optional',P.handleLow.name,P.handleLow.detail,handleTot,P.handleLow.qtyLabel,accUrl(520),false));
+
+  // 4 — Extras
+  const acc=[];
+  acc.push(recRow('Accessory',P.bottleOpener.name,P.bottleOpener.detail,1,P.bottleOpener.qtyLabel,accUrl(497),false));
+
+  // Height summary card
+  const heightMm=primaryProd?primaryProd.height:S.manualHeight;
+  const heightSub=primaryProd?(primaryProd.hd?R.hd:R.std):R.closest;
+
+  document.getElementById('resultContent').innerHTML=`
+    <div class="result-summary" style="margin-bottom:24px">
+      <div class="res-card">
+        <div class="rc-label">${R.height}</div>
+        <div class="rc-val">${heightMm} mm</div>
+        <div class="rc-sub">${heightSub} · ${S.makeLabel||R.custom} ${S.modelLabel||''}</div>
+      </div>
+      <div class="res-card">
+        <div class="rc-label">Use mode</div>
+        <div class="rc-val" style="font-size:16px;padding-top:4px">${(S.useMode||{label:'Stationary'}).label}</div>
+        <div class="rc-sub">${primaryCalc.kgPerBracket} kg/bracket · ${S.roofLen} cm roof</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px">
+      <div class="bom-section-title" style="margin-bottom:12px">
+        <h3 style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase">${T.bom.s1}</h3>
+        <div class="section-rule"></div>
+      </div>
+      ${bracketHtml}
+      ${rec.length?`<div style="margin-top:4px">${rec.join('')}</div>`:''}
+    </div>
+
+    ${bomSection(T.bom.s3,opt)}
+    ${bomSection(T.bom.s4,acc)}
+    <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <button class="btn-wizard secondary" onclick="resetWizard()">${R.startOver}</button>
+      <a href="${LOCALE.shopUrl}" class="btn-wizard">${R.shopBtn}</a>
+    </div>`;
+
+  showStep('stepResult');
+  sendHeight();
+}
+
+// ── utilities ─────────────────────────────────────────────────────────────
+function showStep(id){
+  document.getElementById(id).classList.add('visible');
+  setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth',block:'nearest'});sendHeight();},80);
+}
+function setDone(stepId,val){
+  document.getElementById(stepId).classList.add('done');
+  document.getElementById(stepId+'-done').querySelector('span').textContent=val;
+}
+function updateProgress(pct){document.getElementById('progressFill').style.width=pct+'%';sendHeight();}
+function openPopup(e,url){
+  e.preventDefault();
+  const w=Math.min(1100,screen.width-60),h=Math.min(800,screen.height-60);
+  const left=Math.round((screen.width-w)/2),top=Math.round((screen.height-h)/2);
+  window.open(url,'tsparts_product','width='+w+',height='+h+',left='+left+',top='+top+',resizable=yes,scrollbars=yes,toolbar=no,menubar=no');
+}
+function resetWizard(){
+  S={make:null,makeLabel:null,model:null,modelLabel:null,height:null,heightLabel:null,
+     roofLen:160,manualHeight:169,useMode:null,customLoad:null};
+  ['step1','step2','step3','step4','step5','stepResult'].forEach(id=>{
+    const el=document.getElementById(id);el.classList.remove('done');
+    if(id!=='step1')el.classList.remove('visible');
+  });
+  document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+  updateProgress(0);
+  document.getElementById('roofLen').value=160;
+  document.getElementById('roofLenVal').textContent='160 cm';
+  document.getElementById('roofLenNum').value=160;
+  document.getElementById('manualHeightWrap').style.display='none';
+  document.getElementById('totalLoad').value=200;
+  document.getElementById('customBracketCount').textContent='—';
+  buildUseGrid(); // re-renders use grid and re-applies default selection
+  sendHeight();
+}
+function switchTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  setTimeout(sendHeight,50);
+}
+function sendHeight(){
+  window.parent.postMessage({type:'tsw-resize',height:document.documentElement.scrollHeight},'*');
+}
+window.addEventListener('load',sendHeight);
+new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:true,attributes:true});
+</script>
+</body>
+</html>
