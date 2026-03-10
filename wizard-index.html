@@ -527,21 +527,19 @@ function calcBrackets(isHD){
   const kgPB=s.kg;
   const spacingCm=s.sp;
 
-  // Pairs from spacing rule (min 2 pairs = 4 brackets)
-  const pFS=Math.max(2,Math.ceil(len/spacingCm));
-  // Pairs from load (if entered)
-  let pFL=null;
-  if(S.customLoad){
-    const bn=Math.ceil(S.customLoad/kgPB);
-    pFL=Math.max(2,Math.ceil(bn/2));
-  }
-  const pairs=pFL?Math.max(pFS,pFL):pFS;
+  // Pairs from spacing rule — hard ceiling: actual spacing must not exceed spacingCm
+  // len/(pairs-1) <= sp  =>  pairs >= ceil(len/sp) + 1
+  const pFS=Math.max(2,Math.ceil(len/spacingCm)+1);
+  // Pairs from load — use entered value or default 200 kg; always active
+  const effectiveLoad=S.customLoad||200;
+  const pFL=Math.max(2,Math.ceil(Math.ceil(effectiveLoad/kgPB)/2));
+  const pairs=Math.max(pFS,pFL);
   const tot=pairs*2;
   const actualSpacing=pairs>1?Math.round(len/(pairs-1)):0;
   const totalCapacity=kgPB*tot;
   return {pairs,tot,actualSpacing,totalCapacity,
     kgPerBracket:kgPB,maxSpacingCm:spacingCm,
-    pairsFromSpacing:pFS,pairsFromLoad:pFL,modeLabel};
+    pairsFromSpacing:pFS,pairsFromLoad:pFL,effectiveLoad,modeLabel};
 }
 
 // Calculate both std and HD variants for display
@@ -653,7 +651,7 @@ function showResult(){
           ${recBadge}
         </div>
         <div style="font-size:12px;color:var(--muted);margin-bottom:14px">
-          ${prod.height} mm · ${prod.hd?R.hdProfile:R.stdProfile} · ${kgPerBracket} kg/bracket · ${R.maxLabel} ${maxSpacingCm} cm
+          ${prod.height} mm · ${prod.hd?R.hdProfile:R.stdProfile} · ${kgPerBracket} ${R.kgPerBracket} · ${R.maxLabel} ${maxSpacingCm} cm
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
           <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
