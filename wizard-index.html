@@ -642,9 +642,9 @@ function showResult(){
     const calc=showHD?calcHD:calcStd;
     if(!prod) return `<div style="padding:14px 18px;color:var(--muted);font-size:14px">${fmt(R.noMatch,{contactUrl:LOCALE.contactUrl})}</div>`;
     const {pairs,tot,actualSpacing,totalCapacity,kgPerBracket,maxSpacingCm}=calc;
-    const isRec=(modeId==='offroad')?showHD:!showHD; // recommended = HD for offroad, std otherwise
+    const isRec=(modeId==='offroad')?showHD:!showHD;
     const recBadge=isRec
-      ?`<span style="background:var(--accent);color:#fff;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;font-family:'Oswald',sans-serif">★ Recommended</span>`
+      ?`<span style="background:var(--accent);color:#fff;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;font-family:'Oswald',sans-serif">${R.recommendedBadge}</span>`
       :'';
     return `
       <div style="background:var(--white);border:1px solid var(--border);padding:16px">
@@ -653,32 +653,32 @@ function showResult(){
           ${recBadge}
         </div>
         <div style="font-size:12px;color:var(--muted);margin-bottom:14px">
-          Height: ${prod.height} mm · ${prod.hd?'Heavy Duty profile':'Standard profile'} · ${kgPerBracket} kg/bracket · max spacing ${maxSpacingCm} cm
+          ${prod.height} mm · ${prod.hd?R.hdProfile:R.stdProfile} · ${kgPerBracket} kg/bracket · ${R.maxLabel} ${maxSpacingCm} cm
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
           <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
-            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Pairs needed</div>
+            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">${R.pairsNeededLabel}</div>
             <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--accent)">${pairs}</div>
-            <div style="font-size:11px;color:var(--muted)">${tot} brackets total</div>
+            <div style="font-size:11px;color:var(--muted)">${tot} ${R.bracketsTotal}</div>
           </div>
           <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
-            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Spacing</div>
+            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">${R.spacingLabel}</div>
             <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--accent)">${actualSpacing} cm</div>
-            <div style="font-size:11px;color:var(--muted)">max ${maxSpacingCm} cm</div>
+            <div style="font-size:11px;color:var(--muted)">${R.maxLabel} ${maxSpacingCm} cm</div>
           </div>
           <div style="background:var(--bg);border:1px solid var(--border);padding:10px">
-            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Capacity</div>
+            <div style="font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px">${R.capacityLabel}</div>
             <div style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--accent)">${totalCapacity} kg</div>
             <div style="font-size:11px;color:var(--muted)">${kgPerBracket} kg × ${tot}</div>
           </div>
         </div>
         <div class="spacing-diagram" style="margin:0 0 14px 0">
-          <div class="diagram-title">Top view — ${len} cm roof · ${pairs} pairs</div>
+          <div class="diagram-title">${R.topView} — ${len} cm ${R.roof} · ${pairs} ${R.pairs}</div>
           ${makeDiagram(calc,len,'var(--accent)')}
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <div style="font-size:13px;color:var(--mid)">Qty: <strong>${tot} pcs</strong></div>
-          <a href="${bracketUrl(prod)}" onclick="openPopup(event,this.href)" class="btn-rec">View product →</a>
+          <div style="font-size:13px;color:var(--mid)">${R.qtyLabel} <strong>${tot} ${R.pcs}</strong></div>
+          <a href="${bracketUrl(prod)}" onclick="openPopup(event,this.href)" class="btn-rec">${R.viewProduct}</a>
         </div>
       </div>`;
   }
@@ -692,7 +692,7 @@ function showResult(){
   // crossbar tube qty follows selected bracket type
   const tubeQty=defaultHD?calcHD.pairs:calcStd.pairs;
 
-  // 2 — non-bracket required items
+  // non-bracket required items
   const rec=[];
   rec.push(recRow('Required',P.supportBeam.name,P.supportBeam.detail,
     tubeQty,P.supportBeam.qtyLabel,accUrl(522),false));
@@ -703,7 +703,7 @@ function showResult(){
     rec.push(recRow('Platform',P.platformT2T3.name,P.platformT2T3.detail,
       1,P.platformT2T3.qtyLabel,accUrl(490),false));
 
-  // 2 — Optional accessories
+  // Optional accessories
   const opt=[];
   const handleTot=(defaultHD?calcHD:calcStd).tot;
   if(S.height==='high'||S.height==='unknown')
@@ -711,7 +711,7 @@ function showResult(){
   else
     opt.push(recRow('Optional',P.handleLow.name,P.handleLow.detail,handleTot,P.handleLow.qtyLabel,accUrl(520),false));
 
-  // 3 — Extras
+  // Extras
   const acc=[];
   acc.push(recRow('Accessory',P.bottleOpener.name,P.bottleOpener.detail,1,P.bottleOpener.qtyLabel,accUrl(497),false));
 
@@ -721,20 +721,20 @@ function showResult(){
 
   // Toggle HTML — only shown when both types exist
   const toggleHtml=bothExist?`
-    <div style="display:flex;align-items:center;gap:0;margin-bottom:16px">
-      <span style="font-size:12px;color:var(--muted);margin-right:12px;text-transform:uppercase;letter-spacing:.8px;font-family:'Oswald',sans-serif">Bracket type:</span>
+    <div style="display:flex;align-items:center;gap:0;margin-bottom:16px;flex-wrap:wrap;row-gap:8px">
+      <span style="font-size:12px;color:var(--muted);margin-right:12px;text-transform:uppercase;letter-spacing:.8px;font-family:'Oswald',sans-serif">${R.bracketTypeLabel}</span>
       <div style="display:flex;border:1px solid var(--border);overflow:hidden">
         <button id="tog-std" onclick="bracketToggle(false)"
           style="padding:8px 20px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.6px;text-transform:uppercase;border:none;cursor:pointer;transition:all .15s;background:${!defaultHD?'var(--dark)':'var(--white)'};color:${!defaultHD?'#fff':'var(--mid)'}">
-          Standard${!defaultHD&&(modeId!=='offroad')?'&nbsp;★':''}
+          ${R.std}${!defaultHD&&(modeId!=='offroad')?'&nbsp;★':''}
         </button>
         <button id="tog-hd" onclick="bracketToggle(true)"
           style="padding:8px 20px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.6px;text-transform:uppercase;border:none;border-left:1px solid var(--border);cursor:pointer;transition:all .15s;background:${defaultHD?'var(--dark)':'var(--white)'};color:${defaultHD?'#fff':'var(--mid)'}">
-          HD${defaultHD&&modeId==='offroad'?'&nbsp;★':''}
+          ${R.hd}${defaultHD&&modeId==='offroad'?'&nbsp;★':''}
         </button>
       </div>
-      <span style="font-size:11px;color:var(--muted);margin-left:12px">★ recommended for ${(S.useMode||{label:'this use'}).label.toLowerCase()}</span>
-    </div>`:'' ;
+      <span style="font-size:11px;color:var(--muted);margin-left:12px">${R.recommendedFor} ${(S.useMode||{label:''}).label.toLowerCase()}</span>
+    </div>`:'';
 
   document.getElementById('resultContent').innerHTML=`
     <div class="result-summary" style="margin-bottom:24px">
@@ -744,7 +744,7 @@ function showResult(){
         <div class="rc-sub">${heightSub} · ${S.makeLabel||R.custom} ${S.modelLabel||''}</div>
       </div>
       <div class="res-card">
-        <div class="rc-label">Use mode</div>
+        <div class="rc-label">${R.useModeLabel}</div>
         <div class="rc-val" style="font-size:16px;padding-top:4px">${(S.useMode||{label:'Stationary'}).label}</div>
         <div class="rc-sub">${S.roofLen} cm roof${S.customLoad?' · '+S.customLoad+' kg load':''}</div>
       </div>
