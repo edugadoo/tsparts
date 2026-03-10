@@ -119,7 +119,8 @@
       "pairs": "pairs",
       "pcs": "pcs",
       "viewProduct": "View product →",
-      "useModeLabel": "Use mode"
+      "useModeLabel": "Use mode",
+      "kgPerBracket": "kg/bracket"
     },
     "tags": {
       "Required": "Required",
@@ -331,7 +332,8 @@
       "pairs": "pary",
       "pcs": "szt.",
       "viewProduct": "Zobacz produkt →",
-      "useModeLabel": "Tryb użytkowania"
+      "useModeLabel": "Tryb użytkowania",
+      "kgPerBracket": "kg/łapę"
     },
     "tags": {
       "Required": "Wymagane",
@@ -543,7 +545,8 @@
       "pairs": "Paare",
       "pcs": "Stk.",
       "viewProduct": "Produkt ansehen →",
-      "useModeLabel": "Nutzungsart"
+      "useModeLabel": "Nutzungsart",
+      "kgPerBracket": "kg/Halterung"
     },
     "tags": {
       "Required": "Erforderlich",
@@ -755,7 +758,8 @@
       "pairs": "paires",
       "pcs": "pcs",
       "viewProduct": "Voir le produit →",
-      "useModeLabel": "Mode d'utilisation"
+      "useModeLabel": "Mode d'utilisation",
+      "kgPerBracket": "kg/support"
     },
     "tags": {
       "Required": "Indispensable",
