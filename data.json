@@ -14,6 +14,11 @@
       "baseUrl": "https://ts-parts.de/de_DE",
       "shopUrl": "https://ts-parts.de/de_DE/c/Dachtrager/105",
       "contactUrl": "https://ts-parts.de/de_DE/contact"
+    },
+    "fr": {
+      "baseUrl": "https://ts-parts.eu/en_US",
+      "shopUrl": "https://ts-parts.eu/en_US/c/Roof-racks/105",
+      "contactUrl": "https://ts-parts.eu/en_US/contact"
     }
   },
   "brackets": [
